@@ -254,7 +254,7 @@ namespace EMC.Centera.SDK
 			{
                 byte[] outString;
 				FPInt bufSize = 0;
-				FPInt len = 0;
+				FPInt len;
 
 				do
 				{
@@ -292,7 +292,7 @@ namespace EMC.Centera.SDK
 			{
 				StringBuilder outString = new StringBuilder();
 				FPInt bufSize = 0;
-				FPInt len = 0;
+				FPInt len;
 
 				do
 				{
@@ -403,7 +403,7 @@ namespace EMC.Centera.SDK
 			{
                 StringBuilder outString = new StringBuilder();
                 FPInt bufSize = 0;
-                FPInt len = 0;
+                FPInt len;
 
                 do
                 {
@@ -524,7 +524,7 @@ namespace EMC.Centera.SDK
 		{
             byte[] outString;
 			FPInt bufSize = 0;
-			FPInt len = 0;
+			FPInt len;
 
 			do
 			{
@@ -549,7 +549,7 @@ namespace EMC.Centera.SDK
 		{
             byte[] nameString;
             byte[] valueString;
-			FPInt nameSize = 0, nameLen = 0, valSize = 0, valLen = 0;
+			FPInt nameSize = 0, nameLen, valSize = 0, valLen;
 			
 			do
 			{
@@ -585,7 +585,7 @@ namespace EMC.Centera.SDK
 			{
                 byte[] outString;
 				FPInt bufSize = 0;
-				FPInt len = 0;
+				FPInt len;
 
 				do
 				{
@@ -734,7 +734,7 @@ namespace EMC.Centera.SDK
 		}
 
 
-		private FPTagCollection myTags;
+		private FPTagCollection _myTags;
 
 		/**
 		 * An ArrayList containing the Tag objects on a Clip. This should ONLY be used for reading of the Tags
@@ -742,16 +742,10 @@ namespace EMC.Centera.SDK
 		 */ 
 		public FPTagCollection Tags
 		{
-			get
-			{
-				if (myTags == null)
-					myTags = new FPTagCollection(this);
-
-				return myTags;
-			}
+			get { return _myTags ?? (_myTags = new FPTagCollection(this)); }
 		}
 
-		public FPAttributeCollection myAttributes;
+		private FPAttributeCollection _myAttributes;
 
 		/**
 		 * An ArrayList containing the DescriptionAttribute objects on a Clip. This should ONLY be used for reading of the Tags
@@ -761,10 +755,10 @@ namespace EMC.Centera.SDK
 		{
 			get
 			{
-				if (myAttributes == null)
-					myAttributes = new FPAttributeCollection(this);
+				if (_myAttributes == null)
+					_myAttributes = new FPAttributeCollection(this);
 
-				return myAttributes;
+				return _myAttributes;
 			}
 		}
 

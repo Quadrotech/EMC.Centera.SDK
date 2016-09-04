@@ -2,7 +2,10 @@ using System.Collections;
 
 namespace EMC.Centera.SDK
 {
-    public class FPAttributeCollection:ArrayList
+    /**
+ * A collection of Attributes existing on a Tag or DescriptionAttributes on a Clip..
+ */
+    public sealed class FPAttributeCollection:ArrayList
     {
         internal FPAttributeCollection(FPTag t) 
         { 

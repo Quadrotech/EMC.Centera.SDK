@@ -6,4 +6,6 @@
 
 [assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Naming", "S101:Types should be named in camel case", Justification = "<Pending>", Scope = "type", Target = "~T:EMC.Centera.SDK.FPLogger")]
 [assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Naming", "S101:Types should be named in camel case", Justification = "<Pending>", Scope = "type", Target = "~T:EMC.Centera.SDK.FPClip")]
+[assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Naming", "S100:Methods and properties should be named in camel case", Justification = "<Pending>", Scope = "member", Target = "~M:EMC.Centera.SDK.Native.Clip.GetEBRPeriod(EMC.Centera.SDK.FPTypes.FPClipRef)~EMC.Centera.SDK.FPTypes.FPLong")]
+[assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Naming", "S101:Types should be named in camel case", Justification = "<Pending>", Scope = "type", Target = "~T:EMC.Centera.SDK.FPAttribute")]
 

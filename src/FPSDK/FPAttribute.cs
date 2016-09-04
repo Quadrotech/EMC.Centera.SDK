@@ -33,8 +33,6 @@ along with .NET wrapper; see the file COPYING. If not, write to:
 
 ******************************************************************************/
 
-using System;
-
 namespace EMC.Centera.SDK
 {	
 	/** 
@@ -44,18 +42,15 @@ namespace EMC.Centera.SDK
 	 */
 	public class FPAttribute : IFPAttribute
 	{
-		private readonly string myName;
-		private readonly string myValue;
-
-		/**
+	    /**
 		 * The Attribute Name
 		 */
-		public string Name => myName;
+		public string Name { get; }
 
 	    /**
 		 * The Attribute Value
 		 */
-		public string Value => myValue;
+		public string Value { get; }
 
 	    /**
 		 * Create an FPAttribute object using the name-value string parameters.
@@ -65,8 +60,8 @@ namespace EMC.Centera.SDK
 		 */
 		public FPAttribute(string n, string v)
 		{
-			myName = n;
-			myValue = v;
+			Name = n;
+			Value = v;
 		}
 
 		public override string ToString()
@@ -75,8 +70,4 @@ namespace EMC.Centera.SDK
 		}
 
 	}
-
-	/**
-	 * A collection of Attributes existing on a Tag or DescriptionAttributes on a Clip..
-	 */
 }
