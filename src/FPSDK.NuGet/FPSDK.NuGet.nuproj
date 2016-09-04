@@ -27,8 +27,8 @@
     <Title>EMC.Centera.SDK</Title>
     <Authors>EMC Corporation / QUADROtech</Authors>
     <Owners>EMC Corporation / QUADROtech</Owners>
-    <Summary>FPSDK.NuGet</Summary>
-    <Description>FPSDK.NuGet</Description>
+    <Summary>Managed .NET Wrapper for the EMC Centera SDK</Summary>
+    <Description>Managed .NET Wrapper for the EMC Centera SDK</Description>
     <ReleaseNotes>
     </ReleaseNotes>
     <ProjectUrl>https://github.com/QUADROtech/EMC.Centera.SDK</ProjectUrl>
