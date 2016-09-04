@@ -28,7 +28,8 @@
     <UpgradeBackupLocation>
     </UpgradeBackupLocation>
     <OldToolsVersion>3.5</OldToolsVersion>
-    <TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <OutputPath>bin\Debug\</OutputPath>
@@ -77,18 +78,22 @@
     <ErrorReport>prompt</ErrorReport>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="FPSDK">
-      <Name>FPSDK</Name>
-      <HintPath>..\..\FPSDK.dll</HintPath>
-    </Reference>
-  </ItemGroup>
-  <ItemGroup>
     <Compile Include="AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="WideFilenames.cs">
       <SubType>Code</SubType>
     </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="EMC.Centera.SDK, Version=3.3.11.0, Culture=neutral, PublicKeyToken=141fe4b547d7494f, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\EMC.Centera.SDK.3.3.11-alpha\lib\net35\EMC.Centera.SDK.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

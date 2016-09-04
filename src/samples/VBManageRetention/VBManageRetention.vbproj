@@ -31,7 +31,8 @@
     <UpgradeBackupLocation>
     </UpgradeBackupLocation>
     <OldToolsVersion>3.5</OldToolsVersion>
-    <TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <OutputPath>bin\</OutputPath>
@@ -72,9 +73,9 @@
     <DebugType>none</DebugType>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="FPSDK">
-      <Name>FPSDK</Name>
-      <HintPath>..\..\FPSDK.dll</HintPath>
+    <Reference Include="EMC.Centera.SDK, Version=3.3.11.0, Culture=neutral, PublicKeyToken=141fe4b547d7494f, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\EMC.Centera.SDK.3.3.11-alpha\lib\net35\EMC.Centera.SDK.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="System.Data">
       <Name>System.Data</Name>
@@ -94,6 +95,13 @@
     <Compile Include="ManageRetention.vb">
       <SubType>Code</SubType>
     </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="My Project\" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.VisualBasic.targets" />
   <PropertyGroup>
