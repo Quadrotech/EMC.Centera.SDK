@@ -122,41 +122,95 @@
     <Compile Include="AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="FPApi.cs">
+    <Compile Include="Native\Clip.cs" />
+    <Compile Include="FPTypes\ErrorInfo.cs" />
+    <Compile Include="Native\EventCallback.cs" />
+    <Compile Include="Native\FP.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="FPAttribute.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="FPAttributeCollection.cs" />
+    <Compile Include="FPTypes\FPBool.cs" />
+    <Compile Include="FPTypes\FPCallback.cs" />
     <Compile Include="FPClip.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="FPTypes\FPClipRef.cs" />
+    <Compile Include="FPTypes\FPErrorInfo.cs" />
+    <Compile Include="FPTypes\FPEventCallbackRef.cs" />
+    <Compile Include="FPGenericStream.cs" />
     <Compile Include="FPGenericStreams.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="FPTypes\FPInt.cs" />
+    <Compile Include="FPTypes\FPLibraryException.cs" />
+    <Compile Include="FPTypes\FPLogFormat.cs" />
+    <Compile Include="FPLogger.cs" />
+    <Compile Include="FPTypes\FPLogLevel.cs" />
+    <Compile Include="FPLogProc.cs" />
+    <Compile Include="FPLogStateRef.cs" />
+    <Compile Include="FPTypes\FPLong.cs" />
     <Compile Include="FPMisc.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="FPTypes\FPMonitorRef.cs" />
+    <Compile Include="FPObject.cs" />
+    <Compile Include="FPPartialInputStream.cs" />
+    <Compile Include="FPPartialOutputStream.cs" />
+    <Compile Include="FPPartialStream.cs" />
     <Compile Include="FPPool.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="FPPoolInstance.cs" />
+    <Compile Include="FPTypes\FPPoolQueryRef.cs" />
+    <Compile Include="FPTypes\FPPoolRef.cs" />
     <Compile Include="FPQuery.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="FPRetention.cs">
+    <Compile Include="FPTypes\FPQueryExpressionRef.cs" />
+    <Compile Include="FPTypes\FPQueryRef.cs" />
+    <Compile Include="FPQueryResult.cs" />
+    <Compile Include="FPTypes\FPQueryResultRef.cs" />
+    <Compile Include="FPRetentionClass.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="FPRetentionClassCollection.cs" />
+    <Compile Include="FPTypes\FPRetentionClassContextRef.cs" />
+    <Compile Include="FPTypes\FPRetentionClassRef.cs" />
+    <Compile Include="FPTypes\FPShort.cs" />
+    <Compile Include="FPStream.cs" />
+    <Compile Include="FPStreamCallbacks.cs" />
+    <Compile Include="FPStreamInfo.cs" />
+    <Compile Include="FPTypes\FPStreamRef.cs" />
     <Compile Include="FPTag.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="FPTypes.cs">
+    <Compile Include="FPTagCollection.cs" />
+    <Compile Include="FPTypes\FPTagRef.cs" />
+    <Compile Include="FPTypes\FPPoolInfo.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="FPWideFilenameStream.cs" />
     <Compile Include="IFPAttribute.cs" />
     <Compile Include="IFPClip.cs" />
     <Compile Include="IFPPool.cs" />
     <Compile Include="IFPTag.cs" />
+    <Compile Include="Native\Logging.cs" />
+    <Compile Include="Native\MarshalPtrToUtf8.cs" />
+    <Compile Include="Native\Monitor.cs" />
+    <Compile Include="Native\Pool.cs" />
+    <Compile Include="FPTypes\PoolInfo.cs" />
+    <Compile Include="Native\PoolQuery.cs" />
+    <Compile Include="Native\Query.cs" />
+    <Compile Include="Native\QueryExpression.cs" />
+    <Compile Include="Native\QueryResult.cs" />
+    <Compile Include="Native\RetentionClass.cs" />
+    <Compile Include="Native\RetentionClassContext.cs" />
+    <Compile Include="Native\SDK.cs" />
+    <Compile Include="Native\Stream.cs" />
+    <Compile Include="Native\Tag.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="keyfile.snk" />
@@ -169,6 +223,7 @@
       <Install>true</Install>
     </BootstrapperPackage>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PreBuildEvent>

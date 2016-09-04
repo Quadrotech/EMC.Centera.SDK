@@ -10,12 +10,12 @@ namespace EMC.Centera.SDK
         void ClipAuditedDelete(string inClipID, string inReason, long inOptions);
         void ClipAuditedDelete(string inClipID, string inReason);
         int ClipBufferSize { get; set; }
-        EMC.Centera.SDK.FPClip ClipCreate(string inName);
+        FPClip ClipCreate(string inName);
         void ClipDelete(string inClipID);
         bool ClipExists(string inClipID);
-        EMC.Centera.SDK.FPClip ClipOpen(string inClipID, int inOpenMode);
-        EMC.Centera.SDK.FPClip ClipRawOpen(string inClipID, EMC.Centera.SDK.FPStream inStream);
-        EMC.Centera.SDK.FPClip ClipRawOpen(string inClipID, EMC.Centera.SDK.FPStream inStream, long inOptions);
+        FPClip ClipOpen(string inClipID, int inOpenMode);
+        FPClip ClipRawOpen(string inClipID, FPStream inStream);
+        FPClip ClipRawOpen(string inClipID, FPStream inStream, long inOptions);
         string ClusterID { get; }
         string ClusterName { get; }
         DateTime ClusterTime { get; }
@@ -45,7 +45,7 @@ namespace EMC.Centera.SDK
         bool ReadAllowed { get; }
         string ReadPools { get; }
         string ReplicaAddress { get; }
-        EMC.Centera.SDK.FPRetentionClassCollection RetentionClasses { get; }
+        FPRetentionClassCollection RetentionClasses { get; }
         TimeSpan RetentionDefault { get; }
         bool RetentionMinMax { get; }
         int Timeout { get; set; }

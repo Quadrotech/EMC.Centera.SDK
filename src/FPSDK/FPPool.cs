@@ -35,9 +35,7 @@ along with .NET wrapper; see the file COPYING. If not, write to:
 
 using System;
 using System.Text;
-using System.Collections;
-using System.Runtime.InteropServices;
-using EMC.Centera.FPTypes;
+using EMC.Centera.SDK.FPTypes;
 
 namespace EMC.Centera.SDK
 {	
@@ -59,7 +57,7 @@ namespace EMC.Centera.SDK
 		 */
 		public FPPool(String poolConnectionString)
 		{
-			thePool = FPApi.Pool.Open(poolConnectionString);
+			thePool = Native.Pool.Open(poolConnectionString);
 			AddObject(thePool, this);
 		}
 
@@ -105,7 +103,7 @@ namespace EMC.Centera.SDK
 			{
 				FPPoolInfo outPoolInfo = new FPPoolInfo();
 
-				FPApi.Pool.GetPoolInfo(thePool, ref outPoolInfo);
+				Native.Pool.GetPoolInfo(thePool, ref outPoolInfo);
 				return new PoolInfo(outPoolInfo);
 			}
 		}
@@ -120,7 +118,7 @@ namespace EMC.Centera.SDK
 			if (thePool != 0)
 			{
 				RemoveObject(thePool);
-				FPApi.Pool.Close(this);
+				Native.Pool.Close(this);
 				thePool = 0;
 			}
 		}
@@ -135,11 +133,11 @@ namespace EMC.Centera.SDK
 		{
 			get
 			{
-				return (int) FPApi.Pool.GetIntOption(this, FPMisc.OPTION_BUFFERSIZE);
+				return (int) Native.Pool.GetIntOption(this, FPMisc.OPTION_BUFFERSIZE);
 			}
 			set
 			{
-				FPApi.Pool.SetIntOption(this, FPMisc.OPTION_BUFFERSIZE, (FPInt) value);
+				Native.Pool.SetIntOption(this, FPMisc.OPTION_BUFFERSIZE, (FPInt) value);
 			}
 		}
 
@@ -151,11 +149,11 @@ namespace EMC.Centera.SDK
 		{
 			get
 			{
-				return (int) FPApi.Pool.GetIntOption(this, FPMisc.OPTION_TIMEOUT);
+				return (int) Native.Pool.GetIntOption(this, FPMisc.OPTION_TIMEOUT);
 			}
 			set
 			{
-				FPApi.Pool.SetIntOption(this, FPMisc.OPTION_TIMEOUT, (FPInt) value);
+				Native.Pool.SetIntOption(this, FPMisc.OPTION_TIMEOUT, (FPInt) value);
 			}
 		}
 
@@ -166,7 +164,7 @@ namespace EMC.Centera.SDK
 		{
 			get
 			{
-				if (FPApi.Pool.GetIntOption(this, FPMisc.OPTION_ENABLE_MULTICLUSTER_FAILOVER) == (FPInt) 1)
+				if (Native.Pool.GetIntOption(this, FPMisc.OPTION_ENABLE_MULTICLUSTER_FAILOVER) == (FPInt) 1)
 					return true;
 				else
 					return false;
@@ -174,9 +172,9 @@ namespace EMC.Centera.SDK
 			set
 			{
 				if (value == true)
-					FPApi.Pool.SetIntOption(this, FPMisc.OPTION_ENABLE_MULTICLUSTER_FAILOVER, (FPInt) 1);
+					Native.Pool.SetIntOption(this, FPMisc.OPTION_ENABLE_MULTICLUSTER_FAILOVER, (FPInt) 1);
 				else
-					FPApi.Pool.SetIntOption(this, FPMisc.OPTION_ENABLE_MULTICLUSTER_FAILOVER, (FPInt) 0);
+					Native.Pool.SetIntOption(this, FPMisc.OPTION_ENABLE_MULTICLUSTER_FAILOVER, (FPInt) 0);
 			}
 		}
 
@@ -195,7 +193,7 @@ namespace EMC.Centera.SDK
 		{
 			get
 			{
-				if (FPApi.Pool.GetIntOption(this, FPMisc.OPTION_DEFAULT_COLLISION_AVOIDANCE) == (FPInt) 1)
+				if (Native.Pool.GetIntOption(this, FPMisc.OPTION_DEFAULT_COLLISION_AVOIDANCE) == (FPInt) 1)
 					return true;
 				else
 					return false;
@@ -203,9 +201,9 @@ namespace EMC.Centera.SDK
 			set
 			{
 				if (value == true)
-					FPApi.Pool.SetIntOption(this, FPMisc.OPTION_DEFAULT_COLLISION_AVOIDANCE, (FPInt) 1);
+					Native.Pool.SetIntOption(this, FPMisc.OPTION_DEFAULT_COLLISION_AVOIDANCE, (FPInt) 1);
 				else
-					FPApi.Pool.SetIntOption(this, FPMisc.OPTION_DEFAULT_COLLISION_AVOIDANCE, (FPInt) 0);
+					Native.Pool.SetIntOption(this, FPMisc.OPTION_DEFAULT_COLLISION_AVOIDANCE, (FPInt) 0);
 			}
 		}
 
@@ -217,11 +215,11 @@ namespace EMC.Centera.SDK
 		{
 			get
 			{
-				return (int) FPApi.Pool.GetIntOption(this, FPMisc.OPTION_PREFETCH_SIZE);
+				return (int) Native.Pool.GetIntOption(this, FPMisc.OPTION_PREFETCH_SIZE);
 			}
 			set
 			{
-				FPApi.Pool.SetIntOption(this, FPMisc.OPTION_PREFETCH_SIZE, (FPInt) value);
+				Native.Pool.SetIntOption(this, FPMisc.OPTION_PREFETCH_SIZE, (FPInt) value);
 			}
 		}
 
@@ -232,11 +230,11 @@ namespace EMC.Centera.SDK
 		{
 			get
 			{
-				return (int) FPApi.Pool.GetGlobalOption(FPMisc.OPTION_MAXCONNECTIONS);
+				return (int) Native.Pool.GetGlobalOption(FPMisc.OPTION_MAXCONNECTIONS);
 			}
 			set
 			{
-				FPApi.Pool.SetGlobalOption(FPMisc.OPTION_MAXCONNECTIONS, (FPInt) value);
+				Native.Pool.SetGlobalOption(FPMisc.OPTION_MAXCONNECTIONS, (FPInt) value);
 			}
 		}
 
@@ -248,11 +246,11 @@ namespace EMC.Centera.SDK
 		{
 			get
 			{
-				return (int) FPApi.Pool.GetGlobalOption(FPMisc.OPTION_RETRYCOUNT);
+				return (int) Native.Pool.GetGlobalOption(FPMisc.OPTION_RETRYCOUNT);
 			}
 			set
 			{
-				FPApi.Pool.SetGlobalOption(FPMisc.OPTION_RETRYCOUNT, (FPInt) value);
+				Native.Pool.SetGlobalOption(FPMisc.OPTION_RETRYCOUNT, (FPInt) value);
 			}
 		}
 
@@ -264,11 +262,11 @@ namespace EMC.Centera.SDK
 		{
 			get
 			{
-				return (int) FPApi.Pool.GetGlobalOption(FPMisc.OPTION_PROBE_LIMIT);
+				return (int) Native.Pool.GetGlobalOption(FPMisc.OPTION_PROBE_LIMIT);
 			}
 			set
 			{
-				FPApi.Pool.SetGlobalOption(FPMisc.OPTION_PROBE_LIMIT, (FPInt) value);
+				Native.Pool.SetGlobalOption(FPMisc.OPTION_PROBE_LIMIT, (FPInt) value);
 			}
 		}
 
@@ -279,11 +277,11 @@ namespace EMC.Centera.SDK
 		{
 			get
 			{
-				return (int) FPApi.Pool.GetGlobalOption(FPMisc.OPTION_RETRYSLEEP);
+				return (int) Native.Pool.GetGlobalOption(FPMisc.OPTION_RETRYSLEEP);
 			}
 			set
 			{
-				FPApi.Pool.SetGlobalOption(FPMisc.OPTION_RETRYSLEEP, (FPInt) value);
+				Native.Pool.SetGlobalOption(FPMisc.OPTION_RETRYSLEEP, (FPInt) value);
 			}
 		}
 
@@ -295,11 +293,11 @@ namespace EMC.Centera.SDK
 		{
 			get
 			{
-				return (int) FPApi.Pool.GetGlobalOption(FPMisc.OPTION_CLUSTER_NON_AVAIL_TIME);
+				return (int) Native.Pool.GetGlobalOption(FPMisc.OPTION_CLUSTER_NON_AVAIL_TIME);
 			}
 			set
 			{
-				FPApi.Pool.SetGlobalOption(FPMisc.OPTION_CLUSTER_NON_AVAIL_TIME, (FPInt) value);
+				Native.Pool.SetGlobalOption(FPMisc.OPTION_CLUSTER_NON_AVAIL_TIME, (FPInt) value);
 			}
 		}
 
@@ -311,11 +309,11 @@ namespace EMC.Centera.SDK
 		{
 			get
 			{
-				return (int) FPApi.Pool.GetGlobalOption(FPMisc.OPTION_OPENSTRATEGY);
+				return (int) Native.Pool.GetGlobalOption(FPMisc.OPTION_OPENSTRATEGY);
 			}
 			set
 			{
-				FPApi.Pool.SetGlobalOption(FPMisc.OPTION_OPENSTRATEGY, (FPInt) value);
+				Native.Pool.SetGlobalOption(FPMisc.OPTION_OPENSTRATEGY, (FPInt) value);
 			}
 		}
 		
@@ -326,11 +324,11 @@ namespace EMC.Centera.SDK
 		{
 			get
 			{
-				return (int) FPApi.Pool.GetGlobalOption(FPMisc.OPTION_EMBEDDED_DATA_THRESHOLD);
+				return (int) Native.Pool.GetGlobalOption(FPMisc.OPTION_EMBEDDED_DATA_THRESHOLD);
 			}
 			set
 			{
-				FPApi.Pool.SetGlobalOption(FPMisc.OPTION_EMBEDDED_DATA_THRESHOLD, (FPInt) value);
+				Native.Pool.SetGlobalOption(FPMisc.OPTION_EMBEDDED_DATA_THRESHOLD, (FPInt) value);
 			}
 		}
 
@@ -341,11 +339,11 @@ namespace EMC.Centera.SDK
 		{
 			get
 			{
-				return (int) FPApi.Pool.GetGlobalOption(FPMisc.OPTION_PROBE_LIMIT);
+				return (int) EMC.Centera.SDK.Native.Pool.GetGlobalOption(FPMisc.OPTION_PROBE_LIMIT);
 			}
 			set
 			{
-				FPApi.Pool.SetGlobalOption(FPMisc.OPTION_PROBE_LIMIT, (FPInt) value);
+				EMC.Centera.SDK.Native.Pool.SetGlobalOption(FPMisc.OPTION_PROBE_LIMIT, (FPInt) value);
 			}
 		}
 		*/
@@ -357,11 +355,11 @@ namespace EMC.Centera.SDK
 		{
 			get
 			{
-				return (int) FPApi.Pool.GetGlobalOption(FPMisc.OPTION_MULTICLUSTER_READ_STRATEGY);
+				return (int) Native.Pool.GetGlobalOption(FPMisc.OPTION_MULTICLUSTER_READ_STRATEGY);
 			}
 			set
 			{
-				FPApi.Pool.SetGlobalOption(FPMisc.OPTION_MULTICLUSTER_READ_STRATEGY, (FPInt) value);
+				Native.Pool.SetGlobalOption(FPMisc.OPTION_MULTICLUSTER_READ_STRATEGY, (FPInt) value);
 			}
 		}
 		
@@ -372,11 +370,11 @@ namespace EMC.Centera.SDK
 		{
 			get
 			{
-				return (int) FPApi.Pool.GetGlobalOption(FPMisc.OPTION_MULTICLUSTER_WRITE_STRATEGY);
+				return (int) Native.Pool.GetGlobalOption(FPMisc.OPTION_MULTICLUSTER_WRITE_STRATEGY);
 			}
 			set
 			{
-				FPApi.Pool.SetGlobalOption(FPMisc.OPTION_MULTICLUSTER_WRITE_STRATEGY, (FPInt) value);
+				Native.Pool.SetGlobalOption(FPMisc.OPTION_MULTICLUSTER_WRITE_STRATEGY, (FPInt) value);
 			}
 		}
 		
@@ -387,11 +385,11 @@ namespace EMC.Centera.SDK
 		{
 			get
 			{
-				return (int) FPApi.Pool.GetGlobalOption(FPMisc.OPTION_MULTICLUSTER_DELETE_STRATEGY);
+				return (int) Native.Pool.GetGlobalOption(FPMisc.OPTION_MULTICLUSTER_DELETE_STRATEGY);
 			}
 			set
 			{
-				FPApi.Pool.SetGlobalOption(FPMisc.OPTION_MULTICLUSTER_DELETE_STRATEGY, (FPInt) value);
+				Native.Pool.SetGlobalOption(FPMisc.OPTION_MULTICLUSTER_DELETE_STRATEGY, (FPInt) value);
 			}
 		}
 		
@@ -402,11 +400,11 @@ namespace EMC.Centera.SDK
 		{
 			get
 			{
-				return (int) FPApi.Pool.GetGlobalOption(FPMisc.OPTION_MULTICLUSTER_EXISTS_STRATEGY);
+				return (int) Native.Pool.GetGlobalOption(FPMisc.OPTION_MULTICLUSTER_EXISTS_STRATEGY);
 			}
 			set
 			{
-				FPApi.Pool.SetGlobalOption(FPMisc.OPTION_MULTICLUSTER_EXISTS_STRATEGY, (FPInt) value);
+				Native.Pool.SetGlobalOption(FPMisc.OPTION_MULTICLUSTER_EXISTS_STRATEGY, (FPInt) value);
 			}
 		}
 		
@@ -417,11 +415,11 @@ namespace EMC.Centera.SDK
 		{
 			get
 			{
-				return (int) FPApi.Pool.GetGlobalOption(FPMisc.OPTION_MULTICLUSTER_QUERY_STRATEGY);
+				return (int) Native.Pool.GetGlobalOption(FPMisc.OPTION_MULTICLUSTER_QUERY_STRATEGY);
 			}
 			set
 			{
-				FPApi.Pool.SetGlobalOption(FPMisc.OPTION_MULTICLUSTER_QUERY_STRATEGY, (FPInt) value);
+				Native.Pool.SetGlobalOption(FPMisc.OPTION_MULTICLUSTER_QUERY_STRATEGY, (FPInt) value);
 			}
 		}
 
@@ -432,11 +430,11 @@ namespace EMC.Centera.SDK
 		{
 			get
 			{
-				return (int) FPApi.Pool.GetGlobalOption(FPMisc.OPTION_MULTICLUSTER_READ_CLUSTERS);
+				return (int) Native.Pool.GetGlobalOption(FPMisc.OPTION_MULTICLUSTER_READ_CLUSTERS);
 			}
 			set
 			{
-				FPApi.Pool.SetGlobalOption(FPMisc.OPTION_MULTICLUSTER_READ_CLUSTERS, (FPInt) value);
+				Native.Pool.SetGlobalOption(FPMisc.OPTION_MULTICLUSTER_READ_CLUSTERS, (FPInt) value);
 			}
 		}
 
@@ -447,11 +445,11 @@ namespace EMC.Centera.SDK
 		{
 			get
 			{
-				return (int) FPApi.Pool.GetGlobalOption(FPMisc.OPTION_MULTICLUSTER_WRITE_CLUSTERS);
+				return (int) Native.Pool.GetGlobalOption(FPMisc.OPTION_MULTICLUSTER_WRITE_CLUSTERS);
 			}
 			set
 			{
-				FPApi.Pool.SetGlobalOption(FPMisc.OPTION_MULTICLUSTER_WRITE_CLUSTERS, (FPInt) value);
+				Native.Pool.SetGlobalOption(FPMisc.OPTION_MULTICLUSTER_WRITE_CLUSTERS, (FPInt) value);
 			}
 		}
 		
@@ -462,11 +460,11 @@ namespace EMC.Centera.SDK
 		{
 			get
 			{
-				return (int) FPApi.Pool.GetGlobalOption(FPMisc.OPTION_MULTICLUSTER_DELETE_CLUSTERS);
+				return (int) Native.Pool.GetGlobalOption(FPMisc.OPTION_MULTICLUSTER_DELETE_CLUSTERS);
 			}
 			set
 			{
-				FPApi.Pool.SetGlobalOption(FPMisc.OPTION_MULTICLUSTER_DELETE_CLUSTERS, (FPInt) value);
+				Native.Pool.SetGlobalOption(FPMisc.OPTION_MULTICLUSTER_DELETE_CLUSTERS, (FPInt) value);
 			}
 		}
 		
@@ -477,11 +475,11 @@ namespace EMC.Centera.SDK
 		{
 			get
 			{
-				return (int) FPApi.Pool.GetGlobalOption(FPMisc.OPTION_MULTICLUSTER_EXISTS_CLUSTERS);
+				return (int) Native.Pool.GetGlobalOption(FPMisc.OPTION_MULTICLUSTER_EXISTS_CLUSTERS);
 			}
 			set
 			{
-				FPApi.Pool.SetGlobalOption(FPMisc.OPTION_MULTICLUSTER_EXISTS_CLUSTERS, (FPInt) value);
+				Native.Pool.SetGlobalOption(FPMisc.OPTION_MULTICLUSTER_EXISTS_CLUSTERS, (FPInt) value);
 			}
 		}
 
@@ -492,11 +490,11 @@ namespace EMC.Centera.SDK
 		{
 			get
 			{
-				return (int) FPApi.Pool.GetGlobalOption(FPMisc.OPTION_MULTICLUSTER_QUERY_CLUSTERS);
+				return (int) Native.Pool.GetGlobalOption(FPMisc.OPTION_MULTICLUSTER_QUERY_CLUSTERS);
 			}
 			set
 			{
-				FPApi.Pool.SetGlobalOption(FPMisc.OPTION_MULTICLUSTER_QUERY_CLUSTERS, (FPInt) value);
+				Native.Pool.SetGlobalOption(FPMisc.OPTION_MULTICLUSTER_QUERY_CLUSTERS, (FPInt) value);
 			}
 		}
 		
@@ -525,7 +523,7 @@ namespace EMC.Centera.SDK
 		/**
 		 * The ID string of the Cluster.
 		 */
-		public String ClusterID
+		public string ClusterID
 		{
 			get
 			{
@@ -536,7 +534,7 @@ namespace EMC.Centera.SDK
 		/**
 		 * The name of the Cluster.
 		 */
-		public String ClusterName
+		public string ClusterName
 		{
 			get
 			{
@@ -547,7 +545,7 @@ namespace EMC.Centera.SDK
 		/**
 		 * The version of CentraStar software on the Cluster.
 		 */
-		public String CentraStarVersion
+		public string CentraStarVersion
 		{
 			get
 			{
@@ -558,7 +556,7 @@ namespace EMC.Centera.SDK
 		/**
 		 * The ReplicaAddress of the Cluster.
 		 */
-		public String ReplicaAddress
+		public string ReplicaAddress
 		{
 			get
 			{
@@ -574,7 +572,7 @@ namespace EMC.Centera.SDK
 		{
 			get
 			{
-				return (int) FPApi.Pool.GetLastError();
+				return (int) Native.Pool.GetLastError();
 			}
 		}
 			
@@ -588,7 +586,7 @@ namespace EMC.Centera.SDK
 			get
 			{
 				FPErrorInfo errorInfo = new FPErrorInfo();
-				FPApi.Pool.GetLastErrorInfo(ref errorInfo);
+				Native.Pool.GetLastErrorInfo(ref errorInfo);
 
 				return errorInfo;
 			}
@@ -597,11 +595,11 @@ namespace EMC.Centera.SDK
 		/**
 		 * The naming schemes that are available on the Cluster.
 		 */
-		public String BlobNamingSchemes
+		public string BlobNamingSchemes
 		{
 			get
 			{
-				return this.GetCapability(FPMisc.BLOBNAMING, FPMisc.SUPPORTED_SCHEMES);
+				return GetCapability(FPMisc.BLOBNAMING, FPMisc.SUPPORTED_SCHEMES);
 			}
 		}
 
@@ -612,7 +610,7 @@ namespace EMC.Centera.SDK
 		{
 			get
 			{
-				if (this.GetCapability(FPMisc.CLIPENUMERATION, FPMisc.ALLOWED).Equals(FPMisc.TRUE))
+				if (GetCapability(FPMisc.CLIPENUMERATION, FPMisc.ALLOWED).Equals(FPMisc.TRUE))
 					return true;
 				else
 					return false;
@@ -622,11 +620,11 @@ namespace EMC.Centera.SDK
 		/**
 		 * A list of pools that have Query capability.
 		 */
-		public String QueryPools
+		public string QueryPools
 		{
 			get
 			{
-				return this.GetCapability(FPMisc.CLIPENUMERATION, FPMisc.POOLS);
+				return GetCapability(FPMisc.CLIPENUMERATION, FPMisc.POOLS);
 			}
 		}
 		/**
@@ -636,7 +634,7 @@ namespace EMC.Centera.SDK
 		{
 			get
 			{
-				if (this.GetCapability(FPMisc.DELETE, FPMisc.ALLOWED).Equals(FPMisc.TRUE))
+				if (GetCapability(FPMisc.DELETE, FPMisc.ALLOWED).Equals(FPMisc.TRUE))
 					return true;
 				else
 					return false;
@@ -646,11 +644,11 @@ namespace EMC.Centera.SDK
 		/**
 		 * A list of pools that have Delete capability.
 		 */
-		public String DeletePools
+		public string DeletePools
 		{
 			get
 			{
-				return this.GetCapability(FPMisc.DELETE, FPMisc.POOLS);
+				return GetCapability(FPMisc.DELETE, FPMisc.POOLS);
 			}
 		}
 		/**
@@ -660,7 +658,7 @@ namespace EMC.Centera.SDK
 		{
 			get
 			{
-				if (this.GetCapability(FPMisc.DELETIONLOGGING, FPMisc.SUPPORTED).Equals(FPMisc.TRUE))
+				if (GetCapability(FPMisc.DELETIONLOGGING, FPMisc.SUPPORTED).Equals(FPMisc.TRUE))
 					return true;
 				else
 					return false;
@@ -674,7 +672,7 @@ namespace EMC.Centera.SDK
 		{
 			get
 			{
-				if (this.GetCapability(FPMisc.EXIST, FPMisc.ALLOWED).Equals(FPMisc.TRUE))
+				if (GetCapability(FPMisc.EXIST, FPMisc.ALLOWED).Equals(FPMisc.TRUE))
 					return true;
 				else
 					return false;
@@ -684,11 +682,11 @@ namespace EMC.Centera.SDK
 		/**
 		 * A list of pools that have Exists capability.
 		 */
-		public String ExistsPools
+		public string ExistsPools
 		{
 			get
 			{
-				return this.GetCapability(FPMisc.EXIST, FPMisc.POOLS);
+				return GetCapability(FPMisc.EXIST, FPMisc.POOLS);
 			}
 		}
 		/**
@@ -698,7 +696,7 @@ namespace EMC.Centera.SDK
 		{
 			get
 			{
-				if (this.GetCapability(FPMisc.PRIVILEGEDDELETE, FPMisc.ALLOWED).Equals(FPMisc.TRUE))
+				if (GetCapability(FPMisc.PRIVILEGEDDELETE, FPMisc.ALLOWED).Equals(FPMisc.TRUE))
 					return true;
 				else
 					return false;
@@ -708,11 +706,11 @@ namespace EMC.Centera.SDK
 		/**
 		 * A list of pools that have PrivilegedDelete capability.
 		 */
-		public String PrivilegedDeletePools
+		public string PrivilegedDeletePools
 		{
 			get
 			{
-				return this.GetCapability(FPMisc.PRIVILEGEDDELETE, FPMisc.POOLS);
+				return GetCapability(FPMisc.PRIVILEGEDDELETE, FPMisc.POOLS);
 			}
 		}
 		/**
@@ -722,7 +720,7 @@ namespace EMC.Centera.SDK
 		{
 			get
 			{
-				if (this.GetCapability(FPMisc.READ, FPMisc.ALLOWED).Equals(FPMisc.TRUE))
+				if (GetCapability(FPMisc.READ, FPMisc.ALLOWED).Equals(FPMisc.TRUE))
 					return true;
 				else
 					return false;
@@ -732,21 +730,21 @@ namespace EMC.Centera.SDK
 		/**
 		 * A list of pools that have Read capability.
 		 */
-		public String ReadPools
+		public string ReadPools
 		{
 			get
 			{
-				return this.GetCapability(FPMisc.READ, FPMisc.POOLS);
+				return GetCapability(FPMisc.READ, FPMisc.POOLS);
 			}
 		}
 		/**
 		 * What is the Default retention Strategy of the cluster?
 		 */
-		public String DefaultRetenionScheme
+		public string DefaultRetenionScheme
 		{
 			get
 			{
-				return this.GetCapability(FPMisc.RETENTION, FPMisc.DEFAULT);
+				return GetCapability(FPMisc.RETENTION, FPMisc.DEFAULT);
 			}
 		}
 
@@ -757,7 +755,7 @@ namespace EMC.Centera.SDK
 		{
 			get
 			{
-				if (this.GetCapability(FPMisc.WRITE, FPMisc.ALLOWED).Equals(FPMisc.TRUE))
+				if (GetCapability(FPMisc.WRITE, FPMisc.ALLOWED).Equals(FPMisc.TRUE))
 					return true;
 				else
 					return false;
@@ -767,33 +765,33 @@ namespace EMC.Centera.SDK
 		/**
 		 * A list of pools that have Write capability.
 		 */
-		public String WritePools
+		public string WritePools
 		{
 			get
 			{
-				return this.GetCapability(FPMisc.WRITE, FPMisc.POOLS);
+				return GetCapability(FPMisc.WRITE, FPMisc.POOLS);
 			}
 		}
 
 		/**
 		 * A list containing the Pool mappings for all Profiles / Pools.
 		 */
-		public String PoolMappings
+		public string PoolMappings
 		{
 			get
 			{
-				return this.GetCapability(FPMisc.RETENTION, FPMisc.POOLMAPPINGS);
+				return GetCapability(FPMisc.RETENTION, FPMisc.POOLMAPPINGS);
 			}
 		}
 
 		/**
 		 * A list containing the Profiles for which a Pool mapping exists.
 		 */
-		public String PoolProfiles
+		public string PoolProfiles
 		{
 			get
 			{
-				return this.GetCapability(FPMisc.RETENTION, FPMisc.PROFILES);
+				return GetCapability(FPMisc.RETENTION, FPMisc.PROFILES);
 			}
 		}
 
@@ -804,15 +802,15 @@ namespace EMC.Centera.SDK
 		 * ce		Governance Edition (formerly known as Compliance Edition)
 		 * ce+		Compliane Edition Plus
 		 */
-		public String CenteraEdition
+		public string CenteraEdition
 		{
 			get
 			{
-				return this.GetCapability(FPMisc.COMPLIANCE, FPMisc.MODE);
+				return GetCapability(FPMisc.COMPLIANCE, FPMisc.MODE);
 			}
 		}
 
-		internal String GetCapability(String inCapabilityName,  String inCapabilityAttributeName) 
+		internal string GetCapability(String inCapabilityName,  string inCapabilityAttributeName) 
 		{
 			StringBuilder outString = new StringBuilder();
 			FPInt bufSize = 0;
@@ -825,7 +823,7 @@ namespace EMC.Centera.SDK
 				outString.EnsureCapacity((int) bufSize);
                 try
                 {
-                    FPApi.Pool.GetCapability(this, inCapabilityName, inCapabilityAttributeName, outString, ref len);
+                    Native.Pool.GetCapability(this, inCapabilityName, inCapabilityAttributeName, outString, ref len);
                 }
                 catch (FPLibraryException e)
                 {
@@ -860,7 +858,7 @@ namespace EMC.Centera.SDK
 					bufSize += FPMisc.STRING_BUFFER_SIZE;
 					ioClusterTimeLen += FPMisc.STRING_BUFFER_SIZE;
 					outClusterTime.EnsureCapacity((int) bufSize);
-					FPApi.Pool.GetClusterTime(this, outClusterTime, ref ioClusterTimeLen);
+					Native.Pool.GetClusterTime(this, outClusterTime, ref ioClusterTimeLen);
 				} while (ioClusterTimeLen > bufSize);
 			
 				return FPMisc.GetDateTime(outClusterTime.ToString());
@@ -872,7 +870,7 @@ namespace EMC.Centera.SDK
 		 * See API Guide: FPPool_GetComponentVersion
 		 *
 		 */
-		public static String SDKVersion
+		public static string SDKVersion
 		{
 			get
 			{
@@ -885,7 +883,7 @@ namespace EMC.Centera.SDK
 					bufSize += FPMisc.STRING_BUFFER_SIZE;
 					ioVersionLen += FPMisc.STRING_BUFFER_SIZE;
 					outVersion.EnsureCapacity((int) bufSize);
-					FPApi.Pool.GetComponentVersion((FPInt) FPMisc.VERSION_FPLIBRARY_DLL, outVersion, ref ioVersionLen);
+					Native.Pool.GetComponentVersion((FPInt) FPMisc.VERSION_FPLIBRARY_DLL, outVersion, ref ioVersionLen);
 				} while (ioVersionLen > bufSize);
 			
 				return outVersion.ToString();
@@ -897,17 +895,17 @@ namespace EMC.Centera.SDK
 		 * profile being used to connect to the pool.
 		 *
 		 */
-		public String ProfileClip
+		public string ProfileClip
 		{
 			get
 			{
 				StringBuilder profileClipID = new StringBuilder(FPMisc.STRING_BUFFER_SIZE);
-				FPApi.Pool.GetClipID(this, profileClipID);
+				Native.Pool.GetClipID(this, profileClipID);
 				return profileClipID.ToString();
 			}
 			set
 			{
-				FPApi.Pool.SetClipID(this, value); 
+				Native.Pool.SetClipID(this, value); 
 			}
 		}
 
@@ -921,7 +919,7 @@ namespace EMC.Centera.SDK
 		 */
 		public bool ClipExists(String inClipID) 
 		{
-			if (FPApi.Clip.Exists(this, inClipID) == FPBool.True)
+			if (Native.Clip.Exists(this, inClipID) == FPBool.True)
 				return true;
 			else
 				return false;
@@ -936,7 +934,7 @@ namespace EMC.Centera.SDK
 		 */
 		public void ClipDelete(String inClipID) 
 		{
-			FPApi.Clip.Delete(this, inClipID);
+			Native.Clip.Delete(this, inClipID);
 		}
 
 
@@ -948,7 +946,7 @@ namespace EMC.Centera.SDK
 		 * @param inClipID	The clip to delete.
 		 * @param inReason	A string contining free test relating to the reason for deletion.
 		 */
-		public void ClipAuditedDelete(String inClipID,  String inReason) 
+		public void ClipAuditedDelete(String inClipID,  string inReason) 
 		{
 			ClipAuditedDelete(inClipID, inReason, FPMisc.OPTION_DEFAULT_OPTIONS);
 		}
@@ -961,9 +959,9 @@ namespace EMC.Centera.SDK
 		 * @param inReason	A string contining free test relating to the reason for deletion.
 		 * @param inOptions	The type of deletion being performed (Normal or Privileged).
 		 */
-		public void ClipAuditedDelete(String inClipID,  String inReason, long inOptions) 
+		public void ClipAuditedDelete(String inClipID,  string inReason, long inOptions) 
 		{
-			FPApi.Clip.AuditedDelete(this, inClipID, inReason, (FPLong) inOptions);
+			Native.Clip.AuditedDelete(this, inClipID, inReason, (FPLong) inOptions);
 		}
 
 		/**
@@ -974,7 +972,7 @@ namespace EMC.Centera.SDK
 		 */
 		public FPClip ClipCreate(String inName) 
 		{
-			return new FPClip(FPApi.Clip.Create(this, inName));
+			return new FPClip(Native.Clip.Create(this, inName));
 		}
 
 
@@ -987,7 +985,7 @@ namespace EMC.Centera.SDK
 		 */
 		public FPClip ClipOpen(String inClipID, int inOpenMode) 
 		{
-			return new FPClip(FPApi.Clip.Open(this, inClipID, (FPInt) inOpenMode));
+			return new FPClip(Native.Clip.Open(this, inClipID, (FPInt) inOpenMode));
 		}
 
 
@@ -1015,7 +1013,7 @@ namespace EMC.Centera.SDK
 		 */
 		public FPClip ClipRawOpen(String inClipID, FPStream inStream, long inOptions) 
 		{
-			return new FPClip(FPApi.Clip.RawOpen(thePool, inClipID, inStream, (FPLong) inOptions));
+			return new FPClip(Native.Clip.RawOpen(thePool, inClipID, inStream, (FPLong) inOptions));
 		}
 		
 		public override string ToString()
@@ -1049,7 +1047,7 @@ namespace EMC.Centera.SDK
 		 **/
 		public static void RegisterApplication(string appName, string appVersion)
 		{
-			FPApi.Pool.RegisterApplication(appName, appVersion);
+			Native.Pool.RegisterApplication(appName, appVersion);
 		}
 
 		/**
@@ -1059,7 +1057,7 @@ namespace EMC.Centera.SDK
 		{
 			get
 			{
-				if (this.GetCapability(FPMisc.COMPLIANCE, FPMisc.EVENT_BASED_RETENTION).Equals(FPMisc.SUPPORTED))
+				if (GetCapability(FPMisc.COMPLIANCE, FPMisc.EVENT_BASED_RETENTION).Equals(FPMisc.SUPPORTED))
 					return true;
 				else
 					return false;
@@ -1073,7 +1071,7 @@ namespace EMC.Centera.SDK
 		{
 			get
 			{
-				if (this.GetCapability(FPMisc.COMPLIANCE, FPMisc.RETENTION_HOLD).Equals(FPMisc.SUPPORTED))
+				if (GetCapability(FPMisc.COMPLIANCE, FPMisc.RETENTION_HOLD).Equals(FPMisc.SUPPORTED))
 					return true;
 				else
 					return false;
@@ -1087,8 +1085,8 @@ namespace EMC.Centera.SDK
 		{
 			get
 			{
-				if (this.HoldSupported &&
-					this.GetCapability(FPMisc.RETENTION_HOLD, FPMisc.ALLOWED).Equals(FPMisc.TRUE))
+				if (HoldSupported &&
+					GetCapability(FPMisc.RETENTION_HOLD, FPMisc.ALLOWED).Equals(FPMisc.TRUE))
 					return true;
 				else
 					return false;
@@ -1098,11 +1096,11 @@ namespace EMC.Centera.SDK
 		/**
 		 * A list of pools that have Retention Hold capability.
 		 */
-		public String HoldPools
+		public string HoldPools
 		{
 			get
 			{
-				return this.GetCapability(FPMisc.RETENTION_HOLD, FPMisc.POOLS);
+				return GetCapability(FPMisc.RETENTION_HOLD, FPMisc.POOLS);
 			}
 		}
 		/**
@@ -1112,7 +1110,7 @@ namespace EMC.Centera.SDK
 		{
 			get
 			{
-				return new TimeSpan(0, 0, int.Parse(this.GetCapability(FPMisc.RETENTION, FPMisc.FIXED_RETENTION_MIN)));
+				return new TimeSpan(0, 0, int.Parse(GetCapability(FPMisc.RETENTION, FPMisc.FIXED_RETENTION_MIN)));
 			}
 		}
 
@@ -1123,7 +1121,7 @@ namespace EMC.Centera.SDK
 		{
 			get
 			{
-				return new TimeSpan(0, 0, int.Parse(this.GetCapability(FPMisc.RETENTION, FPMisc.FIXED_RETENTION_MAX)));
+				return new TimeSpan(0, 0, int.Parse(GetCapability(FPMisc.RETENTION, FPMisc.FIXED_RETENTION_MAX)));
 			}
 		}
 
@@ -1134,7 +1132,7 @@ namespace EMC.Centera.SDK
 		{
 			get
 			{
-				return new TimeSpan(0, 0, int.Parse(this.GetCapability(FPMisc.RETENTION, FPMisc.VARIABLE_RETENTION_MIN)));
+				return new TimeSpan(0, 0, int.Parse(GetCapability(FPMisc.RETENTION, FPMisc.VARIABLE_RETENTION_MIN)));
 			}
 		}
 		
@@ -1145,7 +1143,7 @@ namespace EMC.Centera.SDK
 		{
 			get
 			{
-				return new TimeSpan(0, 0, int.Parse(this.GetCapability(FPMisc.RETENTION, FPMisc.VARIABLE_RETENTION_MAX)));
+				return new TimeSpan(0, 0, int.Parse(GetCapability(FPMisc.RETENTION, FPMisc.VARIABLE_RETENTION_MAX)));
 			}
 		}
 
@@ -1156,7 +1154,7 @@ namespace EMC.Centera.SDK
 		{
 			get
 			{
-				return new TimeSpan(0, 0, int.Parse(this.GetCapability(FPMisc.RETENTION, FPMisc.RETENTION_DEFAULT)));
+				return new TimeSpan(0, 0, int.Parse(GetCapability(FPMisc.RETENTION, FPMisc.RETENTION_DEFAULT)));
 			}
 		}
 
@@ -1167,7 +1165,7 @@ namespace EMC.Centera.SDK
 		{
 			get
 			{
-				if (this.GetCapability(FPMisc.COMPLIANCE, FPMisc.RETENTION_MIN_MAX).Equals("supported"))
+				if (GetCapability(FPMisc.COMPLIANCE, FPMisc.RETENTION_MIN_MAX).Equals("supported"))
 					return true;
 				else
 					return false;
@@ -1178,7 +1176,7 @@ namespace EMC.Centera.SDK
         {
             get
             {
-                if (FPApi.Pool.GetGlobalOption(FPMisc.OPTION_STREAM_STRICT_MODE).Equals(FPMisc.TRUE))
+                if (Native.Pool.GetGlobalOption(FPMisc.OPTION_STREAM_STRICT_MODE).Equals(FPMisc.TRUE))
                     return true;
                 else
                     return false;
@@ -1186,9 +1184,9 @@ namespace EMC.Centera.SDK
             set
             {
                 if (value)
-                    FPApi.Pool.SetGlobalOption(FPMisc.OPTION_STREAM_STRICT_MODE, (FPInt) 0);
+                    Native.Pool.SetGlobalOption(FPMisc.OPTION_STREAM_STRICT_MODE, (FPInt) 0);
                 else
-                    FPApi.Pool.SetGlobalOption(FPMisc.OPTION_STREAM_STRICT_MODE, (FPInt) 1);
+                    Native.Pool.SetGlobalOption(FPMisc.OPTION_STREAM_STRICT_MODE, (FPInt) 1);
             }
         }
 	}

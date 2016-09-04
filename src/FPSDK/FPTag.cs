@@ -35,9 +35,7 @@ along with .NET wrapper; see the file COPYING. If not, write to:
 
 using System;
 using System.Text;
-using System.Collections;
-using System.Runtime.InteropServices;
-using EMC.Centera.FPTypes;
+using EMC.Centera.SDK.FPTypes;
 
 namespace EMC.Centera.SDK
 {	
@@ -91,9 +89,9 @@ namespace EMC.Centera.SDK
 		 * @param inParent	The parent Tag for the new Tag.
 		 * @param inName	The name of the new Tag.
 		 */
-		public FPTag(FPTag inParent, String inName) 
+		public FPTag(FPTag inParent, string inName) 
 		{            
-			theTag = FPApi.Tag.Create(inParent, inName);
+			theTag = Native.Tag.Create(inParent, inName);
 			AddObject(theTag, this);
         }
 
@@ -119,7 +117,7 @@ namespace EMC.Centera.SDK
 				RemoveObject(theTag);
                 try
                 {
-                    FPApi.Tag.Close(theTag);
+                    Native.Tag.Close(theTag);
                 }
                 catch (FPLibraryException e)
                 {
@@ -143,7 +141,7 @@ namespace EMC.Centera.SDK
 		 */
 		public FPTag Copy(FPTag inNewParent, int inOptions) 
 		{
-			return new FPTag(FPApi.Tag.Copy(this, inNewParent, (FPInt) inOptions));
+			return new FPTag(Native.Tag.Copy(this, inNewParent, (FPInt) inOptions));
 		}
 
 		/**
@@ -154,7 +152,7 @@ namespace EMC.Centera.SDK
 		{
 			get
 			{
-				return FPApi.Tag.GetClipRef(this);
+				return Native.Tag.GetClipRef(this);
 			}
 		}
 
@@ -167,7 +165,7 @@ namespace EMC.Centera.SDK
 		{
 			get
 			{
-				FPTagRef tagRef = FPApi.Tag.GetSibling(this);
+				FPTagRef tagRef = Native.Tag.GetSibling(this);
 
                 if (tagRef != 0)
                     return new FPTag(tagRef);
@@ -185,7 +183,7 @@ namespace EMC.Centera.SDK
 		{
 			get
 			{
-                FPTagRef tagRef = FPApi.Tag.GetPrevSibling(this);
+                FPTagRef tagRef = Native.Tag.GetPrevSibling(this);
 
                 if (tagRef != 0)
                     return new FPTag(tagRef);
@@ -203,7 +201,7 @@ namespace EMC.Centera.SDK
 		{
 			get
 			{
-                FPTagRef tagRef = FPApi.Tag.GetFirstChild(this);
+                FPTagRef tagRef = Native.Tag.GetFirstChild(this);
 
                 if (tagRef != 0)
                 {
@@ -223,10 +221,10 @@ namespace EMC.Centera.SDK
 		{
 			get
 			{
-                FPTagRef tagRef = FPApi.Tag.GetParent(this);
+                FPTagRef tagRef = Native.Tag.GetParent(this);
 
                 if (tagRef != 0)
-                    return FPApi.Tag.GetParent(this);
+                    return Native.Tag.GetParent(this);
                 else
                     return null;
             }
@@ -239,10 +237,10 @@ namespace EMC.Centera.SDK
 		 */
 		public void Delete() 
 		{
-           FPApi.Tag.Delete(this);
+           Native.Tag.Delete(this);
            RemoveObject(theTag);
            theTag = 0;
-           this.Dispose();
+           Dispose();
 		}
 
 		/**
@@ -250,7 +248,7 @@ namespace EMC.Centera.SDK
 		 * See API Guide: FPTag_GetTagName
 		 *  
 		 */
-		public String Name
+		public string Name
 		{
 			get
 			{
@@ -264,7 +262,7 @@ namespace EMC.Centera.SDK
 					len = bufSize;
 					outString = new byte[(int) bufSize];
 
-					FPApi.Tag.GetTagName(this, ref outString, ref len);
+					Native.Tag.GetTagName(this, ref outString, ref len);
 				} while (len > bufSize);
 
                 return Encoding.UTF8.GetString(outString, 0, (int)len - 1);
@@ -272,9 +270,9 @@ namespace EMC.Centera.SDK
 		}
 
 		/**
-		 * Get a String representation of this Tag - the Tag name.
+		 * Get a string representation of this Tag - the Tag name.
 		 * 
-		 * @return The String representation of this object.
+		 * @return The string representation of this object.
 		 */
 		public override string ToString()
 		{
@@ -282,14 +280,14 @@ namespace EMC.Centera.SDK
 		}
 
 		/**
-		 * Set a String attribute on this Tag. See API Guide: FPTag_SetStringAttribute
+		 * Set a string attribute on this Tag. See API Guide: FPTag_SetStringAttribute
 		 *
 		 * @param	inAttrName	The Attribute Name to be set,
 		 * @param	inAttrValue	The Value to be set.
 		 */
-		public void SetAttribute(String inAttrName,  String inAttrValue) 
+		public void SetAttribute(String inAttrName,  string inAttrValue) 
 		{
-			FPApi.Tag.SetStringAttribute(this, inAttrName, inAttrValue);
+			Native.Tag.SetStringAttribute(this, inAttrName, inAttrValue);
 		}
 
 		/**
@@ -300,7 +298,7 @@ namespace EMC.Centera.SDK
 		 */
 		public void SetAttribute(String inAttrName, long inAttrValue) 
 		{
-			FPApi.Tag.SetLongAttribute(this, inAttrName, (FPLong) inAttrValue);
+			Native.Tag.SetLongAttribute(this, inAttrName, (FPLong) inAttrValue);
 		}
 
 		/**
@@ -312,18 +310,18 @@ namespace EMC.Centera.SDK
 		public void SetAttribute(String inAttrName, bool inAttrValue) 
 		{
 			if (inAttrValue)
-				FPApi.Tag.SetBoolAttribute(this, inAttrName, FPBool.True);
+				Native.Tag.SetBoolAttribute(this, inAttrName, FPBool.True);
 			else
-				FPApi.Tag.SetBoolAttribute(this, inAttrName, FPBool.False);
+				Native.Tag.SetBoolAttribute(this, inAttrName, FPBool.False);
 		}
 
 		/**
-		 * Get the value of a String attribute from this Tag. See API Guide: FPTag_GetStringAttribute
+		 * Get the value of a string attribute from this Tag. See API Guide: FPTag_GetStringAttribute
 		 *
 		 * @param	inAttrName	The Attribute Name to be retrieved,
-		 * @return	The String value of the attribute.
+		 * @return	The string value of the attribute.
 		 */
-		public String GetStringAttribute(String inAttrName) 
+		public string GetStringAttribute(String inAttrName) 
 		{
             byte[] outString;
 			FPInt bufSize = 0;
@@ -335,7 +333,7 @@ namespace EMC.Centera.SDK
 				len = bufSize;
                 outString = new byte[(int) bufSize];
 
-                FPApi.Tag.GetStringAttribute(this, inAttrName, ref outString, ref len);
+                Native.Tag.GetStringAttribute(this, inAttrName, ref outString, ref len);
 			} while (len > bufSize);
 
             return Encoding.UTF8.GetString(outString, 0, (int) len - 1);
@@ -350,7 +348,7 @@ namespace EMC.Centera.SDK
 		 */
 		public long GetLongAttribute(String inAttrName) 
 		{
-			return (long) FPApi.Tag.GetLongAttribute(this, inAttrName);
+			return (long) Native.Tag.GetLongAttribute(this, inAttrName);
 		}
 
 		/**
@@ -361,7 +359,7 @@ namespace EMC.Centera.SDK
 		 */
 		public bool GetBoolAttribute(String inAttrName) 
 		{
-			if (FPApi.Tag.GetBoolAttribute(this, inAttrName) == FPBool.True)
+			if (Native.Tag.GetBoolAttribute(this, inAttrName) == FPBool.True)
 				return true;
 			else
 				return false;
@@ -374,7 +372,7 @@ namespace EMC.Centera.SDK
 		 */
 		public void RemoveAttribute(String inAttrName) 
 		{
-			FPApi.Tag.RemoveAttribute(this, inAttrName);
+			Native.Tag.RemoveAttribute(this, inAttrName);
 		}
 
 		/**
@@ -385,7 +383,7 @@ namespace EMC.Centera.SDK
 		{
 			get
 			{
-				return (int) FPApi.Tag.GetNumAttributes(this);
+				return (int) Native.Tag.GetNumAttributes(this);
 			}
 		}
 
@@ -412,7 +410,7 @@ namespace EMC.Centera.SDK
 				valLen = valSize;
 				valString = new byte[(int) valSize];
 
-				FPApi.Tag.GetIndexAttribute(this, (FPInt) inIndex, ref nameString, ref nameLen, ref valString, ref valLen);
+				Native.Tag.GetIndexAttribute(this, (FPInt) inIndex, ref nameString, ref nameLen, ref valString, ref valLen);
 			} while (nameLen > nameSize || valLen > valSize);
 
             return new FPAttribute(Encoding.UTF8.GetString(nameString, 0, (int)nameLen - 1), Encoding.UTF8.GetString(valString, 0, (int) valLen - 1));
@@ -427,7 +425,7 @@ namespace EMC.Centera.SDK
 		{
 			get
 			{
-				return (long) FPApi.Tag.GetBlobSize(this);
+				return (long) Native.Tag.GetBlobSize(this);
 			}
 		}
 
@@ -451,7 +449,7 @@ namespace EMC.Centera.SDK
 		 */
 		public void BlobWrite(FPStream inStream, long inOptions) 
 		{
-			FPApi.Tag.BlobWrite(this, inStream, (FPLong) inOptions);
+			Native.Tag.BlobWrite(this, inStream, (FPLong) inOptions);
 		}
 
 		/**
@@ -475,7 +473,7 @@ namespace EMC.Centera.SDK
 		 */
 		public void BlobWritePartial(FPStream inStream, long inSequenceID, long inOptions) 
 		{
-			FPApi.Tag.BlobWritePartial(this, inStream, (FPLong) inOptions, (FPLong) inSequenceID);
+			Native.Tag.BlobWritePartial(this, inStream, (FPLong) inOptions, (FPLong) inSequenceID);
 		}
 
 		/**
@@ -498,7 +496,7 @@ namespace EMC.Centera.SDK
 		 */
 		public void BlobRead(FPStream inStream, long inOptions) 
 		{
-			FPApi.Tag.BlobRead(this, inStream, (FPLong) inOptions);
+			Native.Tag.BlobRead(this, inStream, (FPLong) inOptions);
 		}
 
 		/**
@@ -524,7 +522,7 @@ namespace EMC.Centera.SDK
 		 */
 		public void BlobReadPartial(FPStream inStream, long inOffset, long inReadLength, long inOptions) 
 		{
-			FPApi.Tag.BlobReadPartial(this, inStream, (FPLong) inOffset, (FPLong) inReadLength, (FPLong) inOptions);
+			Native.Tag.BlobReadPartial(this, inStream, (FPLong) inOffset, (FPLong) inReadLength, (FPLong) inOptions);
 		}
 
 		/**
@@ -536,7 +534,7 @@ namespace EMC.Centera.SDK
 		{
 			get
 			{
-				return (int) FPApi.Tag.BlobExists(this);
+				return (int) Native.Tag.BlobExists(this);
 			}
 		}
 
@@ -565,19 +563,4 @@ namespace EMC.Centera.SDK
 	 * @author Graham Stuart
 	 * @version
 	 */
-	public class FPTagCollection:ArrayList
-	{
-		internal FPTagCollection(FPClip c) 
-		{ 
-			FPTag t;
-
-			for (int i = 0; i < c.NumTags; i++)
-			{
-				t = c.NextTag;
-				this.Add(t);
-			}
-			
-		}
-	}
-
 }

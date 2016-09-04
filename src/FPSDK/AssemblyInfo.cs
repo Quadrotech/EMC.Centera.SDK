@@ -34,7 +34,6 @@ along with .NET wrapper; see the file COPYING. If not, write to:
 ******************************************************************************/
 
 using System.Reflection;
-using System.Runtime.CompilerServices;
 
 //
 // General Information about an assembly is controlled through the following 

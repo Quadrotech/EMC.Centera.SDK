@@ -34,10 +34,7 @@ along with .NET wrapper; see the file COPYING. If not, write to:
 ******************************************************************************/
 
 using System;
-using System.Text;
-using System.Collections;
-using System.Runtime.InteropServices;
-using EMC.Centera.FPTypes;
+using EMC.Centera.SDK.FPTypes;
 
 namespace EMC.Centera.SDK
 {	
@@ -62,12 +59,12 @@ namespace EMC.Centera.SDK
 		{
 			thePool = p;
 			theQuery = 0;
-			theExpression = FPApi.QueryExpression.Create();
+			theExpression = Native.QueryExpression.Create();
 
 			// Set default values - unbounded query on existing objects
-			FPApi.QueryExpression.SetStartTime(theExpression, 0);
-			FPApi.QueryExpression.SetEndTime(theExpression, (EMC.Centera.FPTypes.FPLong) (-1));
-			FPApi.QueryExpression.SetType(theExpression, (FPInt) EMC.Centera.SDK.FPMisc.QUERY_TYPE_EXISTING);
+			Native.QueryExpression.SetStartTime(theExpression, 0);
+			Native.QueryExpression.SetEndTime(theExpression, (FPLong) (-1));
+			Native.QueryExpression.SetType(theExpression, (FPInt) FPMisc.QUERY_TYPE_EXISTING);
 		}
 
 		/**
@@ -79,7 +76,7 @@ namespace EMC.Centera.SDK
 
 		internal FPQuery(FPPoolQueryRef q)
 		{
-			thePool = FPApi.PoolQuery.GetPoolRef(q);
+			thePool = Native.PoolQuery.GetPoolRef(q);
 			theQuery = q;
 			theExpression = 0;
 		}
@@ -102,13 +99,13 @@ namespace EMC.Centera.SDK
 		{
 			if (theQuery != 0)
 			{
-				FPApi.PoolQuery.Close(theQuery);
+				Native.PoolQuery.Close(theQuery);
 				theQuery = 0;
 			}
 
 			if (theExpression != 0)
 			{
-				FPApi.QueryExpression.Close(theExpression);
+				Native.QueryExpression.Close(theExpression);
 				theExpression = 0;
 			}
 		}
@@ -120,7 +117,7 @@ namespace EMC.Centera.SDK
 		 */
 		public void Execute()
 		{
-			theQuery = FPApi.PoolQuery.Open(thePool, theExpression);
+			theQuery = Native.PoolQuery.Open(thePool, theExpression);
 		}
 
 
@@ -133,7 +130,7 @@ namespace EMC.Centera.SDK
 		{
 			get
 			{
-				return FPApi.PoolQuery.GetPoolRef(this);
+				return Native.PoolQuery.GetPoolRef(this);
 			}
 		}
 
@@ -146,8 +143,8 @@ namespace EMC.Centera.SDK
 		 */
 		public int FetchResult(ref FPQueryResult outResult, int inTimeout) 
 		{
-			outResult.Result = FPApi.PoolQuery.FetchResult(theQuery, (FPInt) inTimeout);
-			return (int) FPApi.QueryResult.GetResultCode(outResult);
+			outResult.Result = Native.PoolQuery.FetchResult(theQuery, (FPInt) inTimeout);
+			return (int) Native.QueryResult.GetResultCode(outResult);
 		}
 
 		/**
@@ -158,12 +155,12 @@ namespace EMC.Centera.SDK
 		{
 			get
 			{
-				return FPMisc.GetDateTime(FPApi.QueryExpression.GetStartTime(theExpression));
+				return FPMisc.GetDateTime(Native.QueryExpression.GetStartTime(theExpression));
 			}
 
 			set
 			{
-				FPApi.QueryExpression.SetStartTime(theExpression, FPMisc.GetTime(value));
+				Native.QueryExpression.SetStartTime(theExpression, FPMisc.GetTime(value));
 			}
 		}
 
@@ -175,15 +172,15 @@ namespace EMC.Centera.SDK
 		{
 			get
 			{
-                if (this.UnboundedEndTime)
+                if (UnboundedEndTime)
                     return FPPool.ClusterTime;
                 else
-                    return FPMisc.GetDateTime(FPApi.QueryExpression.GetEndTime(theExpression));
+                    return FPMisc.GetDateTime(Native.QueryExpression.GetEndTime(theExpression));
 			}
 
 			set
 			{
-				FPApi.QueryExpression.SetEndTime(theExpression, FPMisc.GetTime(value));
+				Native.QueryExpression.SetEndTime(theExpression, FPMisc.GetTime(value));
 			}
 		}
 
@@ -195,12 +192,12 @@ namespace EMC.Centera.SDK
         {
             get
             {
-                return (FPApi.QueryExpression.GetStartTime(theExpression) == 0);
+                return (Native.QueryExpression.GetStartTime(theExpression) == 0);
             }
 
             set
             {
-                FPApi.QueryExpression.SetStartTime(theExpression, 0);
+                Native.QueryExpression.SetStartTime(theExpression, 0);
             }
         }
 
@@ -212,12 +209,12 @@ namespace EMC.Centera.SDK
         {
             get
             {
-                return (FPApi.QueryExpression.GetEndTime(theExpression) == (FPLong) (-1));
+                return (Native.QueryExpression.GetEndTime(theExpression) == (FPLong) (-1));
             }
 
             set
             {
-                FPApi.QueryExpression.SetEndTime(theExpression, (FPLong) (-1));
+                Native.QueryExpression.SetEndTime(theExpression, (FPLong) (-1));
             }
         }
 
@@ -233,11 +230,11 @@ namespace EMC.Centera.SDK
 		{
 			get
 			{
-				return (int) FPApi.QueryExpression.GetType(theExpression);
+				return (int) Native.QueryExpression.GetType(theExpression);
 			}
 			set
 			{
-				FPApi.QueryExpression.SetType(theExpression, (FPInt) value);
+				Native.QueryExpression.SetType(theExpression, (FPInt) value);
 			}
 		}
 
@@ -250,7 +247,7 @@ namespace EMC.Centera.SDK
 		 */
 		public void SelectField(String inFieldName) 
 		{
-			FPApi.QueryExpression.SelectField(theExpression, inFieldName);
+			Native.QueryExpression.SelectField(theExpression, inFieldName);
 		}
 
 		/**
@@ -261,7 +258,7 @@ namespace EMC.Centera.SDK
 		 */
 		public void DeselectField(String inFieldName) 
 		{
-			FPApi.QueryExpression.DeselectField(theExpression, inFieldName);
+			Native.QueryExpression.DeselectField(theExpression, inFieldName);
 		}
 
 		/**
@@ -273,156 +270,13 @@ namespace EMC.Centera.SDK
 		 */
 		public bool IsSelected(String inFieldName) 
 		{
-			if (FPApi.QueryExpression.IsFieldSelected(theExpression, inFieldName) == FPBool.True)
+			if (Native.QueryExpression.IsFieldSelected(theExpression, inFieldName) == FPBool.True)
 				return true;
 			else
 				return false;
 		}
 	}
 
-	public class FPQueryResult : FPObject
-	{
-        FPQueryResultRef theResult;
-
-		/**
-		 * Empty constructor - create the object but do not set a value.
-		 */
-		public FPQueryResult()
-		{
-            theResult = 0;
-        }
-
-		internal FPQueryResultRef Result
-		{
-            set
-            {
-                theResult = value;
-                AddObject(theResult, this);
-            }
-        }
-
-		/**
-		 * Implicit conversion between an FPQueryResult object and an FPQueryResultRef
-		 *
-		 * @param	q	The FPQueryResult object.
-		 * @return	The FPPoolQueryRef associated with it.
-		 */
-		static public implicit operator FPQueryResultRef(FPQueryResult q) 
-		{
-			return q.theResult;
-		}
-
-		/**
-		 * Explicitly close the FPQueryResult.
-		 */
-		public override void Close()
-		{
-			if (theResult != 0)
-			{
-                RemoveObject(theResult);
-                FPApi.QueryResult.Close(theResult);
-				theResult = 0;
-			}
-		}
-
-		/**
-		 * The ID of the Clip associated with this result.
-		 * See API Guide: FPQueryResult_GetClipID
-		 * 
-		 */
-		public String ClipID 
-		{
-			get
-			{
-				StringBuilder outClipID = new StringBuilder(FPMisc.STRING_BUFFER_SIZE);
-			
-				FPApi.QueryResult.GetClipID(theResult, outClipID);
-
-				return outClipID.ToString();
-			}
-		}
-
-		/**
-		 * The Timestamp of the Clip associated with this result.
-		 * See API Guide: FPQueryResult_GetTimestamp
-		 *
-		 */
-		public DateTime Timestamp
-		{
-			get
-			{
-				return FPMisc.GetDateTime(FPApi.QueryResult.GetTimestamp(theResult));
-			}
-		}
-
-		/**
-		 * Retrieve the value of an Attribute of the Clip associated with this result.
-		 * See API Guide: FPQueryResult_GetField
-		 * 
-		 * @param	inAttrName	The name of the attribute to retieve from the current member of the result set.
-		 * @return	The value of the Attribute  of the Clip associated with the current member of the result set.
-		 */
-		public String GetField(String inAttrName) 
-		{
-            byte[] outString;
-			FPInt bufSize = 0;
-			FPInt len = 0;
-
-			do
-			{
-				bufSize += FPMisc.STRING_BUFFER_SIZE;
-				len = bufSize;
-				outString = new byte[(int) bufSize];
-
-				FPApi.QueryResult.GetField(theResult, inAttrName, ref outString, ref len);
-			} while (len > bufSize);
-
-            return Encoding.UTF8.GetString(outString, 0, (int)len - 1);
-
-		}
-
-		/**
-		 * The ResultCode indicating the status of the Query execution.
-		 * See API Guide: FPQueryResult_GetResultCode
-		 * 
-		 */
-		public int ResultCode
-		{
-			get
-			{
-				return (int) FPApi.QueryResult.GetResultCode(theResult);
-			}
-		}
-
-		/**
-		 * The state of the Clip on the Centera i.e.
-		 * 
-		 * true Exists
-		 * false Deleted
-		 * 
-		 * See API Guide: FPQueryResult_GetResultType
-		 * 
-		 */
-		public bool Exists 
-		{
-			get
-			{
-				if (FPApi.QueryResult.GetType(theResult) == (FPInt) FPMisc.QUERY_TYPE_EXISTING)
-					return true;
-				else
-					return false;
-			}
-		}
-
-		public override string ToString()
-		{
-			return "Clip: " + ClipID + 
-				" Status(" + (Exists ? "EXISTS" : "DELETED") + ")" + 
-				" Timestamp " + Timestamp;
-
-		}
-
-
-	}  // end of class QueryResult
+    // end of class QueryResult
 
 }

@@ -35,9 +35,7 @@ along with .NET wrapper; see the file COPYING. If not, write to:
 
 using System;
 using System.Text;
-using System.Collections;
-using System.Runtime.InteropServices;
-using EMC.Centera.FPTypes;
+using EMC.Centera.SDK.FPTypes;
 
 namespace EMC.Centera.SDK
 {	
@@ -60,10 +58,10 @@ namespace EMC.Centera.SDK
 		 * @param inName	The name of the clip.
 		 * @return The int value of the option.
 		 */
-		public FPClip(FPPool inPool,  String inName) 
+		public FPClip(FPPool inPool,  string inName) 
 		{
 			thePool = inPool;
-			theClip = FPApi.Clip.Create(thePool, inName);
+			theClip = Native.Clip.Create(thePool, inName);
 			AddObject(theClip, this);
 		}
 
@@ -76,10 +74,10 @@ namespace EMC.Centera.SDK
 		 * @param inClipID	The ID of the clip to be opened.
 		 * @param inOpenMode	The mode to open the clip in (Flat or Tree).
 		 */
-		public FPClip(FPPool inPool,  String inClipID, int inOpenMode) 
+		public FPClip(FPPool inPool,  string inClipID, int inOpenMode) 
 		{
 			thePool = inPool;
-			theClip = FPApi.Clip.Open(inPool, inClipID, (FPInt) inOpenMode);
+			theClip = Native.Clip.Open(inPool, inClipID, (FPInt) inOpenMode);
 			AddObject(theClip, this);
 		}
 
@@ -93,10 +91,10 @@ namespace EMC.Centera.SDK
 		 * @param inStream	The stream to read the clip from.
 		 * @param inOptions	A suitable option.
 		 */
-		public FPClip(FPPool inPool, String inClipID, FPStream inStream, long inOptions) 
+		public FPClip(FPPool inPool, string inClipID, FPStream inStream, long inOptions) 
 		{
 			thePool = inPool;
-			theClip = FPApi.Clip.RawOpen(thePool, inClipID, inStream, (FPLong) inOptions);
+			theClip = Native.Clip.RawOpen(thePool, inClipID, inStream, (FPLong) inOptions);
 			AddObject(theClip, this);
 		}
 		
@@ -109,7 +107,7 @@ namespace EMC.Centera.SDK
 		internal FPClip(FPClipRef c)
 		{
 			theClip = c;
-			thePool = FPApi.Clip.GetPoolRef(c);
+			thePool = Native.Clip.GetPoolRef(c);
 			AddObject(theClip, this);
 		}
 
@@ -171,7 +169,7 @@ namespace EMC.Centera.SDK
 			if (theClip != 0)
 			{
 				RemoveObject(theClip);
-                FPApi.Clip.Close(theClip);
+                Native.Clip.Close(theClip);
 			}
 
 			theClip = 0;
@@ -207,7 +205,7 @@ namespace EMC.Centera.SDK
 			{
                 if (myTopTag == null)
                 {
-                    FPTagRef t = FPApi.Clip.GetTopTag(this);
+                    FPTagRef t = Native.Clip.GetTopTag(this);
 
                     if (!SDKObjects.Contains(t))
                         myTopTag = new FPTag(t);
@@ -227,7 +225,7 @@ namespace EMC.Centera.SDK
 		{
 			get
 			{
-				return (int) FPApi.Clip.GetNumBlobs(this);
+				return (int) Native.Clip.GetNumBlobs(this);
 			}
 		}
 
@@ -239,7 +237,7 @@ namespace EMC.Centera.SDK
 		{
 			get
 			{
-				return (int) FPApi.Clip.GetNumTags(this);
+				return (int) Native.Clip.GetNumTags(this);
 			}
 		}
 
@@ -251,21 +249,21 @@ namespace EMC.Centera.SDK
 		{
 			get
 			{
-				return (long) FPApi.Clip.GetTotalSize(this);
+				return (long) Native.Clip.GetTotalSize(this);
 			}
 		}
 
 		/**
-		 * A String representing the ID of this Clip. See API Guide: FPClip_GetClipID
+		 * A string representing the ID of this Clip. See API Guide: FPClip_GetClipID
 		 *
 		 */
-		public String ClipID
+		public string ClipID
 		{
 			get
 			{
 				StringBuilder outClipID = new StringBuilder(FPMisc.STRING_BUFFER_SIZE);
 
-				FPApi.Clip.GetClipID(this, outClipID);
+				Native.Clip.GetClipID(this, outClipID);
 				return outClipID.ToString();
 			}
 		}
@@ -274,7 +272,7 @@ namespace EMC.Centera.SDK
 		 * The name of this Clip.
 		 *
 		 */
-		public String Name
+		public string Name
 		{
 			get
 			{
@@ -287,21 +285,21 @@ namespace EMC.Centera.SDK
 					bufSize += FPMisc.STRING_BUFFER_SIZE;
 					len = bufSize;
 					outString = new byte[(int) bufSize];
-					FPApi.Clip.GetName(this, ref outString, ref len);
+					Native.Clip.GetName(this, ref outString, ref len);
 				} while (len > bufSize);
 
                 return Encoding.UTF8.GetString(outString, 0, (int)len - 1);
 			}
 			set
 			{
-				FPApi.Clip.SetName(this, value);
+				Native.Clip.SetName(this, value);
 			}
 		}
 
 		/**
-		 * Return a String form of this Clip
+		 * Return a string form of this Clip
 		 *
-		 * @return The String representing the ID of this Clip.
+		 * @return The string representing the ID of this Clip.
 		 */
 		public override string ToString()
 		{
@@ -325,7 +323,7 @@ namespace EMC.Centera.SDK
 					bufSize += FPMisc.STRING_BUFFER_SIZE;
 					len = bufSize;
 					outString.EnsureCapacity((int) bufSize);
-					FPApi.Clip.GetCreationDate(this, outString, ref len);
+					Native.Clip.GetCreationDate(this, outString, ref len);
 				} while (len > bufSize);
 			
 				return FPMisc.GetDateTime(outString.ToString());
@@ -342,7 +340,7 @@ namespace EMC.Centera.SDK
 		{
 			get
 			{
-				int period = (int) FPApi.Clip.GetRetentionPeriod(this);
+				int period = (int) Native.Clip.GetRetentionPeriod(this);
 
 				if (period < 0)
 				{
@@ -358,11 +356,11 @@ namespace EMC.Centera.SDK
 			{
 				if (value.Ticks > 0)
 				{
-					FPApi.Clip.SetRetentionPeriod(this, (FPLong) value.TotalSeconds);
+					Native.Clip.SetRetentionPeriod(this, (FPLong) value.TotalSeconds);
 				}
 				else
 				{
-					FPApi.Clip.SetRetentionPeriod(this, (FPLong) value.Ticks);
+					Native.Clip.SetRetentionPeriod(this, (FPLong) value.Ticks);
 				}
 			}
 		}
@@ -389,7 +387,7 @@ namespace EMC.Centera.SDK
 
 			set
 			{
-				RetentionPeriod = new TimeSpan(value.Ticks - this.FPPool.ClusterTime.Ticks);
+				RetentionPeriod = new TimeSpan(value.Ticks - FPPool.ClusterTime.Ticks);
 			}
 		}
 
@@ -415,7 +413,7 @@ namespace EMC.Centera.SDK
 
 			set
 			{
-				EBRPeriod = new TimeSpan(value.Ticks - this.FPPool.ClusterTime.Ticks);
+				EBRPeriod = new TimeSpan(value.Ticks - FPPool.ClusterTime.Ticks);
 			}
 		}
 
@@ -436,7 +434,7 @@ namespace EMC.Centera.SDK
                     bufSize += FPMisc.STRING_BUFFER_SIZE;
                     len = bufSize;
                     outString.EnsureCapacity((int)bufSize);
-                    FPApi.Clip.GetEBREventTime(this, outString, ref len);
+                    Native.Clip.GetEBREventTime(this, outString, ref len);
                 } while (len > bufSize);
 
                 return FPMisc.GetDateTime(outString.ToString());
@@ -468,7 +466,7 @@ namespace EMC.Centera.SDK
 		{
 			get
 			{
-				if (FPApi.Clip.IsModified(this) == FPBool.True)
+				if (Native.Clip.IsModified(this) == FPBool.True)
 					return true;
 				else
 					return false;
@@ -485,7 +483,7 @@ namespace EMC.Centera.SDK
 			get
 			{
                 FPTag tag;
-                FPTagRef t = FPApi.Clip.FetchNext(this);
+                FPTagRef t = Native.Clip.FetchNext(this);
 
                 if (!SDKObjects.Contains(t))
                     tag = new FPTag(t);
@@ -499,13 +497,13 @@ namespace EMC.Centera.SDK
 		/**
 		 * Write the Clip to the Centera. See API Guide: FPClip_Write
 		 *
-		 * @return String representing the ID of the clip written to the Centera.
+		 * @return string representing the ID of the clip written to the Centera.
 		 */
-		public String Write() 
+		public string Write() 
 		{
 			StringBuilder outClipID = new StringBuilder(FPMisc.STRING_BUFFER_SIZE);
 
-			FPApi.Clip.Write(this, outClipID);
+			Native.Clip.Write(this, outClipID);
 			return outClipID.ToString();
 		}
 
@@ -516,7 +514,7 @@ namespace EMC.Centera.SDK
 		 */
 		public void RawRead(FPStream inStream) 
 		{
-			FPApi.Clip.RawRead(this, inStream);
+			Native.Clip.RawRead(this, inStream);
 		}
 
 		/**
@@ -525,9 +523,9 @@ namespace EMC.Centera.SDK
 		 * @param inAttrName	The name of the description attribute.
 		 * @param inAttrValue	The value for the description attribute.
 		 */
-		public void SetAttribute(String inAttrName,  String inAttrValue) 
+		public void SetAttribute(String inAttrName,  string inAttrValue) 
 		{
-			FPApi.Clip.SetDescriptionAttribute(this, inAttrName, inAttrValue);
+			Native.Clip.SetDescriptionAttribute(this, inAttrName, inAttrValue);
 		}
 
 		/**
@@ -537,16 +535,16 @@ namespace EMC.Centera.SDK
 		 */
 		public void RemoveAttribute(String inAttrName) 
 		{
-			FPApi.Clip.RemoveDescriptionAttribute(this, inAttrName);
+			Native.Clip.RemoveDescriptionAttribute(this, inAttrName);
 		}
 
 		/**
 		 * Get a description attribute from the Clip level metadata. See API Guide: FPClip_GetDescriptionAttribute
 		 * 
 		 * @param inAttrName	The name of the description attribute.
-		 * @return The String value of the Description attribute.
+		 * @return The string value of the Description attribute.
 		 */
-		public String GetAttribute(String inAttrName)
+		public string GetAttribute(String inAttrName)
 		{
             byte[] outString;
 			FPInt bufSize = 0;
@@ -557,7 +555,7 @@ namespace EMC.Centera.SDK
 				bufSize += FPMisc.STRING_BUFFER_SIZE;
 				len = bufSize;
 				outString = new byte[(int) bufSize];
-				FPApi.Clip.GetDescriptionAttribute(this, inAttrName, ref outString, ref len);
+				Native.Clip.GetDescriptionAttribute(this, inAttrName, ref outString, ref len);
 			} while (len > bufSize);
 
             return Encoding.UTF8.GetString(outString, 0, (int)len - 1);
@@ -587,7 +585,7 @@ namespace EMC.Centera.SDK
 				valLen = valSize;
 				valueString = new byte[(int) valSize];
 
-				FPApi.Clip.GetDescriptionAttributeIndex(this, (FPInt) inIndex, ref nameString, ref nameLen, ref valueString, ref valLen);
+				Native.Clip.GetDescriptionAttributeIndex(this, (FPInt) inIndex, ref nameString, ref nameLen, ref valueString, ref valLen);
 			} while (nameLen > nameSize || valLen > valSize);
 
 			return new FPAttribute(Encoding.UTF8.GetString(nameString, 0, (int)nameLen - 1), Encoding.UTF8.GetString(valueString, 0, (int)valLen - 1));
@@ -602,7 +600,7 @@ namespace EMC.Centera.SDK
 		{
 			get
 			{
-				return (int) FPApi.Clip.GetNumDescriptionAttributes(this);;
+				return (int) Native.Clip.GetNumDescriptionAttributes(this);;
 			}
 		}
 
@@ -611,7 +609,7 @@ namespace EMC.Centera.SDK
 		 * The retention class name associated with this clip.
 		 * 
 		 */
-		public String RetentionClassName
+		public string RetentionClassName
 		{
 			get
 			{
@@ -624,7 +622,7 @@ namespace EMC.Centera.SDK
 					bufSize += FPMisc.STRING_BUFFER_SIZE;
 					len = bufSize;
 					outString = new byte[(int) bufSize];
-					FPApi.Clip.GetRetentionClassName(this, ref outString, ref len);
+					Native.Clip.GetRetentionClassName(this, ref outString, ref len);
 				} while (len > bufSize);
 
                 return Encoding.UTF8.GetString(outString, 0, (int)len - 1);
@@ -633,7 +631,7 @@ namespace EMC.Centera.SDK
 			set
 			{
 				FPRetentionClass rcRef = thePool.RetentionClasses.GetClass(value);
-				FPApi.Clip.SetRetentionClass(this, rcRef);
+				Native.Clip.SetRetentionClass(this, rcRef);
 			}
 		}
 
@@ -651,7 +649,7 @@ namespace EMC.Centera.SDK
 			}
 			set
 			{
-				FPApi.Clip.SetRetentionClass(this, value);
+				Native.Clip.SetRetentionClass(this, value);
 			}
 		}
 
@@ -661,7 +659,7 @@ namespace EMC.Centera.SDK
 		 */
 		public void RemoveRetentionClass() 
 		{
-			FPApi.Clip.RemoveRetentionClass(this);
+			Native.Clip.RemoveRetentionClass(this);
 		}
 
 		
@@ -674,7 +672,7 @@ namespace EMC.Centera.SDK
 		public bool ValidateRetentionClass(FPRetentionClassCollection coll) 
 		{
 
-			if (coll.ValidateClass(this.Name))
+			if (coll.ValidateClass(Name))
 				return true;
 			else
 				return false;
@@ -687,7 +685,7 @@ namespace EMC.Centera.SDK
 		 */
 		public bool ValidateRetentionClass() 
 		{
-			if (FPApi.Clip.ValidateRetentionClass(FPApi.Pool.GetRetentionClassContext(thePool), this) == FPBool.True)
+			if (Native.Clip.ValidateRetentionClass(Native.Pool.GetRetentionClassContext(thePool), this) == FPBool.True)
 				return true;
 			else
 				return false;
@@ -706,7 +704,7 @@ namespace EMC.Centera.SDK
 		{
 			byte[] outClipID = new byte[bufSize];
 
-			FPApi.Clip.GetCanonicalFormat(inClipID, outClipID);
+			Native.Clip.GetCanonicalFormat(inClipID, outClipID);
 
 			return outClipID;
 		}
@@ -722,7 +720,7 @@ namespace EMC.Centera.SDK
 		{
 			byte[] outClipID = new byte[bufSize];
 
-			FPApi.Clip.GetCanonicalFormat(ClipID, outClipID);
+			Native.Clip.GetCanonicalFormat(ClipID, outClipID);
 
 			return outClipID;
 		}
@@ -732,7 +730,7 @@ namespace EMC.Centera.SDK
 		 * platforms that use different character sets. Buffer of FPMisc.STRING_BUFFER_SIZE is used.
 		 * See API Guide: FPClip_GetCanonicalForm
 		 * 
-		 * @param inClipID A standard String format Clip ID.
+		 * @param inClipID A standard string format Clip ID.
 		 * @return The Canonical Form of the clip.
 		 */
 		public static byte[] GetCanonicalFormat(String inClipID)
@@ -762,11 +760,11 @@ namespace EMC.Centera.SDK
 		 * @param inClipID A Clip ID in Canonical Form.
 		 * @return The Canonical Form of the clip.
 		 */
-		public static String GetStringFormat(byte[] inClipID) 
+		public static string GetStringFormat(byte[] inClipID) 
 		{
 			StringBuilder clipString = new StringBuilder(FPMisc.STRING_BUFFER_SIZE);
 
-			FPApi.Clip.GetStringFormat(inClipID, clipString);
+			Native.Clip.GetStringFormat(inClipID, clipString);
 
 			return clipString.ToString();
 		}
@@ -810,7 +808,7 @@ namespace EMC.Centera.SDK
 		{
 			get
 			{
-				if (FPApi.Clip.GetRetentionHold(this) == FPBool.True)
+				if (Native.Clip.GetRetentionHold(this) == FPBool.True)
 					return true;
 				else
 					return false;
@@ -820,9 +818,9 @@ namespace EMC.Centera.SDK
 		public void SetRetentionHold(bool holdState, string holdID)
 		{
 			if (holdState)
-				FPApi.Clip.SetRetentionHold(this, FPBool.True, holdID);
+				Native.Clip.SetRetentionHold(this, FPBool.True, holdID);
 			else
-				FPApi.Clip.SetRetentionHold(this, FPBool.False, holdID);
+				Native.Clip.SetRetentionHold(this, FPBool.False, holdID);
 		}
 
 
@@ -830,7 +828,7 @@ namespace EMC.Centera.SDK
 		{
 			get
 			{
-				int period = (int) FPApi.Clip.GetEBRPeriod(this);
+				int period = (int) Native.Clip.GetEBRPeriod(this);
 
 				if (period < 0)
 				{
@@ -846,20 +844,20 @@ namespace EMC.Centera.SDK
 			{
 				if (value.Ticks > 0)
 				{
-					FPApi.Clip.EnableEBRWithPeriod(this, (FPLong) value.TotalSeconds);
+					Native.Clip.EnableEBRWithPeriod(this, (FPLong) value.TotalSeconds);
 				}
 				else
 				{
-					FPApi.Clip.EnableEBRWithPeriod(this, (FPLong) value.Ticks);
+					Native.Clip.EnableEBRWithPeriod(this, (FPLong) value.Ticks);
 				}
 			}
 		}
 
-		public String EBRClassName
+		public string EBRClassName
 		{
 			get
 			{
-				return FPApi.Clip.GetEBRClassName(this);
+				return Native.Clip.GetEBRClassName(this);
 			}
 		}
 
@@ -867,7 +865,7 @@ namespace EMC.Centera.SDK
 		{
 			set
 			{
-				FPApi.Clip.EnableEBRWithClass(this, value);
+				Native.Clip.EnableEBRWithClass(this, value);
 			}
 		}
 				
@@ -875,7 +873,7 @@ namespace EMC.Centera.SDK
 		{
 			get
 			{
-				if (FPApi.Clip.IsEBREnabled(this) == FPBool.True)
+				if (Native.Clip.IsEBREnabled(this) == FPBool.True)
 					return true;
 				else
 					return false;
@@ -884,7 +882,7 @@ namespace EMC.Centera.SDK
 
 		public void TriggerEBREvent()
 		{
-			FPApi.Clip.TriggerEBREvent(this);
+			Native.Clip.TriggerEBREvent(this);
 		}
 		
 		public TimeSpan TriggerEBRPeriod
@@ -893,11 +891,11 @@ namespace EMC.Centera.SDK
 			{
 				if (value.Ticks != FPMisc.INFINITE_RETENTION_PERIOD)
 				{
-					FPApi.Clip.TriggerEBREventWithPeriod(this, (FPLong) value.TotalSeconds);
+					Native.Clip.TriggerEBREventWithPeriod(this, (FPLong) value.TotalSeconds);
 				}
 				else
 				{
-					FPApi.Clip.TriggerEBREventWithPeriod(this, (FPLong) value.Ticks);
+					Native.Clip.TriggerEBREventWithPeriod(this, (FPLong) value.Ticks);
 				}
 			}
 		}
@@ -906,7 +904,7 @@ namespace EMC.Centera.SDK
 		{
 			set
 			{
-				FPApi.Clip.TriggerEBREventWithClass(this, value);
+				Native.Clip.TriggerEBREventWithClass(this, value);
 			}
 		}
 	}  // end of class Clip

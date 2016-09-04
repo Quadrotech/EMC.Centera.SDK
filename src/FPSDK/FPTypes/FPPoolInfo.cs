@@ -33,62 +33,32 @@ along with .NET wrapper; see the file COPYING. If not, write to:
 
 ******************************************************************************/
 
-using System;
+using System.Runtime.InteropServices;
 
-namespace EMC.Centera.SDK
-{	
-	/** 
-	 * A Name-Value pair containing string representations of the Name and Value of an attribute..
-	 * @author Graham Stuart
-	 * @version
-	 */
-	public class FPAttribute : IFPAttribute
+namespace EMC.Centera.SDK.FPTypes
+{
+    [StructLayout(LayoutKind.Sequential)]
+	public struct FPPoolInfo
 	{
-		private string myName;
-		private string myValue;
+		public FPInt     poolInfoVersion;   /**< The current version of this structure (2)          */
+		public FPLong    capacity;          /**< The total capacity of the pool, in bytes.          */
+		public FPLong    freeSpace;         /**< The total free space of the pool, in bytes.        */
 
-		/**
-		 * The Attribute Name
-		 */
-		public string Name
-		{
-			get
-			{
-				return myName;
-			}
-		}
+		[ MarshalAs( UnmanagedType.ByValTStr, SizeConst=128 )]
+		public string clusterID;         /**< The cluster identifier of the pool.                */
+			
+		[ MarshalAs( UnmanagedType.ByValTStr, SizeConst=128 )]
+		public string clusterName;       /**< The name of the cluster.                           */
 
-		/**
-		 * The Attribute Value
-		 */
-		public string Value
-		{
-			get
-			{
-				return myValue;
-			}
-		}
+		[ MarshalAs( UnmanagedType.ByValTStr, SizeConst=128 )]
+		public string version;           /**< The version of the pool server software.           */
 
-		/**
-		 * Create an FPAttribute object using the name-value string parameters.
-		 * 
-		 * @param n	FPAttribute Name.
-		 * @param v	FPAttribute Value.
-		 */
-		public FPAttribute(String n, string v)
-		{
-			myName = n;
-			myValue = v;
-		}
-
-		public override string ToString()
-		{
-			return "Name (" + Name + ") Value (" + Value + ")";
-		}
-
+		[ MarshalAs( UnmanagedType.ByValTStr, SizeConst=256 )]
+		public string replicaAddress;    /**< The pool address (see FPPool_Open()) where the C-Clips are replicated; empty if there is no replication. */ 
 	}
 
-	/**
-	 * A collection of Attributes existing on a Tag or DescriptionAttributes on a Clip..
-	 */
+
+    /** The structure that holds error information, which is retrieved by the FPPool_GetLastErrorInfo()
+			function.
+		  */
 }

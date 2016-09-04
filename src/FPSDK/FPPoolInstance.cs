@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using System.Text;
-using System.Diagnostics;
-using EMC.Centera.SDK;
 
 namespace EMC.Centera.SDK.Extension
 {
@@ -39,7 +36,7 @@ namespace EMC.Centera.SDK.Extension
 
         ~FPPoolInstance()
         {
-            base.Dispose(false);
+            Dispose(false);
         }
     }
 }

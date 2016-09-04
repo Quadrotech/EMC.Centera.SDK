@@ -11,17 +11,17 @@ namespace EMC.Centera.SDK
         FPTag PrevSibling { get; }
         FPTag FirstChild { get; }
         FPTag Parent { get; }
-        String Name { get; }
+        string Name { get; }
         int NumAttributes { get; }
         long BlobSize { get; }
         int BlobStatus { get; }
         FPAttributeCollection Attributes { get; }
         void Delete();
         string ToString();
-        void SetAttribute(String inAttrName,  String inAttrValue);
+        void SetAttribute(String inAttrName,  string inAttrValue);
         void SetAttribute(String inAttrName, long inAttrValue);
         void SetAttribute(String inAttrName, bool inAttrValue);
-        String GetStringAttribute(String inAttrName);
+        string GetStringAttribute(String inAttrName);
         long GetLongAttribute(String inAttrName);
         bool GetBoolAttribute(String inAttrName);
         void RemoveAttribute(String inAttrName);
