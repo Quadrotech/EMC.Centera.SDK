@@ -41,12 +41,12 @@ using System.Runtime.CompilerServices;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 //
-[assembly: AssemblyTitle("CenteraSDKWrapper")]
+[assembly: AssemblyTitle("EMC.Centera.SDK")]
 [assembly: AssemblyDescription("Object Oriented .NET wrapper for the Centera SDK")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("EMC")]
+[assembly: AssemblyCompany("EMC / QUADROtech")]
 [assembly: AssemblyProduct("")]
-[assembly: AssemblyCopyright("2009")]
+[assembly: AssemblyCopyright("2009-2016")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]		
 
@@ -61,7 +61,7 @@ using System.Runtime.CompilerServices;
 // You can specify all the values or you can default the Revision and Build Numbers 
 // by using the '*' as shown below:
 
-[assembly: AssemblyVersion("3.2.4")]
+[assembly: AssemblyVersion("3.3.0")]
 
 //
 // In order to sign your assembly you must specify a key to use. Refer to the 

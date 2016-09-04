@@ -46,7 +46,7 @@ namespace EMC.Centera.SDK
 	 * @author Graham Stuart
 	 * @version
 	 */
-	public class FPTag : FPObject
+	public class FPTag : FPObject, IFPTag
 	{
 		internal FPTagRef theTag;
 

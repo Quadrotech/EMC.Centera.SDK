@@ -47,7 +47,7 @@ namespace EMC.Centera.SDK
 	 * @version
 	 */
 
-	public class FPClip : FPObject 
+	public class FPClip : FPObject, IFPClip
 	{
 		FPClipRef theClip;
 		FPPool thePool;
