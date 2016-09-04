@@ -46,16 +46,8 @@ namespace EMC.Centera.SDK
 	 * @author Graham Stuart
 	 * @version
 	 */
-
-    public interface IFPAttribute
-    {
-        String Name { get; }
-        String Value { get; }
-        string ToString();
-    }
-
-    public class FPAttribute : IFPAttribute
-    {
+	public class FPAttribute : IFPAttribute
+	{
 		private String myName;
 		private String myValue;
 
