@@ -17,6 +17,7 @@
     <ProjectGuid>2de66d7e-75a4-4130-9616-378675d066ee</ProjectGuid>
   </PropertyGroup>
   <PropertyGroup>
+    <NuProjPath>..\packages\NuProj.0.11.14-beta\tools\</NuProjPath>
     <NuProjPath Condition=" '$(NuProjPath)' == '' ">$(MSBuildExtensionsPath)\NuProj\</NuProjPath>
   </PropertyGroup>
   <Import Project="$(NuProjPath)\NuProj.props" Condition="Exists('$(NuProjPath)\NuProj.props')" />
