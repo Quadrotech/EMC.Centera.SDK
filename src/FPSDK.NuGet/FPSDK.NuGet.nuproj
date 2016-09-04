@@ -21,21 +21,20 @@
   </PropertyGroup>
   <Import Project="$(NuProjPath)\NuProj.props" Condition="Exists('$(NuProjPath)\NuProj.props')" />
   <PropertyGroup Label="Configuration">
-    <Id>FPSDK.NuGet</Id>
-    <Version>1.0.0</Version>
-    <Title>FPSDK.NuGet</Title>
-    <Authors>MichelZ</Authors>
-    <Owners>MichelZ</Owners>
+    <Id>EMC.Centera.SDK</Id>
+    <Version>3.3.0</Version>
+    <Title>EMC.Centera.SDK</Title>
+    <Authors>EMC Corporation / QUADROtech</Authors>
+    <Owners>EMC Corporation / QUADROtech</Owners>
     <Summary>FPSDK.NuGet</Summary>
     <Description>FPSDK.NuGet</Description>
     <ReleaseNotes>
     </ReleaseNotes>
-    <ProjectUrl>
-    </ProjectUrl>
-    <LicenseUrl>
-    </LicenseUrl>
-    <Copyright>Copyright © MichelZ</Copyright>
-    <Tags>FPSDK.NuGet</Tags>
+    <ProjectUrl>https://github.com/QUADROtech/EMC.Centera.SDK</ProjectUrl>
+    <LicenseUrl>https://github.com/QUADROtech/EMC.Centera.SDK/blob/master/README.md</LicenseUrl>
+    <Copyright>Copyright by their respective owners</Copyright>
+    <Tags>EMC Centera SDK .NET Wrapper</Tags>
+    <RequireLicenseAcceptance>true</RequireLicenseAcceptance>
   </PropertyGroup>
   <Import Project="$(NuProjPath)\NuProj.targets" />
 </Project>
