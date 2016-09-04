@@ -241,7 +241,7 @@ namespace EMC.Centera.SDK.Native
         public static readonly FPInt   STREAM_EOF                                        = (FPInt) (-1);
 
 
-		public static FPLong FPTime_StringToLong (String inClusterTime)
+		public static FPLong FPTime_StringToLong (string inClusterTime)
 		{
 			FPLong retval = SDK.FPTime_StringToLong8(inClusterTime);
 			SDK.CheckAndThrowError();
@@ -254,7 +254,7 @@ namespace EMC.Centera.SDK.Native
 			SDK.CheckAndThrowError();
 		}
 
-		public static FPLong FPTime_StringToSeconds (String inClusterTime)
+		public static FPLong FPTime_StringToSeconds (string inClusterTime)
 		{
 			FPLong retval = SDK.FPTime_StringToSeconds8(inClusterTime);
 			SDK.CheckAndThrowError();
@@ -267,7 +267,7 @@ namespace EMC.Centera.SDK.Native
 			SDK.CheckAndThrowError();
 		}
 		
-		public static FPLong FPTime_StringToMilliseconds (String inClusterTime)
+		public static FPLong FPTime_StringToMilliseconds (string inClusterTime)
 		{
 			FPLong retval = SDK.FPTime_StringToMilliseconds8(inClusterTime);
 			SDK.CheckAndThrowError();

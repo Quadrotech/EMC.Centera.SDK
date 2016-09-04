@@ -5,7 +5,7 @@ namespace EMC.Centera.SDK
 {
     public abstract class FPObject : IDisposable
     {
-        protected bool disposed = false;
+        protected bool disposed;
         public void Dispose()
         {
             Dispose(true);
@@ -31,7 +31,7 @@ namespace EMC.Centera.SDK
 
         public abstract void Close();
 
-        static internal Hashtable SDKObjects = Hashtable.Synchronized(new Hashtable());
+        internal static Hashtable SDKObjects = Hashtable.Synchronized(new Hashtable());
 
         protected void AddObject(object key, FPObject obj)
         {

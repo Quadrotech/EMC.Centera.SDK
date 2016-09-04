@@ -56,15 +56,15 @@ namespace EMC.Centera.SDK
          * @param s string containing the date to be converted.
          * @return A DateTime object representing this date.
          */
-        public static DateTime GetDateTime(String s)
+        public static DateTime GetDateTime(string s)
         {
             if (s.Length > 0)
-                return new DateTime(Int32.Parse(s.Substring(0, 4)),  // YYYY
-                Int32.Parse(s.Substring(5, 2)),  // MM
-                Int32.Parse(s.Substring(8, 2)),  // DD
-                Int32.Parse(s.Substring(11, 2)), // HH
-                Int32.Parse(s.Substring(14, 2)), // MM
-                Int32.Parse(s.Substring(17, 2)));// SS
+                return new DateTime(int.Parse(s.Substring(0, 4)),  // YYYY
+                int.Parse(s.Substring(5, 2)),  // MM
+                int.Parse(s.Substring(8, 2)),  // DD
+                int.Parse(s.Substring(11, 2)), // HH
+                int.Parse(s.Substring(14, 2)), // MM
+                int.Parse(s.Substring(17, 2)));// SS
             else
                 throw new FPLibraryException("Invalid / null string passed to GetDateTime", OUT_OF_BOUNDS_ERR);
         }
@@ -99,7 +99,7 @@ namespace EMC.Centera.SDK
          * @param inTime	The string representing the Time. 
          * @return A long representing the Time value (number of seconds since the UNIX Epoch).
          */
-        public static long FPTime_StringToLong(String inTime)
+        public static long FPTime_StringToLong(string inTime)
         {
             long retval = (long)Native.FP.FPTime_StringToSeconds(inTime);
             return retval;
@@ -110,7 +110,7 @@ namespace EMC.Centera.SDK
          * @param inTime	The string representing the Time. 
          * @return A long representing the Time value (number of seconds since the UNIX Epoch).
          */
-        public static long FPTime_StringToSeconds(String inTime)
+        public static long FPTime_StringToSeconds(string inTime)
         {
             return FPTime_StringToLong(inTime);
         }
@@ -121,7 +121,7 @@ namespace EMC.Centera.SDK
          * @param inTime	The string representing the Time. 
          * @return A long representing the Time value (number of milliseconds since the UNIX Epoch).
          */
-        public static long FPTime_StringToMilliseconds(String inTime)
+        public static long FPTime_StringToMilliseconds(string inTime)
         {
             long retval = (long)Native.FP.FPTime_StringToMilliseconds(inTime);
             return retval;

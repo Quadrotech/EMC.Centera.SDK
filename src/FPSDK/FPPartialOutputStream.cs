@@ -13,10 +13,7 @@ namespace EMC.Centera.SDK
                 throw new Exception("Offset > max file size for PartialOutputStream");
         }
 
-        public override bool CanWrite
-        {
-            get { return true; }
-        }
+        public override bool CanWrite => true;
 
         public override void Write(byte[] buffer, int offset, int count)
         {

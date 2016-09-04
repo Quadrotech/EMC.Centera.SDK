@@ -98,15 +98,9 @@ namespace EMC.Centera.SDK
 		 * The Period (as a TimeSpan) associated with this RetentionClass. See API Guide: FPRetentionClass_GetPeriod
 		 *
 		 */
-		public TimeSpan Period
-		{
-			get
-			{
-				return new TimeSpan(0, 0, (int) Native.RetentionClass.GetPeriod(this));
-			}
-		}
+		public TimeSpan Period => new TimeSpan(0, 0, (int) Native.RetentionClass.GetPeriod(this));
 
-		/**
+	    /**
 		 * Explicitly close the RetentionClass. See API Guide: FPRetentionClass_Close
 		 *
 		 */
@@ -127,7 +121,7 @@ namespace EMC.Centera.SDK
 		 * @param c	An FPRetentionClass object.
 		 * @return	The FPRetentionClassRef associated with this object.
 		 */
-		static public implicit operator FPRetentionClassRef(FPRetentionClass c) 
+		public static implicit operator FPRetentionClassRef(FPRetentionClass c) 
 		{
 			return c.theClass;
 		}
@@ -138,7 +132,7 @@ namespace EMC.Centera.SDK
 		 * @param	classRef	An FPRetentionClassRef.
 		 * @return	The FPRetentionClass object associated with it.
 		 */
-		static public implicit operator FPRetentionClass(FPRetentionClassRef classRef) 
+		public static implicit operator FPRetentionClass(FPRetentionClassRef classRef) 
 		{
 			// Find the relevant Tag object in the hastable for this FPTagRef
 			FPRetentionClass classObject = null;

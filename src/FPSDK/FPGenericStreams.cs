@@ -60,7 +60,7 @@ namespace EMC.Centera.SDK
 		public static extern		   void         FPStream_Close (FPStreamRef pStream) ;
 		
 		[DllImport("FPLibrary.dll")]
-		unsafe public static extern	    FPStreamInfo* FPStream_GetInfo (FPStreamRef pStream);
+		public static extern unsafe	    FPStreamInfo* FPStream_GetInfo (FPStreamRef pStream);
 		
 		[DllImport("FPLibrary.dll")]
 		public static extern		   IntPtr		 FPStream_PrepareBuffer (FPStreamRef pStream) ;

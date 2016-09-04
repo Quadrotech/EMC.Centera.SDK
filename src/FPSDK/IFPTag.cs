@@ -18,13 +18,13 @@ namespace EMC.Centera.SDK
         FPAttributeCollection Attributes { get; }
         void Delete();
         string ToString();
-        void SetAttribute(String inAttrName,  string inAttrValue);
-        void SetAttribute(String inAttrName, long inAttrValue);
-        void SetAttribute(String inAttrName, bool inAttrValue);
-        string GetStringAttribute(String inAttrName);
-        long GetLongAttribute(String inAttrName);
-        bool GetBoolAttribute(String inAttrName);
-        void RemoveAttribute(String inAttrName);
+        void SetAttribute(string inAttrName,  string inAttrValue);
+        void SetAttribute(string inAttrName, long inAttrValue);
+        void SetAttribute(string inAttrName, bool inAttrValue);
+        string GetStringAttribute(string inAttrName);
+        long GetLongAttribute(string inAttrName);
+        bool GetBoolAttribute(string inAttrName);
+        void RemoveAttribute(string inAttrName);
         FPAttribute GetAttributeByIndex(int inIndex);
         void BlobWrite(FPStream inStream);
         void BlobWrite(FPStream inStream, long inOptions);

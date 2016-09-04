@@ -32,13 +32,13 @@ namespace EMC.Centera.SDK
         bool EBREnabled { get; }
         TimeSpan TriggerEBRPeriod { set; }
         FPRetentionClass TriggerEBRClass { set; }
-        FPTag AddTag(String tagName);
+        FPTag AddTag(string tagName);
         string ToString();
         string Write();
         void RawRead(FPStream inStream);
-        void SetAttribute(String inAttrName,  string inAttrValue);
-        void RemoveAttribute(String inAttrName);
-        string GetAttribute(String inAttrName);
+        void SetAttribute(string inAttrName,  string inAttrValue);
+        void RemoveAttribute(string inAttrName);
+        string GetAttribute(string inAttrName);
         FPAttribute GetAttributeByIndex(int inIndex);
         void RemoveRetentionClass();
         bool ValidateRetentionClass(FPRetentionClassCollection coll);

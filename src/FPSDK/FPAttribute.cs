@@ -44,38 +44,26 @@ namespace EMC.Centera.SDK
 	 */
 	public class FPAttribute : IFPAttribute
 	{
-		private string myName;
-		private string myValue;
+		private readonly string myName;
+		private readonly string myValue;
 
 		/**
 		 * The Attribute Name
 		 */
-		public string Name
-		{
-			get
-			{
-				return myName;
-			}
-		}
+		public string Name => myName;
 
-		/**
+	    /**
 		 * The Attribute Value
 		 */
-		public string Value
-		{
-			get
-			{
-				return myValue;
-			}
-		}
+		public string Value => myValue;
 
-		/**
+	    /**
 		 * Create an FPAttribute object using the name-value string parameters.
 		 * 
 		 * @param n	FPAttribute Name.
 		 * @param v	FPAttribute Value.
 		 */
-		public FPAttribute(String n, string v)
+		public FPAttribute(string n, string v)
 		{
 			myName = n;
 			myValue = v;

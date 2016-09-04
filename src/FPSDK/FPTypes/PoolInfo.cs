@@ -9,55 +9,18 @@ namespace EMC.Centera.SDK.FPTypes
             info = _info;
         }
 
-        public int poolInfoVersion
-        {
-            get
-            {
-                return (int) info.poolInfoVersion;
-            }
-        }
-        public long capacity
-        {
-            get
-            {
-                return (long) info.capacity;
-            }
-        }
-        public long freeSpace
-        {
-            get
-            {
-                return (long) info.freeSpace;
-            }
-        }
-        public string clusterName
-        {
-            get
-            {
-                return info.clusterName;
-            }
-        }
-        public string clusterID
-        {
-            get
-            {
-                return info.clusterID;
-            }
-        }
-        public string version
-        {
-            get
-            {
-                return info.version;
-            }
-        }
-        public string replicaAddress
-        {
-            get
-            {
-                return info.replicaAddress;
-            }
-        }
+        public int poolInfoVersion => (int) info.poolInfoVersion;
+        public long capacity => (long) info.capacity;
+
+        public long freeSpace => (long) info.freeSpace;
+
+        public string clusterName => info.clusterName;
+
+        public string clusterID => info.clusterID;
+        public string version => info.version;
+
+        public string replicaAddress => info.replicaAddress;
+
         public override string ToString()
         {
             return "\nPool Information" +

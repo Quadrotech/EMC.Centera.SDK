@@ -5,7 +5,7 @@ namespace EMC.Centera.SDK.Extension
 {
     public sealed class FPPoolInstance : FPPool
     {
-        static private Hashtable connectionString2PoolConnection = Hashtable.Synchronized(new Hashtable());
+        private static readonly Hashtable connectionString2PoolConnection = Hashtable.Synchronized(new Hashtable());
 
         public static IFPPool Get(string connectionString)
         {

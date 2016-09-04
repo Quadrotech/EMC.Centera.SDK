@@ -6,13 +6,13 @@ namespace EMC.Centera.SDK
 {
     public class FPGenericStream : FPStream
     {
-        unsafe FPStreamInfo	*theInfo;
+        readonly unsafe FPStreamInfo	*theInfo;
         protected Stream userStream;
-        FPCallback prepare;
-        FPCallback complete;
-        FPCallback mark;
-        FPCallback reset;
-        FPCallback close;
+        readonly FPCallback prepare;
+        readonly FPCallback complete;
+        readonly FPCallback mark;
+        readonly FPCallback reset;
+        readonly FPCallback close;
 
         /**
 		 * Creates a Generic Stream object using the standard callback methods. See API Guide: FPStream_CreateGenericStream
@@ -156,7 +156,7 @@ namespace EMC.Centera.SDK
         /**
 		 * The length of the stream being transferred. Defaults to -1 (unknown length).
 		 */
-        unsafe public long StreamLen
+        public unsafe long StreamLen
         {
             get
             {
@@ -172,18 +172,12 @@ namespace EMC.Centera.SDK
 		 * The stream direction: 
 		 */
 
-        unsafe public StreamDirection Direction
-        {
-            get
-            {
-                return (StreamDirection) theInfo->mReadFlag;
-            }
-        }
+        public unsafe StreamDirection Direction => (StreamDirection) theInfo->mReadFlag;
 
         /**
 		 * Prints out values of the FPStreamInfo control structure.
 		 */
-        unsafe public override string ToString()
+        public override unsafe string ToString()
         {
             return "End of file: " + theInfo->mAtEOF +
                    "\nMarker " + theInfo->mMarkerPos +

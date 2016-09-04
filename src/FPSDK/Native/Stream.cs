@@ -12,19 +12,19 @@ namespace EMC.Centera.SDK.Native
             SDK.CheckAndThrowError();
             return retval;
         }
-        public static FPStreamRef CreatePartialFileForInput(String pFilePath, string pPerm, long pBuffSize, long pOffset, long pSize)
+        public static FPStreamRef CreatePartialFileForInput(string pFilePath, string pPerm, long pBuffSize, long pOffset, long pSize)
         {
             FPStreamRef retval = SDK.FPStream_CreatePartialFileForInput8(pFilePath, pPerm, pBuffSize, pOffset, pSize);
             SDK.CheckAndThrowError();
             return retval;
         }
-        public static FPStreamRef CreateFileForOutput(String pFilePath, string pPerm) 
+        public static FPStreamRef CreateFileForOutput(string pFilePath, string pPerm) 
         {
             FPStreamRef retval = SDK.FPStream_CreateFileForOutput8(pFilePath, pPerm);
             SDK.CheckAndThrowError();
             return retval;
         }
-        public static FPStreamRef CreatePartialFileForOutput(String pFilePath, string pPerm, long pBuffSize, long pOffset, long pSize, long pMaxFileSize)
+        public static FPStreamRef CreatePartialFileForOutput(string pFilePath, string pPerm, long pBuffSize, long pOffset, long pSize, long pMaxFileSize)
         {
             FPStreamRef retval = SDK.FPStream_CreatePartialFileForOutput8(pFilePath, pPerm, pBuffSize, pOffset, pSize, pMaxFileSize);
             SDK.CheckAndThrowError();

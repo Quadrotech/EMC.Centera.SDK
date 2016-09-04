@@ -3,7 +3,7 @@ using System.Runtime.InteropServices;
 namespace EMC.Centera.SDK
 {
     [StructLayout(LayoutKind.Sequential)]
-    unsafe public struct FPStreamInfo
+    public unsafe struct FPStreamInfo
     {
 
         public short	mVersion ;         // current version of FPStreamInfo

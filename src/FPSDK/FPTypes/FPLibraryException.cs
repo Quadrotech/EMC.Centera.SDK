@@ -8,20 +8,14 @@ namespace EMC.Centera.SDK.FPTypes
     {
         public ErrorInfo	myErrorInfo;
 
-        public ErrorInfo errorInfo
-        {
-            get
-            {
-                return myErrorInfo;
-            }
-        }
+        public ErrorInfo errorInfo => myErrorInfo;
 
         public FPLibraryException(FPErrorInfo _errorInfo) 
         {
             myErrorInfo = new ErrorInfo(_errorInfo);
         }
 
-        public FPLibraryException(String s, int error)
+        public FPLibraryException(string s, int error)
         {
             myErrorInfo = new ErrorInfo(s, error);
         }

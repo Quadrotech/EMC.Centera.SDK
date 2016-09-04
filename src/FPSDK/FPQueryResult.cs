@@ -31,7 +31,7 @@ namespace EMC.Centera.SDK
 		 * @param	q	The FPQueryResult object.
 		 * @return	The FPPoolQueryRef associated with it.
 		 */
-        static public implicit operator FPQueryResultRef(FPQueryResult q) 
+        public static implicit operator FPQueryResultRef(FPQueryResult q) 
         {
             return q.theResult;
         }
@@ -71,13 +71,7 @@ namespace EMC.Centera.SDK
 		 * See API Guide: FPQueryResult_GetTimestamp
 		 *
 		 */
-        public DateTime Timestamp
-        {
-            get
-            {
-                return FPMisc.GetDateTime(Native.QueryResult.GetTimestamp(theResult));
-            }
-        }
+        public DateTime Timestamp => FPMisc.GetDateTime(Native.QueryResult.GetTimestamp(theResult));
 
         /**
 		 * Retrieve the value of an Attribute of the Clip associated with this result.
@@ -86,7 +80,7 @@ namespace EMC.Centera.SDK
 		 * @param	inAttrName	The name of the attribute to retieve from the current member of the result set.
 		 * @return	The value of the Attribute  of the Clip associated with the current member of the result set.
 		 */
-        public string GetField(String inAttrName) 
+        public string GetField(string inAttrName) 
         {
             byte[] outString;
             FPInt bufSize = 0;
@@ -110,13 +104,7 @@ namespace EMC.Centera.SDK
 		 * See API Guide: FPQueryResult_GetResultCode
 		 * 
 		 */
-        public int ResultCode
-        {
-            get
-            {
-                return (int) Native.QueryResult.GetResultCode(theResult);
-            }
-        }
+        public int ResultCode => (int) Native.QueryResult.GetResultCode(theResult);
 
         /**
 		 * The state of the Clip on the Centera i.e.

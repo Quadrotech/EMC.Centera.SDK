@@ -6,7 +6,7 @@ namespace EMC.Centera.SDK.Native
 {
     public class MarshalPtrToUtf8 : ICustomMarshaler
     {
-        static MarshalPtrToUtf8 marshaler = new MarshalPtrToUtf8();
+        static readonly MarshalPtrToUtf8 marshaler = new MarshalPtrToUtf8();
 
         public void CleanUpManagedData(object ManagedObj)
         {

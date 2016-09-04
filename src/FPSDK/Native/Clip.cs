@@ -226,7 +226,7 @@ namespace EMC.Centera.SDK.Native
 
         public static string GetEBRClassName (FPClipRef inClip)
         {
-            String retval = SDK.FPClip_GetEBRClassName8(inClip);
+            string retval = SDK.FPClip_GetEBRClassName8(inClip);
             SDK.CheckAndThrowError();
             return retval;
         }

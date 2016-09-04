@@ -153,7 +153,7 @@ namespace EMC.Centera.SDK.Native
             SDK.CheckAndThrowError();
         }
 
-        public static FPLogStateRef OpenLogState(String inName)
+        public static FPLogStateRef OpenLogState(string inName)
         {
             FPLogStateRef retval = SDK.FPLogging_OpenLogState8(inName);
             SDK.CheckAndThrowError();

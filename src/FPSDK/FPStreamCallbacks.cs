@@ -73,7 +73,7 @@ namespace EMC.Centera.SDK
 		 * 
 		 * @param info		The FPStreamInfo structure containing the data and control information.
 		 */
-        unsafe public virtual long PrepareBuffer(ref FPStreamInfo info)
+        public virtual unsafe long PrepareBuffer(ref FPStreamInfo info)
         {
             //Console.WriteLine(this.GetHashCode() + " prepare buffer " + info.ToString());
             // We allocate the buffer if this is the first time through

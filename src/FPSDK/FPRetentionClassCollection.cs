@@ -38,7 +38,7 @@ namespace EMC.Centera.SDK
 		 * @param	inName	The name of the RetentionClass in the list to get the period for.
 		 * @return	The period (as a TimeSpan) associated with the named RetentionClass.
 		 */
-        public TimeSpan GetPeriod(String inName) 
+        public TimeSpan GetPeriod(string inName) 
         {
             if (ValidateClass(inName))
             {
@@ -58,7 +58,7 @@ namespace EMC.Centera.SDK
 		 * @param	inName	The name of the RetentionClass to get from the list.
 		 * @return	The named RetentionClass
 		 */
-        public FPRetentionClass GetClass(String inName) 
+        public FPRetentionClass GetClass(string inName) 
         {
             FPRetentionClass retVal = null;
             
@@ -84,7 +84,7 @@ namespace EMC.Centera.SDK
 		 * @param	inName	The name of the RetentionClass to get from the list.
 		 * @return	The named RetentionClass
 		 */
-        public bool ValidateClass(String inName)
+        public bool ValidateClass(string inName)
         {
             foreach (FPRetentionClass rc in this)
             {

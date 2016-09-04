@@ -6,10 +6,7 @@ namespace EMC.Centera.SDK
     {
         public FPPartialInputStream(Stream s, long o, long c) : base(s, o, c) { }
 
-        public override bool CanRead
-        {
-            get { return true; }
-        }
+        public override bool CanRead => true;
 
         public override int Read(byte[] buffer, int offset, int count)
         {

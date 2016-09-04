@@ -5,7 +5,7 @@ namespace EMC.Centera.SDK
 {
     public class FPLogger : FPObject
     {
-        protected FPLogStateRef theLogger;
+        protected FPLogStateRef TheLogger;
 
         /**
          * Basic Constructor which creates a default FPLogStateRef object.
@@ -15,8 +15,8 @@ namespace EMC.Centera.SDK
          */
         public FPLogger()
         {
-            theLogger = Native.Logging.CreateLogState();
-            AddObject(theLogger, this);
+            TheLogger = Native.Logging.CreateLogState();
+            AddObject(TheLogger, this);
         }
 
         /**
@@ -26,10 +26,10 @@ namespace EMC.Centera.SDK
          * @param   inName  File system path name for a FPLogStateRef contained in a file.
          * @return	A new FPLogger object.
          */
-        public FPLogger(String inName)
+        public FPLogger(string inName)
         {
-            theLogger = Native.Logging.OpenLogState(inName);
-            AddObject(theLogger, this);
+            TheLogger = Native.Logging.OpenLogState(inName);
+            AddObject(TheLogger, this);
         }
 
         /**
@@ -39,11 +39,11 @@ namespace EMC.Centera.SDK
          */
         public override void Close()
         {
-            if (theLogger != 0)
+            if (TheLogger != 0)
             {
-                RemoveObject(theLogger);
-                Native.Logging.Delete(theLogger);
-                theLogger = 0;
+                RemoveObject(TheLogger);
+                Native.Logging.Delete(TheLogger);
+                TheLogger = 0;
             }
         }
 
@@ -54,7 +54,7 @@ namespace EMC.Centera.SDK
          * @param   inLevel The FPLogLevel of the message.
          * @param   inMessage   The actual message to be logged.
          */
-        static public void Log(FPLogLevel inLevel, string inMessage)
+        public static void Log(FPLogLevel inLevel, string inMessage)
         {
             Native.Logging.Log(inLevel, inMessage);
         }
@@ -65,9 +65,9 @@ namespace EMC.Centera.SDK
          * @param	l	The Logger.
          * @return	The FPLogStateRef associated with this Logger.
          */
-        static public implicit operator FPLogStateRef(FPLogger l)
+        public static implicit operator FPLogStateRef(FPLogger l)
         {
-            return l.theLogger;
+            return l.TheLogger;
         }
 
         /**
@@ -76,10 +76,10 @@ namespace EMC.Centera.SDK
          * @param	logRef	The FPLogStateRef.
          * @return	The Logger.
          */
-        static public implicit operator FPLogger(FPLogStateRef logRef)
+        public static implicit operator FPLogger(FPLogStateRef logRef)
         {
             // Find the relevant Logger object in the hastable for this LogStateRef
-            FPLogger logObject = null;
+            FPLogger logObject;
 
             if (SDKObjects.Contains(logRef))
             {
@@ -99,7 +99,7 @@ namespace EMC.Centera.SDK
          *
          * @param   inPath  The file system pathname of the file to be written to.
          */
-        public void Save(String inPath)
+        public void Save(string inPath)
         {
             Native.Logging.Save(this, inPath);
         }
@@ -119,7 +119,7 @@ namespace EMC.Centera.SDK
          * See API Guide: FPLogging_Stop
          *
          */
-        static public void Stop()
+        public static void Stop()
         {
             Native.Logging.Stop();
         }
@@ -130,7 +130,7 @@ namespace EMC.Centera.SDK
          *
          * @param   inProc  The user Callback method (delegate)
          */
-        static public void RegisterCallback(FPLogProc inProc)
+        public static void RegisterCallback(FPLogProc inProc)
         {
             Native.Logging.RegisterCallback(inProc);
         }
@@ -272,7 +272,7 @@ namespace EMC.Centera.SDK
             }
         }
 
-        public static void ConsoleMessage(String message)
+        public static void ConsoleMessage(string message)
         {
             Console.Write(message);
         }

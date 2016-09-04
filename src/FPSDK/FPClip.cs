@@ -47,8 +47,8 @@ namespace EMC.Centera.SDK
 
 	public class FPClip : FPObject, IFPClip
 	{
-		FPClipRef theClip;
-		FPPool thePool;
+		FPClipRef _theClip;
+	    readonly FPPool _thePool;
 
 		/**
 		 * Create a new Clip object in the supplied Pool.
@@ -60,9 +60,9 @@ namespace EMC.Centera.SDK
 		 */
 		public FPClip(FPPool inPool,  string inName) 
 		{
-			thePool = inPool;
-			theClip = Native.Clip.Create(thePool, inName);
-			AddObject(theClip, this);
+			_thePool = inPool;
+			_theClip = Native.Clip.Create(_thePool, inName);
+			AddObject(_theClip, this);
 		}
 
 
@@ -76,9 +76,9 @@ namespace EMC.Centera.SDK
 		 */
 		public FPClip(FPPool inPool,  string inClipID, int inOpenMode) 
 		{
-			thePool = inPool;
-			theClip = Native.Clip.Open(inPool, inClipID, (FPInt) inOpenMode);
-			AddObject(theClip, this);
+			_thePool = inPool;
+			_theClip = Native.Clip.Open(inPool, inClipID, (FPInt) inOpenMode);
+			AddObject(_theClip, this);
 		}
 
 
@@ -93,9 +93,9 @@ namespace EMC.Centera.SDK
 		 */
 		public FPClip(FPPool inPool, string inClipID, FPStream inStream, long inOptions) 
 		{
-			thePool = inPool;
-			theClip = Native.Clip.RawOpen(thePool, inClipID, inStream, (FPLong) inOptions);
-			AddObject(theClip, this);
+			_thePool = inPool;
+			_theClip = Native.Clip.RawOpen(_thePool, inClipID, inStream, (FPLong) inOptions);
+			AddObject(_theClip, this);
 		}
 		
 
@@ -106,9 +106,9 @@ namespace EMC.Centera.SDK
 		 */
 		internal FPClip(FPClipRef c)
 		{
-			theClip = c;
-			thePool = Native.Clip.GetPoolRef(c);
-			AddObject(theClip, this);
+			_theClip = c;
+			_thePool = Native.Clip.GetPoolRef(c);
+			AddObject(_theClip, this);
 		}
 
         /**
@@ -127,9 +127,9 @@ namespace EMC.Centera.SDK
          * @param c A Clip object..
          * @return The FPClipRef associated with this Clip.
          */
-		static public implicit operator FPClipRef(FPClip c) 
+		public static implicit operator FPClipRef(FPClip c) 
 		{
-			return c.theClip;
+			return c._theClip;
 		}
 
 		/**
@@ -138,10 +138,10 @@ namespace EMC.Centera.SDK
 		 * @param clipRef	An FPClipRef.
 		 * @return A new Clip object.
 		 */
-		static public implicit operator FPClip(FPClipRef clipRef) 
+		public static implicit operator FPClip(FPClipRef clipRef) 
 		{
 			// Find the relevant Tag object in the hashtable for this FPTagRef
-			FPClip clipObject = null;
+			FPClip clipObject;
 
 			if (SDKObjects.Contains(clipRef))
 			{
@@ -160,19 +160,19 @@ namespace EMC.Centera.SDK
 		 */
 		public override void Close()
 		{
-			if (myTopTag != null)
+			if (_myTopTag != null)
 			{
-				RemoveObject(myTopTag);
-				myTopTag.Close();
+				RemoveObject(_myTopTag);
+				_myTopTag.Close();
 			}
 
-			if (theClip != 0)
+			if (_theClip != 0)
 			{
-				RemoveObject(theClip);
-                Native.Clip.Close(theClip);
+				RemoveObject(_theClip);
+                Native.Clip.Close(_theClip);
 			}
 
-			theClip = 0;
+			_theClip = 0;
 		}
 
 		/**
@@ -180,20 +180,14 @@ namespace EMC.Centera.SDK
 		 *
 		 * @return A Pool object.
 		 */
-		public FPPool FPPool 
-		{
-			get
-			{
-				return thePool;
-			}
-		}
+		public FPPool FPPool => _thePool;
 
-		public FPTag AddTag(String tagName)
+	    public FPTag AddTag(string tagName)
 		{
 			return new FPTag(TopTag, tagName);
 		}
 
-		private FPTag myTopTag = null;
+		private FPTag _myTopTag;
 
 		/**
 		 * The top tag within the Clip. See API Guide: FPClip_GetTopTag 
@@ -203,17 +197,17 @@ namespace EMC.Centera.SDK
 		{
 			get
 			{
-                if (myTopTag == null)
+                if (_myTopTag == null)
                 {
                     FPTagRef t = Native.Clip.GetTopTag(this);
 
                     if (!SDKObjects.Contains(t))
-                        myTopTag = new FPTag(t);
+                        _myTopTag = new FPTag(t);
                     else
-                        myTopTag = (FPTag) SDKObjects[t];
+                        _myTopTag = (FPTag) SDKObjects[t];
                 }
 
-				return myTopTag;
+				return _myTopTag;
 			}
 		}
 
@@ -221,39 +215,21 @@ namespace EMC.Centera.SDK
 		 * The number of blobs within this Clip. See API Guide: FPClip_GetNumBlobs
 		 *
 		 */
-		public int NumBlobs
-		{
-			get
-			{
-				return (int) Native.Clip.GetNumBlobs(this);
-			}
-		}
+		public int NumBlobs => (int) Native.Clip.GetNumBlobs(this);
 
-		/**
+	    /**
 		 * The number of tags within this Clip. See API Guide: FPClip_GetNumTags
 		 *
 		 */
-		public int NumTags
-		{
-			get
-			{
-				return (int) Native.Clip.GetNumTags(this);
-			}
-		}
+		public int NumTags => (int) Native.Clip.GetNumTags(this);
 
-		/**
+	    /**
 		 * The total size of this Clip. See API Guide: FPClip_GetTotalSize
 		 *
 		 */
-		public long TotalSize
-		{
-			get
-			{
-				return (long) Native.Clip.GetTotalSize(this);
-			}
-		}
+		public long TotalSize => (long) Native.Clip.GetTotalSize(this);
 
-		/**
+	    /**
 		 * A string representing the ID of this Clip. See API Guide: FPClip_GetClipID
 		 *
 		 */
@@ -379,7 +355,7 @@ namespace EMC.Centera.SDK
                     if (RetentionPeriod.Ticks == FPMisc.INFINITE_RETENTION_PERIOD)
     					return new DateTime(9999,12,31);
                     else // Cluster DEFAULT_RETENTION is being used and the clip was written by a pre 3.1 SDK
-                        return CreationDate.Add(thePool.RetentionDefault);
+                        return CreationDate.Add(_thePool.RetentionDefault);
                 }
 				else
 					return CreationDate.Add(RetentionPeriod);
@@ -523,7 +499,7 @@ namespace EMC.Centera.SDK
 		 * @param inAttrName	The name of the description attribute.
 		 * @param inAttrValue	The value for the description attribute.
 		 */
-		public void SetAttribute(String inAttrName,  string inAttrValue) 
+		public void SetAttribute(string inAttrName,  string inAttrValue) 
 		{
 			Native.Clip.SetDescriptionAttribute(this, inAttrName, inAttrValue);
 		}
@@ -533,7 +509,7 @@ namespace EMC.Centera.SDK
 		 * 
 		 * @param inAttrName	The name of the description attribute.
 		 */
-		public void RemoveAttribute(String inAttrName) 
+		public void RemoveAttribute(string inAttrName) 
 		{
 			Native.Clip.RemoveDescriptionAttribute(this, inAttrName);
 		}
@@ -544,7 +520,7 @@ namespace EMC.Centera.SDK
 		 * @param inAttrName	The name of the description attribute.
 		 * @return The string value of the Description attribute.
 		 */
-		public string GetAttribute(String inAttrName)
+		public string GetAttribute(string inAttrName)
 		{
             byte[] outString;
 			FPInt bufSize = 0;
@@ -596,16 +572,10 @@ namespace EMC.Centera.SDK
 		 * The number of Description Attributes associated with this clip.
 		 * 
 		 */
-		public int NumAttributes
-		{
-			get
-			{
-				return (int) Native.Clip.GetNumDescriptionAttributes(this);;
-			}
-		}
+		public int NumAttributes => (int) Native.Clip.GetNumDescriptionAttributes(this);
 
 
-		/**
+	    /**
 		 * The retention class name associated with this clip.
 		 * 
 		 */
@@ -630,7 +600,7 @@ namespace EMC.Centera.SDK
 
 			set
 			{
-				FPRetentionClass rcRef = thePool.RetentionClasses.GetClass(value);
+				FPRetentionClass rcRef = _thePool.RetentionClasses.GetClass(value);
 				Native.Clip.SetRetentionClass(this, rcRef);
 			}
 		}
@@ -643,7 +613,7 @@ namespace EMC.Centera.SDK
 		{
 			get
 			{
-				FPRetentionClass	rcRef = thePool.RetentionClasses.GetClass(RetentionClassName);
+				FPRetentionClass	rcRef = _thePool.RetentionClasses.GetClass(RetentionClassName);
 				
 				return rcRef;
 			}
@@ -685,7 +655,7 @@ namespace EMC.Centera.SDK
 		 */
 		public bool ValidateRetentionClass() 
 		{
-			if (Native.Clip.ValidateRetentionClass(Native.Pool.GetRetentionClassContext(thePool), this) == FPBool.True)
+			if (Native.Clip.ValidateRetentionClass(Native.Pool.GetRetentionClassContext(_thePool), this) == FPBool.True)
 				return true;
 			else
 				return false;
@@ -700,7 +670,7 @@ namespace EMC.Centera.SDK
 		 * @param bufSize The size of the buffer to allocate to hold the Canonical Form.
 		 * @return The Canonical Form of the clip.
 		 */
-		public static byte[] GetCanonicalFormat(String inClipID, int bufSize) 
+		public static byte[] GetCanonicalFormat(string inClipID, int bufSize) 
 		{
 			byte[] outClipID = new byte[bufSize];
 
@@ -733,7 +703,7 @@ namespace EMC.Centera.SDK
 		 * @param inClipID A standard string format Clip ID.
 		 * @return The Canonical Form of the clip.
 		 */
-		public static byte[] GetCanonicalFormat(String inClipID)
+		public static byte[] GetCanonicalFormat(string inClipID)
 		{
 			return GetCanonicalFormat(inClipID, FPMisc.STRING_BUFFER_SIZE);
 		}
@@ -744,15 +714,9 @@ namespace EMC.Centera.SDK
 		 * See API Guide: FPClip_GetCanonicalForm
 		 * 
 		 */
-		public byte[] CanonicalForm
-		{
-			get
-			{
-				return GetCanonicalFormat(ClipID, FPMisc.STRING_BUFFER_SIZE);
-			}
-		}
-			
-		/**
+		public byte[] CanonicalForm => GetCanonicalFormat(ClipID, FPMisc.STRING_BUFFER_SIZE);
+
+	    /**
 		 * Get the standard (ASCII based) form of a Clip ID in Canonical Form. Used for translating Clip IDs between
 		 * platforms that use different character sets. Buffer of FPMisc.STRING_BUFFER_SIZE is used.
 		 * See API Guide: FPClip_GetStringForm
@@ -770,7 +734,7 @@ namespace EMC.Centera.SDK
 		}
 
 
-		private FPTagCollection myTags = null;
+		private FPTagCollection myTags;
 
 		/**
 		 * An ArrayList containing the Tag objects on a Clip. This should ONLY be used for reading of the Tags
@@ -787,7 +751,7 @@ namespace EMC.Centera.SDK
 			}
 		}
 
-		public FPAttributeCollection myAttributes = null;
+		public FPAttributeCollection myAttributes;
 
 		/**
 		 * An ArrayList containing the DescriptionAttribute objects on a Clip. This should ONLY be used for reading of the Tags
@@ -853,15 +817,9 @@ namespace EMC.Centera.SDK
 			}
 		}
 
-		public string EBRClassName
-		{
-			get
-			{
-				return Native.Clip.GetEBRClassName(this);
-			}
-		}
+		public string EBRClassName => Native.Clip.GetEBRClassName(this);
 
-		public FPRetentionClass EBRClass
+	    public FPRetentionClass EBRClass
 		{
 			set
 			{

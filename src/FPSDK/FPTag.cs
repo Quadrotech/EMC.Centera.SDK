@@ -54,7 +54,7 @@ namespace EMC.Centera.SDK
 		 * @param t	An FPTag object.
 		 * @return The FPTagRef associated with the FPTag.
 		 */
-		static public implicit operator FPTagRef(FPTag t) 
+		public static implicit operator FPTagRef(FPTag t) 
 		{
 			return t.theTag;
 		}
@@ -65,7 +65,7 @@ namespace EMC.Centera.SDK
 		 * @param tagRef	An FPTagRef.
 		 * @return The FPTag object associated with the FPTagRef.
 		 */
-		static public implicit operator FPTag(FPTagRef tagRef) 
+		public static implicit operator FPTag(FPTagRef tagRef) 
 		{
 			// Find the relevant Tag object in the hastable for this FPTagRef
 			FPTag tagObject = null;
@@ -148,15 +148,9 @@ namespace EMC.Centera.SDK
 		 * Get the Clip that this Tag is associated with. See API Guide: FPTag_GetClipRef
 		 * 
 		 */
-		public FPClip FPClip 
-		{
-			get
-			{
-				return Native.Tag.GetClipRef(this);
-			}
-		}
+		public FPClip FPClip => Native.Tag.GetClipRef(this);
 
-		/**
+	    /**
 		 * The next sibling Tag that this Tag is associated with. The Clip must have been opened in TREE mode.
 		 * See API Guide: FPTag_GetSibling
 		 * 
@@ -285,7 +279,7 @@ namespace EMC.Centera.SDK
 		 * @param	inAttrName	The Attribute Name to be set,
 		 * @param	inAttrValue	The Value to be set.
 		 */
-		public void SetAttribute(String inAttrName,  string inAttrValue) 
+		public void SetAttribute(string inAttrName,  string inAttrValue) 
 		{
 			Native.Tag.SetStringAttribute(this, inAttrName, inAttrValue);
 		}
@@ -296,7 +290,7 @@ namespace EMC.Centera.SDK
 		 * @param	inAttrName	The Attribute Name to be set,
 		 * @param	inAttrValue	The Value to be set.
 		 */
-		public void SetAttribute(String inAttrName, long inAttrValue) 
+		public void SetAttribute(string inAttrName, long inAttrValue) 
 		{
 			Native.Tag.SetLongAttribute(this, inAttrName, (FPLong) inAttrValue);
 		}
@@ -307,7 +301,7 @@ namespace EMC.Centera.SDK
 		 * @param	inAttrName	The Attribute Name to be set,
 		 * @param	inAttrValue	The Value to be set.
 		 */
-		public void SetAttribute(String inAttrName, bool inAttrValue) 
+		public void SetAttribute(string inAttrName, bool inAttrValue) 
 		{
 			if (inAttrValue)
 				Native.Tag.SetBoolAttribute(this, inAttrName, FPBool.True);
@@ -321,7 +315,7 @@ namespace EMC.Centera.SDK
 		 * @param	inAttrName	The Attribute Name to be retrieved,
 		 * @return	The string value of the attribute.
 		 */
-		public string GetStringAttribute(String inAttrName) 
+		public string GetStringAttribute(string inAttrName) 
 		{
             byte[] outString;
 			FPInt bufSize = 0;
@@ -346,7 +340,7 @@ namespace EMC.Centera.SDK
 		 * @param	inAttrName	The Attribute Name to be retrieved,
 		 * @return	The Long value of the attribute.
 		 */
-		public long GetLongAttribute(String inAttrName) 
+		public long GetLongAttribute(string inAttrName) 
 		{
 			return (long) Native.Tag.GetLongAttribute(this, inAttrName);
 		}
@@ -357,7 +351,7 @@ namespace EMC.Centera.SDK
 		 * @param	inAttrName	The Attribute Name to be retrieved,
 		 * @return	The Boolean value of the attribute.
 		 */
-		public bool GetBoolAttribute(String inAttrName) 
+		public bool GetBoolAttribute(string inAttrName) 
 		{
 			if (Native.Tag.GetBoolAttribute(this, inAttrName) == FPBool.True)
 				return true;
@@ -370,7 +364,7 @@ namespace EMC.Centera.SDK
 		 *
 		 * @param	inAttrName	The Attribute Name to be retrieved,
 		 */
-		public void RemoveAttribute(String inAttrName) 
+		public void RemoveAttribute(string inAttrName) 
 		{
 			Native.Tag.RemoveAttribute(this, inAttrName);
 		}
@@ -379,15 +373,9 @@ namespace EMC.Centera.SDK
 		 * The number of attributes on this Tag. See API Guide: FPTag_GetNumAttributes
 		 *
 		 */
-		public int NumAttributes 
-		{
-			get
-			{
-				return (int) Native.Tag.GetNumAttributes(this);
-			}
-		}
+		public int NumAttributes => (int) Native.Tag.GetNumAttributes(this);
 
-		/**
+	    /**
 		 * Returns an attribute name and value from this Tag using the given index number.
 		 * See API Guide: FPTag_GetIndexAttribute
 		 * 
@@ -421,15 +409,9 @@ namespace EMC.Centera.SDK
 		 * The size of the blob on this Tag. See API Guide: FPTag_GetBlobSize
 		 * 
 		 */
-		public long BlobSize
-		{
-			get
-			{
-				return (long) Native.Tag.GetBlobSize(this);
-			}
-		}
+		public long BlobSize => (long) Native.Tag.GetBlobSize(this);
 
-		/**
+	    /**
 		 * Write the contents of a Stream to the Blob on this Tag using DEFAULT_OPTIONS.
 		 * See API Guide: FPTag_BlobWrite
 		 *
@@ -530,15 +512,9 @@ namespace EMC.Centera.SDK
 		 * -1 for no blob. See API Guide: FPTag_BlobExists
 		 *
 		 */
-		public int BlobStatus
-		{
-			get
-			{
-				return (int) Native.Tag.BlobExists(this);
-			}
-		}
+		public int BlobStatus => (int) Native.Tag.BlobExists(this);
 
-		private FPAttributeCollection myAttributes = null;
+	    private FPAttributeCollection myAttributes;
 
 		/**
 		 * An ArrayList containing the Attributes on the Tag. This should ONLY be used for reading of the Attributes

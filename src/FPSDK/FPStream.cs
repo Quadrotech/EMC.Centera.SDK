@@ -49,7 +49,7 @@ namespace EMC.Centera.SDK
          * @param	fileName	The name of the file to write to.
          * @param	permissions	The permissions to create the file with.
          */
-        public FPStream(String fileName, string permissions)
+        public FPStream(string fileName, string permissions)
         {
             theStream = Native.Stream.CreateFileForOutput(fileName, permissions);
             AddObject(theStream, this);
@@ -62,7 +62,7 @@ namespace EMC.Centera.SDK
          * @param	fileName	The name of the file to read from.
          * @param	bufferSize	The size of the buffer to use for writing.
          */
-        public FPStream(String fileName, long bufferSize)
+        public FPStream(string fileName, long bufferSize)
         {
             theStream = Native.Stream.CreateFileForInput(fileName, "rb", bufferSize);
             AddObject(theStream, this);
@@ -77,7 +77,7 @@ namespace EMC.Centera.SDK
          * @param	offset  	The position in the file to start reading from.
          * @param	length  	The length of the file segment to read from.
          */
-        public FPStream(String fileName, long bufferSize, long offset, long length)
+        public FPStream(string fileName, long bufferSize, long offset, long length)
         {
             theStream = Native.Stream.CreatePartialFileForInput(fileName, "rb", bufferSize, offset, length);
             AddObject(theStream, this);
@@ -94,7 +94,7 @@ namespace EMC.Centera.SDK
          * @param	length  	The length of the file segment to write to.
          * @param	maxFileSize	The maximum size that the output file max grow to.
          */
-        public FPStream(String fileName, string permission, long bufferSize, long offset, long length, long maxFileSize)
+        public FPStream(string fileName, string permission, long bufferSize, long offset, long length, long maxFileSize)
         {
             theStream = Native.Stream.CreatePartialFileForOutput(fileName, permission, bufferSize, offset, length, maxFileSize);
             AddObject(theStream, this);
@@ -135,7 +135,7 @@ namespace EMC.Centera.SDK
          * @param	s	The Stream.
          * @return	The FPStreamRef associated with this Stream.
          */
-        static public implicit operator FPStreamRef(FPStream s)
+        public static implicit operator FPStreamRef(FPStream s)
         {
             return s.theStream;
         }
@@ -146,7 +146,7 @@ namespace EMC.Centera.SDK
          * @param	streamRef	The FPStreamRef.
          * @return	The new Stream.
          */
-        static public implicit operator FPStream(FPStreamRef streamRef)
+        public static implicit operator FPStream(FPStreamRef streamRef)
         {
             // Find the relevant Tag object in the hastable for this FPTagRef
             FPStream streamObject = null;

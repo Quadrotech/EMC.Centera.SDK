@@ -101,7 +101,7 @@ namespace EMC.Centera.SDK.Native
             return retval;
         }
 
-        public static void RegisterApplication(String appName, string appVersion)
+        public static void RegisterApplication(string appName, string appVersion)
         {
             SDK.FPPool_RegisterApplication8(appName, appVersion);
             SDK.CheckAndThrowError();

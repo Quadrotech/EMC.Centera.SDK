@@ -17,15 +17,9 @@ namespace EMC.Centera.SDK
             theStream = s;
         }
 
-        public override bool CanRead
-        {
-            get { return false; }
-        }
+        public override bool CanRead => false;
 
-        public override bool CanWrite
-        {
-            get { return false; }
-        }
+        public override bool CanWrite => false;
 
         public override int Read(byte[] buffer, int offset, int count)
         {
@@ -42,10 +36,7 @@ namespace EMC.Centera.SDK
             get { throw new Exception("The method or operation is not implemented."); }
         }
 
-        public override long Length
-        {
-            get { return length; }
-        }
+        public override long Length => length;
 
         public override long Position
         {

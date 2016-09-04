@@ -55,7 +55,7 @@ namespace EMC.Centera.SDK
 		 * @param poolConnectionString A Pool connection string containing IP (or DNS names) of
 		 *                       the target clusters and associated authorization / options. 
 		 */
-		public FPPool(String poolConnectionString)
+		public FPPool(string poolConnectionString)
 		{
 			thePool = Native.Pool.Open(poolConnectionString);
 			AddObject(thePool, this);
@@ -68,7 +68,7 @@ namespace EMC.Centera.SDK
 		 * @param p A Pool object..
 		 * @return The FPPoolRef associated with this Pool.
 		 */
-		static public implicit operator FPPoolRef(FPPool p) 
+		public static implicit operator FPPoolRef(FPPool p) 
 		{
 			return p.thePool;
 		}
@@ -79,7 +79,7 @@ namespace EMC.Centera.SDK
 		 * @param poolRef FPPoolRef.
 		 * @return The FPPool object associated with the FPPoolRef.
 		 */
-		static public implicit operator FPPool(FPPoolRef poolRef) 
+		public static implicit operator FPPool(FPPoolRef poolRef) 
 		{
 			// Find the relevant Pool object in the hastable for this FPPoolRef
 			FPPool poolObject = null;
@@ -501,83 +501,41 @@ namespace EMC.Centera.SDK
 		/**
 		 * The capacity of the Cluster.
 		 */
-		public long Capacity
-		{
-			get
-			{
-				return PoolInfo.capacity;
-			}
-		}
+		public long Capacity => PoolInfo.capacity;
 
-		/**
+	    /**
 		 * The amount of FreeSpace on the Cluster.
 		 */
-		public long FreeSpace
-		{
-			get
-			{
-				return PoolInfo.freeSpace;
-			}
-		}
+		public long FreeSpace => PoolInfo.freeSpace;
 
-		/**
+	    /**
 		 * The ID string of the Cluster.
 		 */
-		public string ClusterID
-		{
-			get
-			{
-				return PoolInfo.clusterID;
-			}
-		}
+		public string ClusterID => PoolInfo.clusterID;
 
-		/**
+	    /**
 		 * The name of the Cluster.
 		 */
-		public string ClusterName
-		{
-			get
-			{
-				return PoolInfo.clusterName;
-			}
-		}
+		public string ClusterName => PoolInfo.clusterName;
 
-		/**
+	    /**
 		 * The version of CentraStar software on the Cluster.
 		 */
-		public string CentraStarVersion
-		{
-			get
-			{
-				return PoolInfo.version;
-			}
-		}
+		public string CentraStarVersion => PoolInfo.version;
 
-		/**
+	    /**
 		 * The ReplicaAddress of the Cluster.
 		 */
-		public string ReplicaAddress
-		{
-			get
-			{
-				return PoolInfo.replicaAddress;
-			}
-		}
+		public string ReplicaAddress => PoolInfo.replicaAddress;
 
-		/**
+	    /**
 		 * The error status for the last SDK operation with any pool. See API Guide: FPPool_GetLastError
 		 *
 		 */
-		public static int LastError
-		{
-			get
-			{
-				return (int) Native.Pool.GetLastError();
-			}
-		}
-			
+		public static int LastError => (int) Native.Pool.GetLastError();
 
-		/**
+
+	    /**
 		 * A structure containing information relating to the last SDK operation. See API Guide: FPPool_GetLastErrorInfo
 		 *
 		 */
@@ -595,15 +553,9 @@ namespace EMC.Centera.SDK
 		/**
 		 * The naming schemes that are available on the Cluster.
 		 */
-		public string BlobNamingSchemes
-		{
-			get
-			{
-				return GetCapability(FPMisc.BLOBNAMING, FPMisc.SUPPORTED_SCHEMES);
-			}
-		}
+		public string BlobNamingSchemes => GetCapability(FPMisc.BLOBNAMING, FPMisc.SUPPORTED_SCHEMES);
 
-		/**
+	    /**
 		 * Is Query available in the Capabilities list of the Pool object?
 		 */
 		public bool QueryAllowed
@@ -620,14 +572,8 @@ namespace EMC.Centera.SDK
 		/**
 		 * A list of pools that have Query capability.
 		 */
-		public string QueryPools
-		{
-			get
-			{
-				return GetCapability(FPMisc.CLIPENUMERATION, FPMisc.POOLS);
-			}
-		}
-		/**
+		public string QueryPools => GetCapability(FPMisc.CLIPENUMERATION, FPMisc.POOLS);
+	    /**
 		 * Is Delete available in the Capabilities list of the Pool object?
 		 */
 		public bool DeleteAllowed
@@ -644,14 +590,8 @@ namespace EMC.Centera.SDK
 		/**
 		 * A list of pools that have Delete capability.
 		 */
-		public string DeletePools
-		{
-			get
-			{
-				return GetCapability(FPMisc.DELETE, FPMisc.POOLS);
-			}
-		}
-		/**
+		public string DeletePools => GetCapability(FPMisc.DELETE, FPMisc.POOLS);
+	    /**
 		 * Are Delete operations logged i.e. are Reflections created?
 		 */
 		public bool DeletionsLogged
@@ -682,14 +622,8 @@ namespace EMC.Centera.SDK
 		/**
 		 * A list of pools that have Exists capability.
 		 */
-		public string ExistsPools
-		{
-			get
-			{
-				return GetCapability(FPMisc.EXIST, FPMisc.POOLS);
-			}
-		}
-		/**
+		public string ExistsPools => GetCapability(FPMisc.EXIST, FPMisc.POOLS);
+	    /**
 		 * Is PrivilegedDelete available in the Capabilities list of the Pool object?
 		 */
 		public bool PrivilegedDeleteAllowed
@@ -706,14 +640,8 @@ namespace EMC.Centera.SDK
 		/**
 		 * A list of pools that have PrivilegedDelete capability.
 		 */
-		public string PrivilegedDeletePools
-		{
-			get
-			{
-				return GetCapability(FPMisc.PRIVILEGEDDELETE, FPMisc.POOLS);
-			}
-		}
-		/**
+		public string PrivilegedDeletePools => GetCapability(FPMisc.PRIVILEGEDDELETE, FPMisc.POOLS);
+	    /**
 		 * Is Read available in the Capabilities list of the Pool object?
 		 */
 		public bool ReadAllowed
@@ -730,25 +658,13 @@ namespace EMC.Centera.SDK
 		/**
 		 * A list of pools that have Read capability.
 		 */
-		public string ReadPools
-		{
-			get
-			{
-				return GetCapability(FPMisc.READ, FPMisc.POOLS);
-			}
-		}
-		/**
+		public string ReadPools => GetCapability(FPMisc.READ, FPMisc.POOLS);
+	    /**
 		 * What is the Default retention Strategy of the cluster?
 		 */
-		public string DefaultRetenionScheme
-		{
-			get
-			{
-				return GetCapability(FPMisc.RETENTION, FPMisc.DEFAULT);
-			}
-		}
+		public string DefaultRetenionScheme => GetCapability(FPMisc.RETENTION, FPMisc.DEFAULT);
 
-		/**
+	    /**
 		 * Is Write available in the Capabilities list of the Pool object?
 		 */
 		public bool WriteAllowed
@@ -765,52 +681,28 @@ namespace EMC.Centera.SDK
 		/**
 		 * A list of pools that have Write capability.
 		 */
-		public string WritePools
-		{
-			get
-			{
-				return GetCapability(FPMisc.WRITE, FPMisc.POOLS);
-			}
-		}
+		public string WritePools => GetCapability(FPMisc.WRITE, FPMisc.POOLS);
 
-		/**
+	    /**
 		 * A list containing the Pool mappings for all Profiles / Pools.
 		 */
-		public string PoolMappings
-		{
-			get
-			{
-				return GetCapability(FPMisc.RETENTION, FPMisc.POOLMAPPINGS);
-			}
-		}
+		public string PoolMappings => GetCapability(FPMisc.RETENTION, FPMisc.POOLMAPPINGS);
 
-		/**
+	    /**
 		 * A list containing the Profiles for which a Pool mapping exists.
 		 */
-		public string PoolProfiles
-		{
-			get
-			{
-				return GetCapability(FPMisc.RETENTION, FPMisc.PROFILES);
-			}
-		}
+		public string PoolProfiles => GetCapability(FPMisc.RETENTION, FPMisc.PROFILES);
 
-		/**
+	    /**
 		 * The Edition of the Centera this pool is connected to i.e. 
 		 * 
 		 * basic	Basic Edition
 		 * ce		Governance Edition (formerly known as Compliance Edition)
 		 * ce+		Compliane Edition Plus
 		 */
-		public string CenteraEdition
-		{
-			get
-			{
-				return GetCapability(FPMisc.COMPLIANCE, FPMisc.MODE);
-			}
-		}
+		public string CenteraEdition => GetCapability(FPMisc.COMPLIANCE, FPMisc.MODE);
 
-		internal string GetCapability(String inCapabilityName,  string inCapabilityAttributeName) 
+	    internal string GetCapability(string inCapabilityName,  string inCapabilityAttributeName) 
 		{
 			StringBuilder outString = new StringBuilder();
 			FPInt bufSize = 0;
@@ -917,7 +809,7 @@ namespace EMC.Centera.SDK
 		 * @param inClipID	The clip to check for existence.
 		 * @return A boolean value realting to existence.
 		 */
-		public bool ClipExists(String inClipID) 
+		public bool ClipExists(string inClipID) 
 		{
 			if (Native.Clip.Exists(this, inClipID) == FPBool.True)
 				return true;
@@ -932,7 +824,7 @@ namespace EMC.Centera.SDK
 		 *
 		 * @param inClipID	The clip to delete.
 		 */
-		public void ClipDelete(String inClipID) 
+		public void ClipDelete(string inClipID) 
 		{
 			Native.Clip.Delete(this, inClipID);
 		}
@@ -946,7 +838,7 @@ namespace EMC.Centera.SDK
 		 * @param inClipID	The clip to delete.
 		 * @param inReason	A string contining free test relating to the reason for deletion.
 		 */
-		public void ClipAuditedDelete(String inClipID,  string inReason) 
+		public void ClipAuditedDelete(string inClipID,  string inReason) 
 		{
 			ClipAuditedDelete(inClipID, inReason, FPMisc.OPTION_DEFAULT_OPTIONS);
 		}
@@ -959,7 +851,7 @@ namespace EMC.Centera.SDK
 		 * @param inReason	A string contining free test relating to the reason for deletion.
 		 * @param inOptions	The type of deletion being performed (Normal or Privileged).
 		 */
-		public void ClipAuditedDelete(String inClipID,  string inReason, long inOptions) 
+		public void ClipAuditedDelete(string inClipID,  string inReason, long inOptions) 
 		{
 			Native.Clip.AuditedDelete(this, inClipID, inReason, (FPLong) inOptions);
 		}
@@ -970,7 +862,7 @@ namespace EMC.Centera.SDK
 		 * @param inName The name of the clip to be created.
 		 * @return The resulting Clip object.
 		 */
-		public FPClip ClipCreate(String inName) 
+		public FPClip ClipCreate(string inName) 
 		{
 			return new FPClip(Native.Clip.Create(this, inName));
 		}
@@ -983,7 +875,7 @@ namespace EMC.Centera.SDK
 		 * @param inOpenMode	How the clip should be opened (Flat or Tree)
 		 * @return The reulting Clip object.
 		 */
-		public FPClip ClipOpen(String inClipID, int inOpenMode) 
+		public FPClip ClipOpen(string inClipID, int inOpenMode) 
 		{
 			return new FPClip(Native.Clip.Open(this, inClipID, (FPInt) inOpenMode));
 		}
@@ -997,7 +889,7 @@ namespace EMC.Centera.SDK
 		 * @param inStream	The stream to read the clip from.
 		 * return The resultng new Clip in this Pool.
 		 */
-		public FPClip ClipRawOpen(String inClipID, FPStream inStream) 
+		public FPClip ClipRawOpen(string inClipID, FPStream inStream) 
 		{
 			return ClipRawOpen(inClipID, inStream, FPMisc.OPTION_DEFAULT_OPTIONS);
 		}
@@ -1011,7 +903,7 @@ namespace EMC.Centera.SDK
 		 * @param inOptions	Options relating to how the Open is performed.
 		 * return The resultng new Clip in this Pool.
 		 */
-		public FPClip ClipRawOpen(String inClipID, FPStream inStream, long inOptions) 
+		public FPClip ClipRawOpen(string inClipID, FPStream inStream, long inOptions) 
 		{
 			return new FPClip(Native.Clip.RawOpen(thePool, inClipID, inStream, (FPLong) inOptions));
 		}
@@ -1022,7 +914,7 @@ namespace EMC.Centera.SDK
 		}
 
 
-		private FPRetentionClassCollection myRetentionClasses = null;
+		private FPRetentionClassCollection myRetentionClasses;
 		
 		/**
 		 * The RetentionClasses configured within this pool. These are configured on the Centera so no modification
@@ -1096,69 +988,33 @@ namespace EMC.Centera.SDK
 		/**
 		 * A list of pools that have Retention Hold capability.
 		 */
-		public string HoldPools
-		{
-			get
-			{
-				return GetCapability(FPMisc.RETENTION_HOLD, FPMisc.POOLS);
-			}
-		}
-		/**
+		public string HoldPools => GetCapability(FPMisc.RETENTION_HOLD, FPMisc.POOLS);
+	    /**
 		 * The minimum period that may be specified for a normal (fixed) retention period.
 		 **/
-		public TimeSpan FixedRetentionMin
-		{
-			get
-			{
-				return new TimeSpan(0, 0, int.Parse(GetCapability(FPMisc.RETENTION, FPMisc.FIXED_RETENTION_MIN)));
-			}
-		}
+		public TimeSpan FixedRetentionMin => new TimeSpan(0, 0, int.Parse(GetCapability(FPMisc.RETENTION, FPMisc.FIXED_RETENTION_MIN)));
 
-		/**
+	    /**
 		 * The maximum period that may be specified for a normal (fixed) retention period.
 		 **/
-		public TimeSpan FixedRetentionMax
-		{
-			get
-			{
-				return new TimeSpan(0, 0, int.Parse(GetCapability(FPMisc.RETENTION, FPMisc.FIXED_RETENTION_MAX)));
-			}
-		}
+		public TimeSpan FixedRetentionMax => new TimeSpan(0, 0, int.Parse(GetCapability(FPMisc.RETENTION, FPMisc.FIXED_RETENTION_MAX)));
 
-		/**
+	    /**
 		 * The minimum period that may be specified for a variable (EBR) retention period.
 		 **/
-		public TimeSpan VariableRetentionMin
-		{
-			get
-			{
-				return new TimeSpan(0, 0, int.Parse(GetCapability(FPMisc.RETENTION, FPMisc.VARIABLE_RETENTION_MIN)));
-			}
-		}
-		
-		/**
+		public TimeSpan VariableRetentionMin => new TimeSpan(0, 0, int.Parse(GetCapability(FPMisc.RETENTION, FPMisc.VARIABLE_RETENTION_MIN)));
+
+	    /**
 		 * The maximum period that may be specified for a variable (EBR) retention period.
 		 **/
-		public TimeSpan VariableRetentionMax
-		{
-			get
-			{
-				return new TimeSpan(0, 0, int.Parse(GetCapability(FPMisc.RETENTION, FPMisc.VARIABLE_RETENTION_MAX)));
-			}
-		}
+		public TimeSpan VariableRetentionMax => new TimeSpan(0, 0, int.Parse(GetCapability(FPMisc.RETENTION, FPMisc.VARIABLE_RETENTION_MAX)));
 
-		/**
+	    /**
 		 * The default retention period that may will be used if the application does not specifically set it.
 		 **/
-		public TimeSpan RetentionDefault
-		{
-			get
-			{
-				return new TimeSpan(0, 0, int.Parse(GetCapability(FPMisc.RETENTION, FPMisc.RETENTION_DEFAULT)));
-			}
-		}
+		public TimeSpan RetentionDefault => new TimeSpan(0, 0, int.Parse(GetCapability(FPMisc.RETENTION, FPMisc.RETENTION_DEFAULT)));
 
-		/**
+	    /**
 		 * Are Retention Governors supported on the Centera i.e. Minimum / Maximum values for Fixed and Variable retention.
 		 **/
 		public bool RetentionMinMax

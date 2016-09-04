@@ -46,7 +46,7 @@ namespace EMC.Centera.SDK
 	 */
 	public class FPQuery : FPObject
 	{
-		FPPoolRef thePool;
+	    readonly FPPoolRef thePool;
 		FPPoolQueryRef theQuery;
 		FPQueryExpressionRef theExpression;
 
@@ -87,7 +87,7 @@ namespace EMC.Centera.SDK
 		 * @param	q	The Query.
 		 * @return	The FPPoolQueryRef associated with the object
 		 */
-		static public implicit operator FPPoolQueryRef(FPQuery q) 
+		public static implicit operator FPPoolQueryRef(FPQuery q) 
 		{
 			return q.theQuery;
 		}
@@ -126,15 +126,9 @@ namespace EMC.Centera.SDK
 		 * See API Guide: FPPoolQuery_GetPoolRef
 		 *
 		 */
-		public FPPool FPPool
-		{
-			get
-			{
-				return Native.PoolQuery.GetPoolRef(this);
-			}
-		}
+		public FPPool FPPool => Native.PoolQuery.GetPoolRef(this);
 
-		/**
+	    /**
 		 * Retrieve the next member of the result set for the current open Query. See API Guide: FPPoolQuery_FetchResult
 		 * 
 		 * @param   outResult	The next available FPQueryResult in the FPQuery.
@@ -245,7 +239,7 @@ namespace EMC.Centera.SDK
 		 * 
 		 * @param	inFieldName	The Attribute Name.
 		 */
-		public void SelectField(String inFieldName) 
+		public void SelectField(string inFieldName) 
 		{
 			Native.QueryExpression.SelectField(theExpression, inFieldName);
 		}
@@ -256,7 +250,7 @@ namespace EMC.Centera.SDK
 		 * 
 		 * @param	inFieldName	The Attribute Name.
 		 */
-		public void DeselectField(String inFieldName) 
+		public void DeselectField(string inFieldName) 
 		{
 			Native.QueryExpression.DeselectField(theExpression, inFieldName);
 		}
@@ -268,7 +262,7 @@ namespace EMC.Centera.SDK
 		 * @param	inFieldName	The Attribute Name.
 		 * @return	Boolean representing the Selected state for the Atrribute in the Query Expression.
 		 */
-		public bool IsSelected(String inFieldName) 
+		public bool IsSelected(string inFieldName) 
 		{
 			if (Native.QueryExpression.IsFieldSelected(theExpression, inFieldName) == FPBool.True)
 				return true;
