@@ -6,6 +6,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FPSDK", "FPSDK\FPSDK.csproj
 EndProject
 Project("{FF286327-C783-4F7A-AB73-9BCBAD0D4460}") = "FPSDK.NuGet", "FPSDK.NuGet\FPSDK.NuGet.nuproj", "{2DE66D7E-75A4-4130-9616-378675D066EE}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{C5283DEA-F9CC-45EB-A897-8470CF9D9436}"
+	ProjectSection(SolutionItems) = preProject
+		.nuget\nuget.config = .nuget\nuget.config
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
