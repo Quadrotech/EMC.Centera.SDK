@@ -5,6 +5,10 @@
 # Original Project
 The Original Project can be found here: https://sourceforge.net/p/cosi-dot-net/
 
+# Installation
+You will need the EMC Centera SDK from EMC to use this wrapper. Get it from here, drop the binaries into the same directory as the wrapper.
+https://developer-content.emc.com/downloads/centera/download.htm
+
 # License addition to GPLv2
 /******************************************************************************
 
