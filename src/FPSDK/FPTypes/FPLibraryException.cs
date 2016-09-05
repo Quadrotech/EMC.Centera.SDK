@@ -6,30 +6,27 @@ namespace EMC.Centera.SDK.FPTypes
     [Serializable]
     public class FPLibraryException : Exception
     {
-        public ErrorInfo	myErrorInfo;
+        public ErrorInfo ErrorInfo { get; }
 
-        public ErrorInfo errorInfo => myErrorInfo;
-
-        public FPLibraryException(FPErrorInfo _errorInfo) 
+        public FPLibraryException(FPErrorInfo errorInfo) 
         {
-            myErrorInfo = new ErrorInfo(_errorInfo);
+            ErrorInfo = new ErrorInfo(errorInfo);
         }
 
         public FPLibraryException(string s, int error)
         {
-            myErrorInfo = new ErrorInfo(s, error);
+            ErrorInfo = new ErrorInfo(s, error);
         }
 
         public override string ToString()	
         {
             StringBuilder retval = new StringBuilder();
-            retval.Append("error: " + errorInfo.error + 
-                          ", error text: " + errorInfo.errorString + 
-                          ", syserror: " + errorInfo.systemError + 
-                          ", message: " + errorInfo.message + 
-                          ", trace: " + errorInfo.trace);
+            retval.Append("error: " + ErrorInfo.Error + 
+                          ", error text: " + ErrorInfo.ErrorString + 
+                          ", syserror: " + ErrorInfo.SystemError + 
+                          ", message: " + ErrorInfo.Message + 
+                          ", trace: " + ErrorInfo.Trace);
             return retval.ToString();
         }
-
     }
 }

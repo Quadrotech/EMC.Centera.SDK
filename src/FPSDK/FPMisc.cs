@@ -435,17 +435,9 @@ namespace EMC.Centera.SDK
         public const int LOG_NO_POLLING                                      = (int) -1;
         public const int LOG_SIZE_UNBOUNDED                                  = (int) -1;
     }
-    /** 
-     * Abstract disposable base class for FP objects.
-     * @author Graham Stuart
-     * @version
-     */
 
-    /** 
-     * An object representing an FPStreamRef.
-     * @author Graham Stuart
-     * @version
-     */
+
+
     // end of class Stream
 
     /** 

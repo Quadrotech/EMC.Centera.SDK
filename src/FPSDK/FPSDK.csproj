@@ -150,14 +150,14 @@
     <Compile Include="FPTypes\FPLogFormat.cs" />
     <Compile Include="FPLogger.cs" />
     <Compile Include="FPTypes\FPLogLevel.cs" />
-    <Compile Include="FPLogProc.cs" />
-    <Compile Include="FPLogStateRef.cs" />
+    <Compile Include="FPTypes\FPLogProc.cs" />
+    <Compile Include="FPTypes\FPLogStateRef.cs" />
     <Compile Include="FPTypes\FPLong.cs" />
     <Compile Include="FPMisc.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="FPTypes\FPMonitorRef.cs" />
-    <Compile Include="FPObject.cs" />
+    <Compile Include="FPTypes\FPObject.cs" />
     <Compile Include="FPPartialInputStream.cs" />
     <Compile Include="FPPartialOutputStream.cs" />
     <Compile Include="FPPartialStream.cs" />

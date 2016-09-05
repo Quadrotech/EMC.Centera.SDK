@@ -719,9 +719,9 @@ namespace EMC.Centera.SDK
                 }
                 catch (FPLibraryException e)
                 {
-                    ErrorInfo err = e.errorInfo;
+                    ErrorInfo err = e.ErrorInfo;
 
-                    if (e.errorInfo.error == FPMisc.ATTR_NOT_FOUND_ERR)
+                    if (e.ErrorInfo.Error == FPMisc.ATTR_NOT_FOUND_ERR)
                         return "";
                     else
                         throw e;

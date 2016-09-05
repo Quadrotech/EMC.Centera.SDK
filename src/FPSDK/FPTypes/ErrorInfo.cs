@@ -1,37 +1,35 @@
-using System;
-
 namespace EMC.Centera.SDK.FPTypes
 {
     public class ErrorInfo
     {
-        private FPErrorInfo	errorInfo;
+        private readonly FPErrorInfo _errorInfo;
 
-        internal ErrorInfo(FPErrorInfo _errorInfo)
+        internal ErrorInfo(FPErrorInfo errorInfo)
         {
-            errorInfo = _errorInfo;
+            _errorInfo = errorInfo;
         }
 
         internal ErrorInfo(string s, int error)
         {
-            errorInfo.errorString = s;
-            errorInfo.error = (FPInt) error;
-            errorInfo.trace = "";
-            errorInfo.message = "";
-            errorInfo.errorClass = (FPShort) 3;
+            _errorInfo.errorString = s;
+            _errorInfo.error = (FPInt) error;
+            _errorInfo.trace = "";
+            _errorInfo.message = "";
+            _errorInfo.errorClass = (FPShort) 3;
         }
 
-        public int error => (int) errorInfo.error;
-        public int systemError => (int) errorInfo.systemError;
+        public int Error => (int) _errorInfo.error;
+        public int SystemError => (int) _errorInfo.systemError;
 
-        public string trace => errorInfo.trace;
-        public string message => errorInfo.message;
-        public string errorString => errorInfo.errorString;
+        public string Trace => _errorInfo.trace;
+        public string Message => _errorInfo.message;
+        public string ErrorString => _errorInfo.errorString;
 
-        public ushort errorClass => (ushort) errorInfo.errorClass;
+        public ushort ErrorClass => (ushort) _errorInfo.errorClass;
 
         public override string ToString()
         {
-            return errorString;
+            return ErrorString;
         }
 
     }

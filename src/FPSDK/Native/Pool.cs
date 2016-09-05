@@ -7,7 +7,6 @@ namespace EMC.Centera.SDK.Native
 {
     public class Pool 
     {
-
         public static FPPoolRef Open( string inPoolAddress) 
         {
             FPPoolRef retval = SDK.FPPool_Open8(inPoolAddress);
@@ -106,6 +105,5 @@ namespace EMC.Centera.SDK.Native
             SDK.FPPool_RegisterApplication8(appName, appVersion);
             SDK.CheckAndThrowError();
         }
-
     }
 }

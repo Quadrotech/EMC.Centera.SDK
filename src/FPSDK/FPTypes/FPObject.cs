@@ -1,11 +1,16 @@
 using System;
 using System.Collections;
 
-namespace EMC.Centera.SDK
+namespace EMC.Centera.SDK.FPTypes
 {
+  /** 
+ * Abstract disposable base class for FP objects.
+ * @author Graham Stuart
+ * @version
+ */
     public abstract class FPObject : IDisposable
     {
-        protected bool disposed;
+        protected bool Disposed;
         public void Dispose()
         {
             Dispose(true);
@@ -17,9 +22,9 @@ namespace EMC.Centera.SDK
         // We don't have any others so it's effectively not utilised.
         public void Dispose(bool disposing)
         {
-            if (!disposed)
+            if (!Disposed)
             {
-                disposed = true;
+                Disposed = true;
                 Close();
             }
         }
