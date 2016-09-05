@@ -33,7 +33,6 @@ along with .NET wrapper; see the file COPYING. If not, write to:
 
 ******************************************************************************/
 
-using System;
 using System.Text;
 using EMC.Centera.SDK.FPTypes;
 

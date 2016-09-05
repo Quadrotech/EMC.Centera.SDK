@@ -40,21 +40,21 @@ namespace EMC.Centera.SDK.FPTypes
     [StructLayout(LayoutKind.Sequential)]
 	public struct FPPoolInfo
 	{
-		public FPInt     poolInfoVersion;   /// <summary>< The current version of this structure (2)          /// </summary>
-		public FPLong    capacity;          /// <summary>< The total capacity of the pool, in bytes.          /// </summary>
-		public FPLong    freeSpace;         /// <summary>< The total free space of the pool, in bytes.        /// </summary>
+		public FPInt     poolInfoVersion;   /* The current version of this structure (2)          */
+		public FPLong    capacity;          /* The total capacity of the pool, in bytes.          */
+		public FPLong    freeSpace;         /* The total free space of the pool, in bytes.        */
 
 		[ MarshalAs( UnmanagedType.ByValTStr, SizeConst=128 )]
-		public string clusterID;         /// <summary>< The cluster identifier of the pool.                /// </summary>
+		public string clusterID;         /* The cluster identifier of the pool.                */
 			
 		[ MarshalAs( UnmanagedType.ByValTStr, SizeConst=128 )]
-		public string clusterName;       /// <summary>< The name of the cluster.                           /// </summary>
+		public string clusterName;       /* The name of the cluster.                           */
 
 		[ MarshalAs( UnmanagedType.ByValTStr, SizeConst=128 )]
-		public string version;           /// <summary>< The version of the pool server software.           /// </summary>
+		public string version;           /* The version of the pool server software.           */
 
 		[ MarshalAs( UnmanagedType.ByValTStr, SizeConst=256 )]
-		public string replicaAddress;    /// <summary>< The pool address (see FPPool_Open()) where the C-Clips are replicated; empty if there is no replication. /// </summary> 
+		public string replicaAddress;    /* The pool address (see FPPool_Open()) where the C-Clips are replicated; empty if there is no replication. */ 
 	}
 
 
