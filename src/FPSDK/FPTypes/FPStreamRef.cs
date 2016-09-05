@@ -1,9 +1,9 @@
 namespace EMC.Centera.SDK.FPTypes
 {
-    /** 
-     * An object representing an FPStreamRef.
-     * @author Graham Stuart
-     * @version
-     */
+    /// <summary> 
+    ///An object representing an FPStreamRef.
+    ///@author Graham Stuart
+    ///@version
+     /// </summary>
     public enum FPStreamRef					: ulong { Zero }
 }

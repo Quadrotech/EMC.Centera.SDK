@@ -2,6 +2,9 @@ using System.IO;
 
 namespace EMC.Centera.SDK
 {
+    /// <summary> The FPPartialInputStream reads data from a section of an
+    /// underlying stream using offset and size to determine the "section" boundaries.
+    /// </summary>
     public class FPPartialInputStream : FPPartialStream
     {
         public FPPartialInputStream(Stream s, long o, long c) : base(s, o, c) { }

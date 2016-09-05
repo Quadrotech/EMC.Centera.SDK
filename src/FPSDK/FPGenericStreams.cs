@@ -1,4 +1,4 @@
-/******************************************************************************
+/*****************************************************************************
 
 Copyright © 2006 EMC Corporation. All Rights Reserved
  
@@ -39,12 +39,12 @@ using EMC.Centera.SDK.FPTypes;
 
 namespace EMC.Centera.SDK
 {
-	/** 
-	 * FPStreamInfo contains the control information and data buffer that is used to transfer data
-	 * between the application and the SDK.
-	 * @author Graham Stuart
-	 * @version
-	 */
+	/// <summary> 
+	///FPStreamInfo contains the control information and data buffer that is used to transfer data
+	///between the application and the SDK.
+	///@author Graham Stuart
+	///@version
+	 /// </summary>
 
     internal sealed class SDK 
 	{
@@ -75,37 +75,13 @@ namespace EMC.Centera.SDK
 		public static extern		   void          FPStream_ResetMark (FPStreamRef pStream) ;
 
 	}
-/* The FPPartialStream is a convenience classes to utilise a section of an
- * underlying stream using offset and size to determine the "section" boundaries.
- */
 
-    /* The FPPartialInputStream reads data from a section of an
-     * underlying stream using offset and size to determine the "section" boundaries.
-     */
 
-    /* The FPPartialOutputStream writes data to a section of an
-     * underlying stream using offset and size to determine the "section" boundaries.
-     * An additonal constructor places constraints on the maximum size of the resulting stream.
-     */
+    
 
-    /** 
-	 * A Generic Stream  object.
-	 * @author Graham Stuart
-	 * @version
-	 */
+   
 
-    /**
-     * This is a helper class that allows for the use of Windows files with Wide Character filenames without the
-     * need for additional special marshalling or Centera SDK support. It is derived from a GenericStream but the relevant
-     * FileStream object is created for you.
-     */
-
-    /**
-     * This class encapsulates the Callback Methods that are used to manipulate a GenericStream, and
-     * data members that are required while doing so. You should derive from this class is you wish to
-     * populate the data buffer or process reurned data in a way that does not make use of a Stream
-     * derived object or you wish do to things differently than the default behaviour.
-     */
+   
 }
 
 

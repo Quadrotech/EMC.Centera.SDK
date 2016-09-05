@@ -4,6 +4,13 @@ using EMC.Centera.SDK.FPTypes;
 
 namespace EMC.Centera.SDK
 {
+
+
+    /// <summary> 
+    ///A Generic Stream  object.
+    ///@author Graham Stuart
+    ///@version
+    /// </summary>
     public class FPGenericStream : FPStream
     {
         readonly unsafe FPStreamInfo	*theInfo;
@@ -14,20 +21,20 @@ namespace EMC.Centera.SDK
         readonly FPCallback reset;
         readonly FPCallback close;
 
-        /**
-		 * Creates a Generic Stream object using the standard callback methods. See API Guide: FPStream_CreateGenericStream
-		 * See API Guide: FPStream_CreateGenericStream
-		 *
-		 * @param userStream	Instance of an object derived from the Stream class. This object
-		 *						is used by the calling application to transfer the data to the Generic
-		 *						Stream. Stream direction is set to input to the Centera if the CanRead
-		 *						property of the userStream is true. Note: The derived Stream class should
-		 *						implement the Seek functionality is this is used to provide Marker Support
-		 *						for the SDK. The direction of the Stream is determined by the CanRead property
-         *                      of the supplied Stream.
-		 * @param userData		An IntPtr which can be used to reference a user object that may be required
-		 *						when working with the input or output data buffer.
-		 */
+        /// <summary>
+		///Creates a Generic Stream object using the standard callback methods. See API Guide: FPStream_CreateGenericStream
+		///See API Guide: FPStream_CreateGenericStream
+		///
+		///@param userStream	Instance of an object derived from the Stream class. This object
+		///						is used by the calling application to transfer the data to the Generic
+		///						Stream. Stream direction is set to input to the Centera if the CanRead
+		///						property of the userStream is true. Note: The derived Stream class should
+		///						implement the Seek functionality is this is used to provide Marker Support
+		///						for the SDK. The direction of the Stream is determined by the CanRead property
+        ///                     of the supplied Stream.
+		///@param userData		An IntPtr which can be used to reference a user object that may be required
+		///						when working with the input or output data buffer.
+		 /// </summary>
         public FPGenericStream(Stream userStream, IntPtr userData)
             :this(userStream.CanRead ? StreamDirection.InputToCentera : StreamDirection.OutputFromCentera, 
                 new FPStreamCallbacks(userStream),
@@ -35,39 +42,39 @@ namespace EMC.Centera.SDK
         {
         }
 
-        /**
-		 * Creates a Generic Stream object using the standard callbacks. A Stream derived class is still used for transfer
-         * but the user supplies the direction required (supports bi-directional streams).
-		 * See API Guide: FPStream_CreateGenericStream
-		 *
-		 * @param userStream	Instance of an object derived from the Stream class. This object
-		 *						is used by the calling application to transfer the data to the Generic
-		 *						Stream. Note: The derived Stream class should implement the Seek functionality
-		 *                      is this is used to provide Marker Support for the SDK.
-		 * @param direction     The direction of the stream.
-		 * @param userData		An IntPtr which can be used to reference a user object that may be required
-		 *						when working with the input or output data buffer.
-		 */
+        /// <summary>
+		///Creates a Generic Stream object using the standard callbacks. A Stream derived class is still used for transfer
+        ///but the user supplies the direction required (supports bi-directional streams).
+		///See API Guide: FPStream_CreateGenericStream
+		///
+		///@param userStream	Instance of an object derived from the Stream class. This object
+		///						is used by the calling application to transfer the data to the Generic
+		///						Stream. Note: The derived Stream class should implement the Seek functionality
+		///                     is this is used to provide Marker Support for the SDK.
+		///@param direction     The direction of the stream.
+		///@param userData		An IntPtr which can be used to reference a user object that may be required
+		///						when working with the input or output data buffer.
+		 /// </summary>
         public FPGenericStream(Stream userStream, StreamDirection direction, IntPtr userData)
             : this(direction, new FPStreamCallbacks(userStream), userData)
         {
         }
 		
-        /**
-		 * Creates a Generic Stream object with user supplied callbacks. A Stream derived class is still used for transfer.
-		 * See API Guide: FPStream_CreateGenericStream
-		 *
-		 * @param userStream	Instance of an object derived from the Stream class. This object
-		 *						is used by the calling application to transfer the data to the Generic
-		 *						Stream. Stream direction is set to input to the Centera if the CanRead
-		 *						property of the userStream is true. Note: The derived Stream class should
-		 *						implement the Seek functionality is this is used to provide Marker Support
-		 *						for the SDK.
-		 * @param userCBS		Callbacks provided by the user. Typically the derived class will only
-		 *						require to override PopulateBuffer and / or ProcessReturnedData.
-		 * @param userData		An IntPtr which can be used to reference a user object that may be required
-		 *						when working with the input or output data buffer.
-		 */
+        /// <summary>
+		///Creates a Generic Stream object with user supplied callbacks. A Stream derived class is still used for transfer.
+		///See API Guide: FPStream_CreateGenericStream
+		///
+		///@param userStream	Instance of an object derived from the Stream class. This object
+		///						is used by the calling application to transfer the data to the Generic
+		///						Stream. Stream direction is set to input to the Centera if the CanRead
+		///						property of the userStream is true. Note: The derived Stream class should
+		///						implement the Seek functionality is this is used to provide Marker Support
+		///						for the SDK.
+		///@param userCBS		Callbacks provided by the user. Typically the derived class will only
+		///						require to override PopulateBuffer and / or ProcessReturnedData.
+		///@param userData		An IntPtr which can be used to reference a user object that may be required
+		///						when working with the input or output data buffer.
+		 /// </summary>
         public FPGenericStream(Stream userStream, FPStreamCallbacks userCBS, IntPtr userData)
             :this(userStream.CanRead ? StreamDirection.InputToCentera : StreamDirection.OutputFromCentera,
                 userCBS,
@@ -75,40 +82,40 @@ namespace EMC.Centera.SDK
         {
         }
 
-        /**
-         * Creates a Generic Stream object with user supplied callbacks. A Stream derived class is still used for transfer.
-         * but the user supplies the direction required (supports bi-directional streams).
-         * See API Guide: FPStream_CreateGenericStream
-         *
-         * @param userStream	Instance of an object derived from the Stream class. This object
-         *						is used by the calling application to transfer the data to the Generic
-         *						Stream. Note: The derived Stream class should implement the Seek functionality is
-         *                      this is used to provide Marker Support for the SDK.
-         * @param direction     The direction of the stream.
-         * @param userCBS		Callbacks provided by the user. Typically the derived class will only
-         *						require to override PopulateBuffer and / or ProcessReturnedData.
-         * @param userData		An IntPtr which can be used to reference a user object that may be required
-         *						when working with the input or output data buffer.
-         */
+        /// <summary>
+        ///Creates a Generic Stream object with user supplied callbacks. A Stream derived class is still used for transfer.
+        ///but the user supplies the direction required (supports bi-directional streams).
+        ///See API Guide: FPStream_CreateGenericStream
+        ///
+        ///@param userStream	Instance of an object derived from the Stream class. This object
+        ///						is used by the calling application to transfer the data to the Generic
+        ///						Stream. Note: The derived Stream class should implement the Seek functionality is
+        ///                     this is used to provide Marker Support for the SDK.
+        ///@param direction     The direction of the stream.
+        ///@param userCBS		Callbacks provided by the user. Typically the derived class will only
+        ///						require to override PopulateBuffer and / or ProcessReturnedData.
+        ///@param userData		An IntPtr which can be used to reference a user object that may be required
+        ///						when working with the input or output data buffer.
+         /// </summary>
         public FPGenericStream(Stream userStream, StreamDirection direction, FPStreamCallbacks userCBS, IntPtr userData)
             :this(direction, userCBS, userData)
         {
         }
 
-        /**
-		 * Creates a Generic Stream object with user supplied callbacks. This is the most complex way of using
-		 * a GenericStream and will require the user to implement more of the functionality normally handled by
-		 * the standard callbacks. In particular Marker Support will require the user to make their transfer
-		 * method "rewindable" for up to 100MB of previously transferred data. See API Guide: FPStream_CreateGenericStream
-		 * See API Guide: FPStream_CreateGenericStream
-		 *
-		 * @param direction		Indicator for the type of GenericStream that is to be created i.e. input to
-		 *						Centera or output from Centera.
-		 * @param userCBS		Callbacks provided by the user. Typically the derived class will only
-		 *						require to override PopulateBuffer and / or ProcessReturnedData.
-		 * @param userData		An IntPtr which can be used to reference a user object that may be required
-		 *						when working with the input or output data buffer.
-		 */
+        /// <summary>
+		///Creates a Generic Stream object with user supplied callbacks. This is the most complex way of using
+		///a GenericStream and will require the user to implement more of the functionality normally handled by
+		///the standard callbacks. In particular Marker Support will require the user to make their transfer
+		///method "rewindable" for up to 100MB of previously transferred data. See API Guide: FPStream_CreateGenericStream
+		///See API Guide: FPStream_CreateGenericStream
+		///
+		///@param direction		Indicator for the type of GenericStream that is to be created i.e. input to
+		///						Centera or output from Centera.
+		///@param userCBS		Callbacks provided by the user. Typically the derived class will only
+		///						require to override PopulateBuffer and / or ProcessReturnedData.
+		///@param userData		An IntPtr which can be used to reference a user object that may be required
+		///						when working with the input or output data buffer.
+		 /// </summary>
         public FPGenericStream(StreamDirection direction, FPStreamCallbacks userCBS, IntPtr userData)
         {
             prepare = new FPCallback(userCBS.PrepareBuffer);
@@ -140,9 +147,9 @@ namespace EMC.Centera.SDK
             }
         }
 		
-        /**
-		 * Close the underlying FPStream object.
-		 */
+        /// <summary>
+		///Close the underlying FPStream object.
+		 /// </summary>
         public override void Close()
         {
             if (theStream != 0)
@@ -153,9 +160,9 @@ namespace EMC.Centera.SDK
             }
         }
 
-        /**
-		 * The length of the stream being transferred. Defaults to -1 (unknown length).
-		 */
+        /// <summary>
+		///The length of the stream being transferred. Defaults to -1 (unknown length).
+		 /// </summary>
         public unsafe long StreamLen
         {
             get
@@ -168,15 +175,15 @@ namespace EMC.Centera.SDK
             }
         }
 
-        /**
-		 * The stream direction: 
-		 */
+        /// <summary>
+		///The stream direction: 
+		 /// </summary>
 
         public unsafe StreamDirection Direction => (StreamDirection) theInfo->mReadFlag;
 
-        /**
-		 * Prints out values of the FPStreamInfo control structure.
-		 */
+        /// <summary>
+		///Prints out values of the FPStreamInfo control structure.
+		 /// </summary>
         public override unsafe string ToString()
         {
             return "End of file: " + theInfo->mAtEOF +

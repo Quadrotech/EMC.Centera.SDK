@@ -4,6 +4,12 @@ using EMC.Centera.SDK.FPTypes;
 
 namespace EMC.Centera.SDK
 {
+
+    /// <summary> 
+	///A collection of RetentionClass objects stored in an ArrayList.
+	///@author Graham Stuart
+	///@version
+	 /// </summary>
     public class FPRetentionClassCollection:ArrayList
     {
         private FPRetentionClassContextRef myContext;
@@ -32,12 +38,12 @@ namespace EMC.Centera.SDK
                 c = Native.RetentionClassContext.GetNextClass(RCContext);
             }
         }	
-        /**
-		 * Get the Period associated with a named RetentionClass in the RetentionClassList.
-		 *
-		 * @param	inName	The name of the RetentionClass in the list to get the period for.
-		 * @return	The period (as a TimeSpan) associated with the named RetentionClass.
-		 */
+        /// <summary>
+		///Get the Period associated with a named RetentionClass in the RetentionClassList.
+		///
+		///@param	inName	The name of the RetentionClass in the list to get the period for.
+		///@return	The period (as a TimeSpan) associated with the named RetentionClass.
+		 /// </summary>
         public TimeSpan GetPeriod(string inName) 
         {
             if (ValidateClass(inName))
@@ -51,13 +57,13 @@ namespace EMC.Centera.SDK
             }
         }
 
-        /**
-		 * Get a named RetentionClass from the RetentionClassList. The class must exist or an exception is thrown.
-		 * See API Guide: FPRetentionClassContext_GetNamedClass
-		 * 
-		 * @param	inName	The name of the RetentionClass to get from the list.
-		 * @return	The named RetentionClass
-		 */
+        /// <summary>
+		///Get a named RetentionClass from the RetentionClassList. The class must exist or an exception is thrown.
+		///See API Guide: FPRetentionClassContext_GetNamedClass
+		///
+		///@param	inName	The name of the RetentionClass to get from the list.
+		///@return	The named RetentionClass
+		 /// </summary>
         public FPRetentionClass GetClass(string inName) 
         {
             FPRetentionClass retVal = null;
@@ -77,13 +83,13 @@ namespace EMC.Centera.SDK
                 return retVal;
         }
 
-        /**
-		 * Check for the existence of a named RetentionClass in the RetentionClassList.
-		 * See API Guide: FPRetentionClassContext_GetNamedClass
-		 * 
-		 * @param	inName	The name of the RetentionClass to get from the list.
-		 * @return	The named RetentionClass
-		 */
+        /// <summary>
+		///Check for the existence of a named RetentionClass in the RetentionClassList.
+		///See API Guide: FPRetentionClassContext_GetNamedClass
+		///
+		///@param	inName	The name of the RetentionClass to get from the list.
+		///@return	The named RetentionClass
+		 /// </summary>
         public bool ValidateClass(string inName)
         {
             foreach (FPRetentionClass rc in this)

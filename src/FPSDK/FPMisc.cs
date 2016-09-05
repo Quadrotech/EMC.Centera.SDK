@@ -1,4 +1,4 @@
-/******************************************************************************
+/*****************************************************************************
 
 Copyright © 2006 EMC Corporation. All Rights Reserved
  
@@ -39,23 +39,23 @@ using EMC.Centera.SDK.FPTypes;
 
 namespace EMC.Centera.SDK
 {
-    /** 
-     * Contains definitions of FP constants and useful helper methods.
-     * @author Graham Stuart
-     * @version
-     */
+    /// <summary> 
+    ///Contains definitions of FP constants and useful helper methods.
+    ///@author Graham Stuart
+    ///@version
+     /// </summary>
 
     public class FPMisc
     {
         internal static readonly DateTime Epoch = new DateTime(1970, 1, 1);
 
-        /**
-         * Converts a string with format of "YYYY:MM:DD:HH:MM:SS" into
-         * a standard DateTime object. 
-         *
-         * @param s string containing the date to be converted.
-         * @return A DateTime object representing this date.
-         */
+        /// <summary>
+        ///Converts a string with format of "YYYY:MM:DD:HH:MM:SS" into
+        ///a standard DateTime object. 
+        ///
+        ///@param s string containing the date to be converted.
+        ///@return A DateTime object representing this date.
+         /// </summary>
         public static DateTime GetDateTime(string s)
         {
             if (s.Length > 0)
@@ -69,70 +69,70 @@ namespace EMC.Centera.SDK
                 throw new FPLibraryException("Invalid / null string passed to GetDateTime", OUT_OF_BOUNDS_ERR);
         }
 
-        /**
-         * Converts an  FPLong into a standard DateTime object 
-         * identified by the provided connect string.
-         *
-         * @param l Number of milliseconds since the Epoch 
-         * @return A DateTime object representing the converted FPLong value.
-         */
+        /// <summary>
+        ///Converts an  FPLong into a standard DateTime object 
+        ///identified by the provided connect string.
+        ///
+        ///@param l Number of milliseconds since the Epoch 
+        ///@return A DateTime object representing the converted FPLong value.
+         /// </summary>
         public static DateTime GetDateTime(FPLong l)
         {
             return Epoch.Add(new TimeSpan((long)l * 10000));
         }
 
-        /**
-         * Converts a DateTime object to an FPLong time value. 
-         * identified by the provided connect string.
-         *
-         * @param d The DateTime to be converted 
-         * @return An FPLong representing the ocnverted DateTime object.
-         */
+        /// <summary>
+        ///Converts a DateTime object to an FPLong time value. 
+        ///identified by the provided connect string.
+        ///
+        ///@param d The DateTime to be converted 
+        ///@return An FPLong representing the ocnverted DateTime object.
+         /// </summary>
         public static FPLong GetTime(DateTime d)
         {
             return (FPLong)((d.Ticks - Epoch.Ticks) / 10000);
         }
 
-        /**
-         * Converts a Time (represented by a string value) to a long representation. 
-         *
-         * @param inTime	The string representing the Time. 
-         * @return A long representing the Time value (number of seconds since the UNIX Epoch).
-         */
+        /// <summary>
+        ///Converts a Time (represented by a string value) to a long representation. 
+        ///
+        ///@param inTime	The string representing the Time. 
+        ///@return A long representing the Time value (number of seconds since the UNIX Epoch).
+         /// </summary>
         public static long FPTime_StringToLong(string inTime)
         {
             long retval = (long)Native.FP.FPTime_StringToSeconds(inTime);
             return retval;
         }
-        /**
-         * Converts a Time (represented by a string value) to a long representation in Seconds. 
-         *
-         * @param inTime	The string representing the Time. 
-         * @return A long representing the Time value (number of seconds since the UNIX Epoch).
-         */
+        /// <summary>
+        ///Converts a Time (represented by a string value) to a long representation in Seconds. 
+        ///
+        ///@param inTime	The string representing the Time. 
+        ///@return A long representing the Time value (number of seconds since the UNIX Epoch).
+         /// </summary>
         public static long FPTime_StringToSeconds(string inTime)
         {
             return FPTime_StringToLong(inTime);
         }
 
-        /**
-         * Converts a Time (represented by a string value) to a long representation in Milliseconds. 
-         *
-         * @param inTime	The string representing the Time. 
-         * @return A long representing the Time value (number of milliseconds since the UNIX Epoch).
-         */
+        /// <summary>
+        ///Converts a Time (represented by a string value) to a long representation in Milliseconds. 
+        ///
+        ///@param inTime	The string representing the Time. 
+        ///@return A long representing the Time value (number of milliseconds since the UNIX Epoch).
+         /// </summary>
         public static long FPTime_StringToMilliseconds(string inTime)
         {
             long retval = (long)Native.FP.FPTime_StringToMilliseconds(inTime);
             return retval;
         }
 
-        /**
-         * Converts a Time (represented by a long value) to a string representation. 
-         *
-         * @param inTime	The long representing the Time (number of seconds since the UNIX Epoch). 
-         * @return An string representing the Time value.
-         */
+        /// <summary>
+        ///Converts a Time (represented by a long value) to a string representation. 
+        ///
+        ///@param inTime	The long representing the Time (number of seconds since the UNIX Epoch). 
+        ///@return An string representing the Time value.
+         /// </summary>
         public static string FPTime_LongToString(long inTime)
         {
             StringBuilder outClusterTime = new StringBuilder();
@@ -150,13 +150,13 @@ namespace EMC.Centera.SDK
             return outClusterTime.ToString();
         }
 
-        /**
-         * Converts a Time (represented by a long value of the number of milliseconds since the UNIX Epoch) to a string representation. 
-         *
-         * @param inTime	The long representing the Time. 
-         * @param inOptions	Allows for inclusion or exclusion of the millisecond element in the returned string.
-         * @return A string representing the Time value.
-         */
+        /// <summary>
+        ///Converts a Time (represented by a long value of the number of milliseconds since the UNIX Epoch) to a string representation. 
+        ///
+        ///@param inTime	The long representing the Time. 
+        ///@param inOptions	Allows for inclusion or exclusion of the millisecond element in the returned string.
+        ///@return A string representing the Time value.
+         /// </summary>
         public static string FPTime_MillisecondsToString(long inTime, FPInt inOptions)
         {
             StringBuilder outClusterTime = new StringBuilder();
@@ -174,13 +174,13 @@ namespace EMC.Centera.SDK
             return outClusterTime.ToString();
         }
 
-        /**
-         * Converts a Time (represented by a long valueof the number of seconds since the UNIX Epoch) to a string representation. 
-         *
-         * @param inTime	The long representing the Time.
-         * @param inOptions	Allows for inclusion or exclusion of the millisecond element in the returned string.
-         * @return A string representing the Time value.
-         */
+        /// <summary>
+        ///Converts a Time (represented by a long valueof the number of seconds since the UNIX Epoch) to a string representation. 
+        ///
+        ///@param inTime	The long representing the Time.
+        ///@param inOptions	Allows for inclusion or exclusion of the millisecond element in the returned string.
+        ///@return A string representing the Time value.
+         /// </summary>
         public static string FPTime_SecondsToString(long inTime, FPInt inOptions)
         {
             StringBuilder outClusterTime = new StringBuilder();
@@ -440,11 +440,11 @@ namespace EMC.Centera.SDK
 
     // end of class Stream
 
-    /** 
-     * Utility class for Logging useing FPLogStateRef and FPLogging APIs.
-     * @author Graham Stuart
-     * @version
-     */
+    /// <summary> 
+    ///Utility class for Logging useing FPLogStateRef and FPLogging APIs.
+    ///@author Graham Stuart
+    ///@version
+     /// </summary>
     // end of class Logger
 
 }

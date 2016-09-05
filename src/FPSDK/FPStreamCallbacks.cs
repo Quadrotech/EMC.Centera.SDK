@@ -5,6 +5,12 @@ using EMC.Centera.SDK.FPTypes;
 
 namespace EMC.Centera.SDK
 {
+    /// <summary>
+    ///This class encapsulates the Callback Methods that are used to manipulate a GenericStream, and
+    ///data members that are required while doing so. You should derive from this class is you wish to
+    ///populate the data buffer or process reurned data in a way that does not make use of a Stream
+    ///derived object or you wish do to things differently than the default behaviour.
+    /// </summary>
     public class FPStreamCallbacks
     {
         protected int bufferSize;
@@ -13,31 +19,31 @@ namespace EMC.Centera.SDK
 		
         protected FPStreamRef theStream;
 	
-        /**
-		 * Creates an FPStreamCallbacks object.
-		 * 
-		 * @param s			The Stream derived object to use for transferring the data between the application
-		 *					and the SDK. This Stream should support Seek in order to allow Marker Support.
-		 */
+        /// <summary>
+		///Creates an FPStreamCallbacks object.
+		///
+		///@param s			The Stream derived object to use for transferring the data between the application
+		///					and the SDK. This Stream should support Seek in order to allow Marker Support.
+		/// </summary>
         public FPStreamCallbacks(Stream s)
         {
             BufferSize = 16 * 1024;
             userStream = s;
         }
 
-        /**
-		 *  Zero parameter base class construtor for derivation purposes.
-		 */
+        /// <summary>
+		/// Zero parameter base class construtor for derivation purposes.
+		 /// </summary>
         protected FPStreamCallbacks()
         {
             userStream = null;
         }
 
-        /**
-		 * Change the buffer size for the transfer of the data between the application and the SDK. As
-		 * the SDK always uses 16k, this is the optimum value to use and is the initial default value
-		 * is set when the FPStreamCallbacks object is created.. 
-		 */
+        /// <summary>
+		///Change the buffer size for the transfer of the data between the application and the SDK. As
+		///the SDK always uses 16k, this is the optimum value to use and is the initial default value
+		///is set when the FPStreamCallbacks object is created.. 
+		 /// </summary>
         public int BufferSize
         {
             get
@@ -51,9 +57,9 @@ namespace EMC.Centera.SDK
             }
         }
 
-        /**
-		 * The FPStreamRef object representing the GenericStream.
-		 */
+        /// <summary>
+		///The FPStreamRef object representing the GenericStream.
+		 /// </summary>
         public FPStreamRef StreamRef
         {
             get
@@ -67,12 +73,12 @@ namespace EMC.Centera.SDK
             }
         }
 		
-        /**
-		 * This function is only required when writing to the Centera.
-		 * Allocate a buffer and populate it with the next chunk of data to be sent.
-		 * 
-		 * @param info		The FPStreamInfo structure containing the data and control information.
-		 */
+        /// <summary>
+		///This function is only required when writing to the Centera.
+		///Allocate a buffer and populate it with the next chunk of data to be sent.
+		///
+		///@param info		The FPStreamInfo structure containing the data and control information.
+		 /// </summary>
         public virtual unsafe long PrepareBuffer(ref FPStreamInfo info)
         {
             //Console.WriteLine(this.GetHashCode() + " prepare buffer " + info.ToString());
@@ -114,13 +120,13 @@ namespace EMC.Centera.SDK
         }
 	
 
-        /**
-		 * Populates the buffer that transfers data from the application to the SDK.
-		 * 
-		 * @param localBuffer	The area of local storage allocated as the transfer buffer.
-		 * @param bufferSize	The size of this buffer.
-		 * @param userData		User object for whatever purpose they deem fit.
-		 */
+        /// <summary>
+		///Populates the buffer that transfers data from the application to the SDK.
+		///
+		///@param localBuffer	The area of local storage allocated as the transfer buffer.
+		///@param bufferSize	The size of this buffer.
+		///@param userData		User object for whatever purpose they deem fit.
+		 /// </summary>
         public virtual int PopulateBuffer(ref byte[] localBuffer, int bufferSize, object userData)
         {		
             // The localBuffer is populated from the Stream that the user provides.
@@ -132,12 +138,12 @@ namespace EMC.Centera.SDK
             return userStream.Read(localBuffer, 0, bufferSize);
         }
 
-        /**
-		 * This function is called both for reading and writing to the Centera and it signifies
-		 * that the block has been to the SDK (when writing) or received from the SDK (when reading).
-		 * 
-		 * @param info		The FPStreamInfo structure containing the data and control information.
-		 */ 
+        /// <summary>
+		///This function is called both for reading and writing to the Centera and it signifies
+		///that the block has been to the SDK (when writing) or received from the SDK (when reading).
+		///
+		///@param info		The FPStreamInfo structure containing the data and control information.
+		 /// </summary> 
         public virtual long BlockTransferred(ref FPStreamInfo info)
         {
             //Console.WriteLine(this.GetHashCode() + " Block transferred OK");
@@ -164,14 +170,14 @@ namespace EMC.Centera.SDK
             return 0;
         }
 
-        /**
-		 * Extract the data from the buffer returned from the Centera and send it on to the
-		 * application.
-		 * 
-		 * @param localBuffer	The area of local storage allocated as the transfer buffer.
-		 * @param bufferSize	The size of this buffer.
-		 * @param userData		User object for whatever purpose they deem fit.
-		 */
+        /// <summary>
+		///Extract the data from the buffer returned from the Centera and send it on to the
+		///application.
+		///
+		///@param localBuffer	The area of local storage allocated as the transfer buffer.
+		///@param bufferSize	The size of this buffer.
+		///@param userData		User object for whatever purpose they deem fit.
+		 /// </summary>
         public virtual void ProcessReturnedData(byte[] localBuffer, int bufferSize, object userData)
         {
             //Console.WriteLine(this.GetHashCode() + " Processing returned data");
@@ -181,12 +187,12 @@ namespace EMC.Centera.SDK
                 userStream.Write(localBuffer, 0, bufferSize);
         }
 
-        /**
-		 * Allows the SDK to set a marker at the current stream position. This effectively
-		 * means that data up to this point has been successfully transferred to the Centera.
-		 * 
-		 * @param info		The FPStreamInfo structure containing the data and control information.
-		 */
+        /// <summary>
+		///Allows the SDK to set a marker at the current stream position. This effectively
+		///means that data up to this point has been successfully transferred to the Centera.
+		///
+		///@param info		The FPStreamInfo structure containing the data and control information.
+		 /// </summary>
         public virtual long SetMark(ref FPStreamInfo info)
         {
             //Console.WriteLine(this.GetHashCode() + " Mark set at " + info.mStreamPos);
@@ -195,16 +201,16 @@ namespace EMC.Centera.SDK
             return 0;
         }
 
-        /**
-		 * Allows the SDK to request that the application resends data from the previously set
-		 * marker position due to problems in sending that data to the Centera. If using
-		 * a "normal" GenericStream that uses a Stream based class for transfer, this will be
-		 * achieved using the Seek member, and the derived class must implement this.
-		 * 
-		 * Note: up to 100MB of data could be required to be resent!
-		 * 
-		 * @param info		The FPStreamInfo structure containing the data and control information.
-		 */
+        /// <summary>
+		///Allows the SDK to request that the application resends data from the previously set
+		///marker position due to problems in sending that data to the Centera. If using
+		///a "normal" GenericStream that uses a Stream based class for transfer, this will be
+		///achieved using the Seek member, and the derived class must implement this.
+		///
+		///Note: up to 100MB of data could be required to be resent!
+		///
+		///@param info		The FPStreamInfo structure containing the data and control information.
+		 /// </summary>
         public virtual long ResetMark(ref FPStreamInfo info)
         {
             // The stream the user supplies must override Seek in order for this to work!!
@@ -218,12 +224,12 @@ namespace EMC.Centera.SDK
             return 0;
         }
 
-        /**
-		 * The SDK has signalled that the operation is complete. Allocated buffers should now be freed
-		 * up.
-		 * 
-		 * @param info		The FPStreamInfo structure containing the data and control information.
-		 */
+        /// <summary>
+		///The SDK has signalled that the operation is complete. Allocated buffers should now be freed
+		///up.
+		///
+		///@param info		The FPStreamInfo structure containing the data and control information.
+		 /// </summary>
         public virtual long TransferComplete(ref FPStreamInfo info)
         {
             // If we are writing to Centera, free the unmanaged buffer that we allocated

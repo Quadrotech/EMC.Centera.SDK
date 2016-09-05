@@ -566,9 +566,9 @@ namespace EMC.Centera.SDK.Native
         [DllImport("FPLibrary.dll")]
         public static extern void FPLogging_RegisterCallback(FPLogProc inProc);
 
-        /*
-        * Generic error checking routine for transforming SDK errors into .NET exceptions
-        */
+        /// <summary>
+        /// Generic error checking routine for transforming SDK errors into .NET exceptions
+        /// </summary>
         public static void CheckAndThrowError()
         {
             /* Get the error code of the last SDK API function call */
@@ -590,7 +590,5 @@ namespace EMC.Centera.SDK.Native
                 throw new FPLibraryException(errInfo);
             }
         }
-
-
-    };
+    }
 }

@@ -3,6 +3,10 @@ using System.IO;
 
 namespace EMC.Centera.SDK
 {
+    /// <summary> The FPPartialOutputStream writes data to a section of an
+    /// underlying stream using offset and size to determine the "section" boundaries.
+    /// An additonal constructor places constraints on the maximum size of the resulting stream.
+    /// </summary>
     public class FPPartialOutputStream : FPPartialStream
     {
         public FPPartialOutputStream(Stream s, long o, long c) : base(s, o, c) { }

@@ -1,4 +1,4 @@
-/******************************************************************************
+/*****************************************************************************
 
 Copyright © 2006 EMC Corporation. All Rights Reserved
  
@@ -39,22 +39,22 @@ using EMC.Centera.SDK.FPTypes;
 namespace EMC.Centera.SDK
 {	
 
-	/** 
-	 * An object representing a query to an existing pool.
-	 * @author Graham Stuart
-	 * @version
-	 */
+	/// <summary> 
+	///An object representing a query to an existing pool.
+	///@author Graham Stuart
+	///@version
+	 /// </summary>
 	public class FPQuery : FPObject
 	{
 	    readonly FPPoolRef thePool;
 		FPPoolQueryRef theQuery;
 		FPQueryExpressionRef theExpression;
 
-		/**
-		 * Construct a Query for an existing Pool. Default values set for an unbounded time query on existing objects.
-		 *
-		 * @param	p	The existing Pool object.
-		 */
+		/// <summary>
+		///Construct a Query for an existing Pool. Default values set for an unbounded time query on existing objects.
+		///
+		///@param	p	The existing Pool object.
+		 /// </summary>
 		public FPQuery(FPPool p)
 		{
 			thePool = p;
@@ -67,12 +67,12 @@ namespace EMC.Centera.SDK
 			Native.QueryExpression.SetType(theExpression, (FPInt) FPMisc.QUERY_TYPE_EXISTING);
 		}
 
-		/**
-		 * Construct a Query using an existing FPPoolQueryRef. Used internally when implicitly converting
-		 * an FPPoolQueryRef to a Query.
-		 *
-		 * @param	q	The existing FPPoolQueryRef
-		 */ 
+		/// <summary>
+		///Construct a Query using an existing FPPoolQueryRef. Used internally when implicitly converting
+		///an FPPoolQueryRef to a Query.
+		///
+		///@param	q	The existing FPPoolQueryRef
+		 /// </summary> 
 
 		internal FPQuery(FPPoolQueryRef q)
 		{
@@ -81,20 +81,20 @@ namespace EMC.Centera.SDK
 			theExpression = 0;
 		}
 
-		/**
-		 * Implicit conversion between a Query and an FPPoolQueryRef
-		 *
-		 * @param	q	The Query.
-		 * @return	The FPPoolQueryRef associated with the object
-		 */
+		/// <summary>
+		///Implicit conversion between a Query and an FPPoolQueryRef
+		///
+		///@param	q	The Query.
+		///@return	The FPPoolQueryRef associated with the object
+		 /// </summary>
 		public static implicit operator FPPoolQueryRef(FPQuery q) 
 		{
 			return q.theQuery;
 		}
 
-		/**
-		 * Explicitly close this Query. See API Guide: FPPoolQuery_Close
-		 */
+		/// <summary>
+		///Explicitly close this Query. See API Guide: FPPoolQuery_Close
+		 /// </summary>
 		public override void Close() 
 		{
 			if (theQuery != 0)
@@ -110,41 +110,41 @@ namespace EMC.Centera.SDK
 			}
 		}
 
-		/**
-		 * Executes this Query on the associated Pool based on the associated QueryExpression. 
-		 * See API Guide: FPPoolQuery_Open
-		 *
-		 */
+		/// <summary>
+		///Executes this Query on the associated Pool based on the associated QueryExpression. 
+		///See API Guide: FPPoolQuery_Open
+		///
+		 /// </summary>
 		public void Execute()
 		{
 			theQuery = Native.PoolQuery.Open(thePool, theExpression);
 		}
 
 
-		/**
-		 * The Pool object associated with this Query.
-		 * See API Guide: FPPoolQuery_GetPoolRef
-		 *
-		 */
+		/// <summary>
+		///The Pool object associated with this Query.
+		///See API Guide: FPPoolQuery_GetPoolRef
+		///
+		 /// </summary>
 		public FPPool FPPool => Native.PoolQuery.GetPoolRef(this);
 
-	    /**
-		 * Retrieve the next member of the result set for the current open Query. See API Guide: FPPoolQuery_FetchResult
-		 * 
-		 * @param   outResult	The next available FPQueryResult in the FPQuery.
-		 * @param	inTimeout	The timeout value to wait for the next result.
-		 * @return	The ResultCode of the operation.
-		 */
+	    /// <summary>
+		///Retrieve the next member of the result set for the current open Query. See API Guide: FPPoolQuery_FetchResult
+		///
+		///@param   outResult	The next available FPQueryResult in the FPQuery.
+		///@param	inTimeout	The timeout value to wait for the next result.
+		///@return	The ResultCode of the operation.
+		 /// </summary>
 		public int FetchResult(ref FPQueryResult outResult, int inTimeout) 
 		{
 			outResult.Result = Native.PoolQuery.FetchResult(theQuery, (FPInt) inTimeout);
 			return (int) Native.QueryResult.GetResultCode(outResult);
 		}
 
-		/**
-		 * The Start Time for the Query to be executed.
-		 *
-		 */
+		/// <summary>
+		///The Start Time for the Query to be executed.
+		///
+		 /// </summary>
 		public DateTime StartTime
 		{
 			get
@@ -158,10 +158,10 @@ namespace EMC.Centera.SDK
 			}
 		}
 
-		/**
-		 * The End Time for the Query to be executed.
-		 *
-		 */
+		/// <summary>
+		///The End Time for the Query to be executed.
+		///
+		 /// </summary>
 		public DateTime EndTime
 		{
 			get
@@ -178,10 +178,10 @@ namespace EMC.Centera.SDK
 			}
 		}
 
-        /**
-         * The Start Time for the Query to be executed is unbounded i.e. the Java Epoch.
-         *
-         */
+        /// <summary>
+        ///The Start Time for the Query to be executed is unbounded i.e. the Java Epoch.
+        ///
+         /// </summary>
         public bool UnboundedStartTime
         {
             get
@@ -195,10 +195,10 @@ namespace EMC.Centera.SDK
             }
         }
 
-        /**
-         * The End Time for the Query to be executed is unbounded i.e. the current cluster time.
-         *
-         */
+        /// <summary>
+        ///The End Time for the Query to be executed is unbounded i.e. the current cluster time.
+        ///
+         /// </summary>
         public bool UnboundedEndTime
         {
             get
@@ -212,14 +212,14 @@ namespace EMC.Centera.SDK
             }
         }
 
-        /**
-         * The Type of Query to be executed i.e. the type of clips to query for:
-         * 
-         * FPMisc.QUERY_TYPE_DELETED
-         * FPMisc.QUERY_TYPE_EXISTING
-         * FPMisc.QUERY_TYPE_DELETED | FPMisc.QUERY_TYPE_EXISTING
-         * 
-         */
+        /// <summary>
+        ///The Type of Query to be executed i.e. the type of clips to query for:
+        ///
+        ///FPMisc.QUERY_TYPE_DELETED
+        ///FPMisc.QUERY_TYPE_EXISTING
+        ///FPMisc.QUERY_TYPE_DELETED | FPMisc.QUERY_TYPE_EXISTING
+        ///
+         /// </summary>
 		public int Type
 		{
 			get
@@ -233,35 +233,35 @@ namespace EMC.Centera.SDK
 		}
 
 
-		/**
-		 * Add a Clip level attrbute to the list of attributes to be retrieved in the Query to be executed.
-		 * See API Guide: FPQueryExpression_SelectField
-		 * 
-		 * @param	inFieldName	The Attribute Name.
-		 */
+		/// <summary>
+		///Add a Clip level attrbute to the list of attributes to be retrieved in the Query to be executed.
+		///See API Guide: FPQueryExpression_SelectField
+		///
+		///@param	inFieldName	The Attribute Name.
+		 /// </summary>
 		public void SelectField(string inFieldName) 
 		{
 			Native.QueryExpression.SelectField(theExpression, inFieldName);
 		}
 
-		/**
-		 * Remove a Clip level attrbute from the list of attributes to be retrieved in the Query to be executed.
-		 * See API Guide: FPQueryExpression_DeselectField
-		 * 
-		 * @param	inFieldName	The Attribute Name.
-		 */
+		/// <summary>
+		///Remove a Clip level attrbute from the list of attributes to be retrieved in the Query to be executed.
+		///See API Guide: FPQueryExpression_DeselectField
+		///
+		///@param	inFieldName	The Attribute Name.
+		 /// </summary>
 		public void DeselectField(string inFieldName) 
 		{
 			Native.QueryExpression.DeselectField(theExpression, inFieldName);
 		}
 
-		/**
-		 * Determine if an Attribute is in the list of selected attibutes to be retrieved in the Query to be executed.
-		 * See API Guide: FPQueryExpression_IsFieldSelected
-		 * 
-		 * @param	inFieldName	The Attribute Name.
-		 * @return	Boolean representing the Selected state for the Atrribute in the Query Expression.
-		 */
+		/// <summary>
+		///Determine if an Attribute is in the list of selected attibutes to be retrieved in the Query to be executed.
+		///See API Guide: FPQueryExpression_IsFieldSelected
+		///
+		///@param	inFieldName	The Attribute Name.
+		///@return	Boolean representing the Selected state for the Atrribute in the Query Expression.
+		 /// </summary>
 		public bool IsSelected(string inFieldName) 
 		{
 			if (Native.QueryExpression.IsFieldSelected(theExpression, inFieldName) == FPBool.True)

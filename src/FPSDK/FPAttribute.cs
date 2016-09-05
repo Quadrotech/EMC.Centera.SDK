@@ -1,4 +1,4 @@
-/******************************************************************************
+/*****************************************************************************
 
 Copyright © 2006 EMC Corporation. All Rights Reserved
  
@@ -35,29 +35,29 @@ along with .NET wrapper; see the file COPYING. If not, write to:
 
 namespace EMC.Centera.SDK
 {	
-	/** 
-	 * A Name-Value pair containing string representations of the Name and Value of an attribute..
-	 * @author Graham Stuart
-	 * @version
-	 */
+	/// <summary> 
+	///A Name-Value pair containing string representations of the Name and Value of an attribute..
+	///@author Graham Stuart
+	///@version
+	 /// </summary>
 	public class FPAttribute : IFPAttribute
 	{
-	    /**
-		 * The Attribute Name
-		 */
+	    /// <summary>
+		///The Attribute Name
+		 /// </summary>
 		public string Name { get; }
 
-	    /**
-		 * The Attribute Value
-		 */
+	    /// <summary>
+		///The Attribute Value
+		 /// </summary>
 		public string Value { get; }
 
-	    /**
-		 * Create an FPAttribute object using the name-value string parameters.
-		 * 
-		 * @param n	FPAttribute Name.
-		 * @param v	FPAttribute Value.
-		 */
+	    /// <summary>
+		///Create an FPAttribute object using the name-value string parameters.
+		///
+		///@param n	FPAttribute Name.
+		///@param v	FPAttribute Value.
+		 /// </summary>
 		public FPAttribute(string n, string v)
 		{
 			Name = n;
@@ -68,6 +68,5 @@ namespace EMC.Centera.SDK
 		{
 			return "Name (" + Name + ") Value (" + Value + ")";
 		}
-
 	}
 }

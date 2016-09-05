@@ -3,6 +3,9 @@ using System.IO;
 
 namespace EMC.Centera.SDK
 {
+    /// <summary>The FPPartialStream is a convenience classes to utilise a section of an
+    /// underlying stream using offset and size to determine the "section" boundaries.
+    /// </summary>
     public abstract class FPPartialStream : Stream
     {
         protected Stream theStream;

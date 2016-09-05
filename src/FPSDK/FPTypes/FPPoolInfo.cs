@@ -1,4 +1,4 @@
-/******************************************************************************
+/*****************************************************************************
 
 Copyright © 2006 EMC Corporation. All Rights Reserved
  
@@ -40,25 +40,23 @@ namespace EMC.Centera.SDK.FPTypes
     [StructLayout(LayoutKind.Sequential)]
 	public struct FPPoolInfo
 	{
-		public FPInt     poolInfoVersion;   /**< The current version of this structure (2)          */
-		public FPLong    capacity;          /**< The total capacity of the pool, in bytes.          */
-		public FPLong    freeSpace;         /**< The total free space of the pool, in bytes.        */
+		public FPInt     poolInfoVersion;   /// <summary>< The current version of this structure (2)          /// </summary>
+		public FPLong    capacity;          /// <summary>< The total capacity of the pool, in bytes.          /// </summary>
+		public FPLong    freeSpace;         /// <summary>< The total free space of the pool, in bytes.        /// </summary>
 
 		[ MarshalAs( UnmanagedType.ByValTStr, SizeConst=128 )]
-		public string clusterID;         /**< The cluster identifier of the pool.                */
+		public string clusterID;         /// <summary>< The cluster identifier of the pool.                /// </summary>
 			
 		[ MarshalAs( UnmanagedType.ByValTStr, SizeConst=128 )]
-		public string clusterName;       /**< The name of the cluster.                           */
+		public string clusterName;       /// <summary>< The name of the cluster.                           /// </summary>
 
 		[ MarshalAs( UnmanagedType.ByValTStr, SizeConst=128 )]
-		public string version;           /**< The version of the pool server software.           */
+		public string version;           /// <summary>< The version of the pool server software.           /// </summary>
 
 		[ MarshalAs( UnmanagedType.ByValTStr, SizeConst=256 )]
-		public string replicaAddress;    /**< The pool address (see FPPool_Open()) where the C-Clips are replicated; empty if there is no replication. */ 
+		public string replicaAddress;    /// <summary>< The pool address (see FPPool_Open()) where the C-Clips are replicated; empty if there is no replication. /// </summary> 
 	}
 
 
-    /** The structure that holds error information, which is retrieved by the FPPool_GetLastErrorInfo()
-			function.
-		  */
+
 }

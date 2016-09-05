@@ -1,4 +1,4 @@
-/******************************************************************************
+/*****************************************************************************
 
 Copyright © 2006 EMC Corporation. All Rights Reserved
  
@@ -42,9 +42,8 @@ namespace EMC.Centera.SDK.Native
 	/// <summary>
 	/// EMC.Centera.SDK.Native is a wrapper class for the Centera SDK DLL
 	/// </summary>
-	/** The structure that will store the pool information that
-			FPPool_GetPoolInfo() retrieves.
-		  */
+	/* The structure that will store the pool information that FPPool_GetPoolInfo() retrieves. */
+
 	public class FP 
 	{
 		public static readonly string  OPTION_BUFFERSIZE                                 = "buffersize";

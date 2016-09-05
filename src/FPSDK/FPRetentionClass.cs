@@ -1,4 +1,4 @@
-/******************************************************************************
+/*****************************************************************************
 
 Copyright © 2006 EMC Corporation. All Rights Reserved
  
@@ -40,20 +40,20 @@ using EMC.Centera.SDK.FPTypes;
 namespace EMC.Centera.SDK
 {	
 
-	/** 
-	 * A RetentionClass object.
-	 * @author Graham Stuart
-	 * @version
-	 */
+	/// <summary> 
+	///A RetentionClass object.
+	///@author Graham Stuart
+	///@version
+	 /// </summary>
 	public class FPRetentionClass : FPObject
 	{
 		FPRetentionClassRef theClass;
 
-		/**
-		 * Create a RetentionClass using an existing FPRetentionClassRef.
-		 *
-		 * @param	c	The FPRetentionClassRef.
-		 */
+		/// <summary>
+		///Create a RetentionClass using an existing FPRetentionClassRef.
+		///
+		///@param	c	The FPRetentionClassRef.
+		 /// </summary>
 		internal FPRetentionClass(FPRetentionClassRef c)
 		{
 			theClass = c;
@@ -61,11 +61,11 @@ namespace EMC.Centera.SDK
 		}
 
 
-		/**
-		 * The name of the RetentionClass.
-		 * See API Guide: FPRetentionClass_GetName
-		 * 
-		 */
+		/// <summary>
+		///The name of the RetentionClass.
+		///See API Guide: FPRetentionClass_GetName
+		///
+		 /// </summary>
 		public string Name
 		{
 			get
@@ -94,16 +94,16 @@ namespace EMC.Centera.SDK
 			}
 		}
 
-		/**
-		 * The Period (as a TimeSpan) associated with this RetentionClass. See API Guide: FPRetentionClass_GetPeriod
-		 *
-		 */
+		/// <summary>
+		///The Period (as a TimeSpan) associated with this RetentionClass. See API Guide: FPRetentionClass_GetPeriod
+		///
+		 /// </summary>
 		public TimeSpan Period => new TimeSpan(0, 0, (int) Native.RetentionClass.GetPeriod(this));
 
-	    /**
-		 * Explicitly close the RetentionClass. See API Guide: FPRetentionClass_Close
-		 *
-		 */
+	    /// <summary>
+		///Explicitly close the RetentionClass. See API Guide: FPRetentionClass_Close
+		///
+		 /// </summary>
 		public override void Close() 
 		{
 			if (theClass != 0)
@@ -115,23 +115,23 @@ namespace EMC.Centera.SDK
 		}
 		
 
-		/**
-		 * Implicit conversion between an FPRetentionClass and an FPRetentionClassRef.
-		 *
-		 * @param c	An FPRetentionClass object.
-		 * @return	The FPRetentionClassRef associated with this object.
-		 */
+		/// <summary>
+		///Implicit conversion between an FPRetentionClass and an FPRetentionClassRef.
+		///
+		///@param c	An FPRetentionClass object.
+		///@return	The FPRetentionClassRef associated with this object.
+		 /// </summary>
 		public static implicit operator FPRetentionClassRef(FPRetentionClass c) 
 		{
 			return c.theClass;
 		}
 
-		/**
-		 * Implicit conversion between an FPRetentionClassRef and an FPRetentionClass. 
-		 *
-		 * @param	classRef	An FPRetentionClassRef.
-		 * @return	The FPRetentionClass object associated with it.
-		 */
+		/// <summary>
+		///Implicit conversion between an FPRetentionClassRef and an FPRetentionClass. 
+		///
+		///@param	classRef	An FPRetentionClassRef.
+		///@return	The FPRetentionClass object associated with it.
+		 /// </summary>
 		public static implicit operator FPRetentionClass(FPRetentionClassRef classRef) 
 		{
 			// Find the relevant Tag object in the hastable for this FPTagRef
@@ -149,11 +149,11 @@ namespace EMC.Centera.SDK
 			return classObject;
 		}
 
-		/**
-		 * Get a string representation of this RetentionClass - the RetentionClass name and Period.
-		 * 
-		 * @return The string representation of this object.
-		 */
+		/// <summary>
+		///Get a string representation of this RetentionClass - the RetentionClass name and Period.
+		///
+		///@return The string representation of this object.
+		 /// </summary>
 		public override string ToString()
 		{
 			return Name + "("
@@ -166,10 +166,4 @@ namespace EMC.Centera.SDK
 		}  // end of class RetentionClass
 
 	}
-	
-	/** 
-	 * A collection of RetentionClass objects stored in an ArrayList.
-	 * @author Graham Stuart
-	 * @version
-	 */
 }

@@ -7,36 +7,36 @@ namespace EMC.Centera.SDK
     {
         protected FPLogStateRef TheLogger;
 
-        /**
-         * Basic Constructor which creates a default FPLogStateRef object.
-         * See API Guide: FPLogging_CreateLogState
-         *
-         * @return	A new FPLogger object.
-         */
+        /// <summary>
+        ///Basic Constructor which creates a default FPLogStateRef object.
+        ///See API Guide: FPLogging_CreateLogState
+        ///
+        ///@return	A new FPLogger object.
+         /// </summary>
         public FPLogger()
         {
             TheLogger = Native.Logging.CreateLogState();
             AddObject(TheLogger, this);
         }
 
-        /**
-         * Constructor which creates an FPLogStateRef object using a config file.
-         * See API Guide: FPLogging_OpenLogState
-         *
-         * @param   inName  File system path name for a FPLogStateRef contained in a file.
-         * @return	A new FPLogger object.
-         */
+        /// <summary>
+        ///Constructor which creates an FPLogStateRef object using a config file.
+        ///See API Guide: FPLogging_OpenLogState
+        ///
+        ///@param   inName  File system path name for a FPLogStateRef contained in a file.
+        ///@return	A new FPLogger object.
+         /// </summary>
         public FPLogger(string inName)
         {
             TheLogger = Native.Logging.OpenLogState(inName);
             AddObject(TheLogger, this);
         }
 
-        /**
-         * Explicitly free the resources assoicated with an FPLogStateRef object
-         * See API Guide: FPLogState_Delete
-         *
-         */
+        /// <summary>
+        ///Explicitly free the resources assoicated with an FPLogStateRef object
+        ///See API Guide: FPLogState_Delete
+        ///
+         /// </summary>
         public override void Close()
         {
             if (TheLogger != 0)
@@ -47,35 +47,35 @@ namespace EMC.Centera.SDK
             }
         }
 
-        /**
-         * Static method to allow an application to log its own messages to the active LogState
-         * See API Guide: FPLogging_log
-         *
-         * @param   inLevel The FPLogLevel of the message.
-         * @param   inMessage   The actual message to be logged.
-         */
+        /// <summary>
+        ///Static method to allow an application to log its own messages to the active LogState
+        ///See API Guide: FPLogging_log
+        ///
+        ///@param   inLevel The FPLogLevel of the message.
+        ///@param   inMessage   The actual message to be logged.
+         /// </summary>
         public static void Log(FPLogLevel inLevel, string inMessage)
         {
             Native.Logging.Log(inLevel, inMessage);
         }
 
-        /**
-         * Implicit conversion between a  Logger and an FPLogStateRef
-         *
-         * @param	l	The Logger.
-         * @return	The FPLogStateRef associated with this Logger.
-         */
+        /// <summary>
+        ///Implicit conversion between a  Logger and an FPLogStateRef
+        ///
+        ///@param	l	The Logger.
+        ///@return	The FPLogStateRef associated with this Logger.
+         /// </summary>
         public static implicit operator FPLogStateRef(FPLogger l)
         {
             return l.TheLogger;
         }
 
-        /**
-         * Implicit conversion between an FPLogStateRef and a  Stream
-         *
-         * @param	logRef	The FPLogStateRef.
-         * @return	The Logger.
-         */
+        /// <summary>
+        ///Implicit conversion between an FPLogStateRef and a  Stream
+        ///
+        ///@param	logRef	The FPLogStateRef.
+        ///@return	The Logger.
+         /// </summary>
         public static implicit operator FPLogger(FPLogStateRef logRef)
         {
             // Find the relevant Logger object in the hastable for this LogStateRef
@@ -93,53 +93,53 @@ namespace EMC.Centera.SDK
             return logObject;
         }
 
-        /**
-         * Allow the application to save the current logger object to a config file.
-         * See API Guide: FPLogState_Save
-         *
-         * @param   inPath  The file system pathname of the file to be written to.
-         */
+        /// <summary>
+        ///Allow the application to save the current logger object to a config file.
+        ///See API Guide: FPLogState_Save
+        ///
+        ///@param   inPath  The file system pathname of the file to be written to.
+         /// </summary>
         public void Save(string inPath)
         {
             Native.Logging.Save(this, inPath);
         }
 
-        /**
-         * Start the SDK logging using the current Logger object's state
-         * See API Guide: FPLogging_Start
-         *
-         */
+        /// <summary>
+        ///Start the SDK logging using the current Logger object's state
+        ///See API Guide: FPLogging_Start
+        ///
+         /// </summary>
         public void Start()
         {
             Native.Logging.Start(this);
         }
 
-        /**
-         * Static method to stop the SDK lgging
-         * See API Guide: FPLogging_Stop
-         *
-         */
+        /// <summary>
+        ///Static method to stop the SDK lgging
+        ///See API Guide: FPLogging_Stop
+        ///
+         /// </summary>
         public static void Stop()
         {
             Native.Logging.Stop();
         }
 
-        /**
-         * Static method to allow an application to register its own method to perform logging
-         * See API Guide: FPLogging_RegisterCallback
-         *
-         * @param   inProc  The user Callback method (delegate)
-         */
+        /// <summary>
+        ///Static method to allow an application to register its own method to perform logging
+        ///See API Guide: FPLogging_RegisterCallback
+        ///
+        ///@param   inProc  The user Callback method (delegate)
+         /// </summary>
         public static void RegisterCallback(FPLogProc inProc)
         {
             Native.Logging.RegisterCallback(inProc);
         }
 
-        /**
-         * AppendMode property i.e. Append to existing log or replace on start.
-         * See API Guide: FPLogState_GetAppendMode / FPLogState_SetAppendMode
-         *
-         */
+        /// <summary>
+        ///AppendMode property i.e. Append to existing log or replace on start.
+        ///See API Guide: FPLogState_GetAppendMode / FPLogState_SetAppendMode
+        ///
+         /// </summary>
         public FPBool AppendMode
         {
             get
@@ -152,11 +152,11 @@ namespace EMC.Centera.SDK
             }
         }
 
-        /**
-         * DisableCallback property i.e. do we use the user-registered callback for logging
-         * See API Guide: FPLogState_GetDisableCallback / FPLogState_SetDisableCallback
-         *
-         */
+        /// <summary>
+        ///DisableCallback property i.e. do we use the user-registered callback for logging
+        ///See API Guide: FPLogState_GetDisableCallback / FPLogState_SetDisableCallback
+        ///
+         /// </summary>
         public FPBool DisableCallback
         {
             get
@@ -169,11 +169,11 @@ namespace EMC.Centera.SDK
             }
         }
 
-        /**
-         * LogFilter property - determines the type of calls which are logged
-         * See API Guide: FPLogState_GetLogFilter / FPLogState_SetLogFilter
-         *
-         */
+        /// <summary>
+        ///LogFilter property - determines the type of calls which are logged
+        ///See API Guide: FPLogState_GetLogFilter / FPLogState_SetLogFilter
+        ///
+         /// </summary>
         public FPInt LogFilter
         {
             get
@@ -186,11 +186,11 @@ namespace EMC.Centera.SDK
             }
         }
 
-        /**
-         * LogLevel property - determines which severity level of SDK messages are logged
-         * See API Guide: FPLogState_GetLogLevel / FPLogState_SetLogLevel
-         *
-         */
+        /// <summary>
+        ///LogLevel property - determines which severity level of SDK messages are logged
+        ///See API Guide: FPLogState_GetLogLevel / FPLogState_SetLogLevel
+        ///
+         /// </summary>
         public FPLogLevel LogLevel
         {
             get
@@ -203,11 +203,11 @@ namespace EMC.Centera.SDK
             }
         }
 
-        /**
-         * LogPath property - the file system path for the log file
-         * See API Guide: FPLogState_GetLogPath / FPLogState_SetLogPath
-         *
-         */
+        /// <summary>
+        ///LogPath property - the file system path for the log file
+        ///See API Guide: FPLogState_GetLogPath / FPLogState_SetLogPath
+        ///
+         /// </summary>
         public string LogPath
         {
             get
@@ -220,11 +220,11 @@ namespace EMC.Centera.SDK
             }
         }
 
-        /**
-         * MaxLogSize property - the maximum file system size the log file can occupy (default 1GB)
-         * See API Guide: FPLogState_GetMaxLogSize / FPLogState_SetMaxLogSize
-         *
-         */
+        /// <summary>
+        ///MaxLogSize property - the maximum file system size the log file can occupy (default 1GB)
+        ///See API Guide: FPLogState_GetMaxLogSize / FPLogState_SetMaxLogSize
+        ///
+         /// </summary>
         public FPLong MaxLogSize
         {
             get
@@ -237,11 +237,11 @@ namespace EMC.Centera.SDK
             }
         }
 
-        /**
-         * MaxOverflows property - the number of backup log files allowed (default 1)
-         * See API Guide: FPLogState_GetMaxOverflows / FPLogState_SetMaxOverflows
-         *
-         */
+        /// <summary>
+        ///MaxOverflows property - the number of backup log files allowed (default 1)
+        ///See API Guide: FPLogState_GetMaxOverflows / FPLogState_SetMaxOverflows
+        ///
+         /// </summary>
         public FPInt MaxOverflows
         {
             get
@@ -254,12 +254,12 @@ namespace EMC.Centera.SDK
             }
         }
 
-        /**
-         * PollInterval property - the time (in minutes) between polling for changes
-         * in any config file that was used to enable logging (default 5)
-         * See API Guide: FPLogState_GetPollInterval / FPLogState_SetPollInterval
-         *
-         */
+        /// <summary>
+        ///PollInterval property - the time (in minutes) between polling for changes
+        ///in any config file that was used to enable logging (default 5)
+        ///See API Guide: FPLogState_GetPollInterval / FPLogState_SetPollInterval
+        ///
+         /// </summary>
         public FPInt PollInterval
         {
             get

@@ -4,6 +4,12 @@ namespace EMC.Centera.SDK
 {
     public class FPTagCollection:ArrayList
     {
+
+        /// <summary> 
+        ///A collection of Tags on a Clip..
+        ///@author Graham Stuart
+        ///@version
+         /// </summary>
         internal FPTagCollection(FPClip c) 
         { 
             FPTag t;

@@ -164,7 +164,7 @@
     <Compile Include="FPPool.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="FPPoolInstance.cs" />
+    <Compile Include="Extension\FPPoolInstance.cs" />
     <Compile Include="FPTypes\FPPoolQueryRef.cs" />
     <Compile Include="FPTypes\FPPoolRef.cs" />
     <Compile Include="FPQuery.cs">

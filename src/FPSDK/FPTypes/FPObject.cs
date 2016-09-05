@@ -3,11 +3,11 @@ using System.Collections;
 
 namespace EMC.Centera.SDK.FPTypes
 {
-  /** 
- * Abstract disposable base class for FP objects.
- * @author Graham Stuart
- * @version
- */
+  /// <summary> 
+///Abstract disposable base class for FP objects.
+///@author Graham Stuart
+///@version
+ /// </summary>
     public abstract class FPObject : IDisposable
     {
         protected bool Disposed;
