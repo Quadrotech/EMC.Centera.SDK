@@ -36,6 +36,7 @@
     <Copyright>Copyright by their respective owners</Copyright>
     <Tags>EMC Centera SDK .NET Wrapper</Tags>
     <RequireLicenseAcceptance>true</RequireLicenseAcceptance>
+    <IconUrl>http://www.twia.nl/resources/FPSDK.png</IconUrl>
   </PropertyGroup>
   <Import Project="$(NuProjPath)\NuProj.targets" />
 </Project>
